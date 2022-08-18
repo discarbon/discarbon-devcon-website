@@ -1,0 +1,6 @@
+
+https://stackoverflow.com/questions/7155918/list-of-major-cities-with-latitude-longitude-and-timezone
+
+wget ourairports.com/data/airports.csv
+
+cleaned manually and converted using https://www.convertcsv.com/csv-to-json.htm and https://www.convertsimple.com/convert-json-to-javascript/
