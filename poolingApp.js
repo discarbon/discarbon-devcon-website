@@ -1,4 +1,4 @@
-import { addressesMainnet, addressesMumbai } from './addresses.js';
+import { addressesMainnet } from './addresses.js';
 
 "use strict";
 
@@ -317,6 +317,7 @@ function updateBalanceField() {
 
 async function calculateRequiredMaticPaymentForOffset() {
   let amount = await window.pooling
+    .calculateNeededAmount(addresses['WMATIC'], window.carbonToOffset.asBigNumber());
   amount = new BigNumber(amount, tokenDecimals[window.paymentToken]);
   window.paymentAmount = new BigNumber(1.01 * amount.asFloat(), tokenDecimals[window.paymentToken]);
 }
@@ -326,7 +327,7 @@ async function calculateRequiredTokenPaymentForOffset() {
     window.paymentAmount = new BigNumber(window.carbonToOffset.asBigNumber(), tokenDecimals[window.paymentToken]);
   } else {
     let amount = await window.pooling
-      .calculateNeededTokenAmount(addresses[window.paymentToken], addresses['NCT'], window.carbonToOffset.asBigNumber());
+      .calculateNeededAmount(addresses[window.paymentToken], window.carbonToOffset.asBigNumber());
     window.paymentAmount = new BigNumber(amount, tokenDecimals[window.paymentToken]);
   }
 }
@@ -399,7 +400,7 @@ async function doAutoOffsetUsingETH() {
   busyOffsetButton();
   try {
     const transaction = await window.poolingWithSigner
-      .autoOffsetUsingETH(addresses['NCT'], window.carbonToOffset.asBigNumber(), { value: window.paymentAmount.asBigNumber(), gasLimit: 600000 });
+      .participateWithMatic(window.carbonToOffset.asBigNumber(), { value: window.paymentAmount.asBigNumber(), gasLimit: 600000 });
     await transaction.wait();
     readyOffsetButton();
   } catch (e) {
