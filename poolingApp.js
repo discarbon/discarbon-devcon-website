@@ -699,7 +699,7 @@ async function calculateFlightDistance() {
     startLocation = await findLatLong(startName)
   }
 
-  let destinationName = document.getElementById('destination').value
+  let destinationName = "BOG, El Dorado International Airport, Bogota, Colombia"; //document.getElementById('destination').value
   let destinationLocation;
   if (destinationName) {
     destinationLocation = await findLatLong(destinationName)
@@ -843,24 +843,24 @@ $(function () {
   };
 });
 
-$(function () {
-  $("#destination").autocomplete({
-    maxShowItems: 6,
-    source: airportsList,
-    minLength: 2,
-    select: function (event, ui) { calculateFlightDistance() }
-  }).focus(function () {
-    $(this).autocomplete('search', $(this).val())
-  }).autocomplete("instance")._renderItem = function (ul, item) {
-    return $("<li>")
-      .append('<div style="font-size:20px;">' + item.label.split(",")[1] + "<br>" +
-        '<span style="font-size:16px;"><b>' + item.label.split(",")[0] + "</b>, " +
-        item.label.split(",")[2] + ", " +
-        item.label.split(",")[3] +
-        "</span></div>")
-      .appendTo(ul);
-  };
-});
+// $(function () {
+//   $("#destination").autocomplete({
+//     maxShowItems: 6,
+//     source: airportsList,
+//     minLength: 2,
+//     select: function (event, ui) { calculateFlightDistance() }
+//   }).focus(function () {
+//     $(this).autocomplete('search', $(this).val())
+//   }).autocomplete("instance")._renderItem = function (ul, item) {
+//     return $("<li>")
+//       .append('<div style="font-size:20px;">' + item.label.split(",")[1] + "<br>" +
+//         '<span style="font-size:16px;"><b>' + item.label.split(",")[0] + "</b>, " +
+//         item.label.split(",")[2] + ", " +
+//         item.label.split(",")[3] +
+//         "</span></div>")
+//       .appendTo(ul);
+//   };
+// });
 
 /**
  * Main entry point.
