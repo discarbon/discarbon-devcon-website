@@ -105,10 +105,10 @@ function init() {
 }
 
 async function createContractObject() {
-  let jsonFile = "./ABI/OffsetHelper_" + addresses["offsetHelper"] + ".json";
-  var offsetHelperABI = await $.getJSON(jsonFile);
-  window.offsetHelper = new ethers.Contract(addresses["offsetHelper"], offsetHelperABI, window.provider);
-  window.offsetHelperWithSigner = window.offsetHelper.connect(window.signer);
+  let jsonFile = "./ABI/Pooling_" + addresses["pooling"] + ".json";
+  var poolingABI = await $.getJSON(jsonFile);
+  window.pooling = new ethers.Contract(addresses["pooling"], poolingABI, window.provider);
+  window.poolingWithSigner = window.pooling.connect(window.signer);
 }
 
 /**
@@ -316,7 +316,7 @@ function updateBalanceField() {
 }
 
 async function calculateRequiredMaticPaymentForOffset() {
-  let amount = await window.offsetHelper
+  let amount = await window.pooling
     .calculateNeededETHAmount(addresses['NCT'], window.carbonToOffset.asBigNumber());
   window.paymentAmount = new BigNumber(amount, tokenDecimals[window.paymentToken]);
 }
@@ -325,7 +325,7 @@ async function calculateRequiredTokenPaymentForOffset() {
   if (window.paymentToken === "NCT") {
     window.paymentAmount = new BigNumber(window.carbonToOffset.asBigNumber(), tokenDecimals[window.paymentToken]);
   } else {
-    let amount = await window.offsetHelper
+    let amount = await window.pooling
       .calculateNeededTokenAmount(addresses[window.paymentToken], addresses['NCT'], window.carbonToOffset.asBigNumber());
     window.paymentAmount = new BigNumber(amount, tokenDecimals[window.paymentToken]);
   }
@@ -348,7 +348,7 @@ async function getErc20Balance() {
 }
 
 async function getErc20Allowance() {
-  let allowance = await window.erc20Contract.allowance(window.signer.getAddress(), addresses["offsetHelper"]);
+  let allowance = await window.erc20Contract.allowance(window.signer.getAddress(), addresses["pooling"]);
   return new BigNumber(allowance, 18);
   // TODO: understand if we're doing it wrong or why usdc doesn't seem to respect it's 6 decimals when calling allowance()? I.e., why not
   // return new BigNumber(allowance, tokenDecimals[window.paymentToken]);
@@ -360,7 +360,7 @@ async function approveErc20() {
   const approvalAmount = new BigNumber(1.01 * window.paymentAmount.asFloat(), tokenDecimals[window.paymentToken]);
   try {
     const erc20WithSigner = window.erc20Contract.connect(window.signer);
-    const transaction = await erc20WithSigner.approve(addresses["offsetHelper"], approvalAmount.asBigNumber());
+    const transaction = await erc20WithSigner.approve(addresses["pooling"], approvalAmount.asBigNumber());
     await transaction.wait();
     readyApproveButton();
     enableOffsetButton();
@@ -398,7 +398,7 @@ async function doAutoOffsetUsingETH() {
   await calculateRequiredMaticPaymentForOffset();
   busyOffsetButton();
   try {
-    const transaction = await window.offsetHelperWithSigner
+    const transaction = await window.poolingWithSigner
       .autoOffsetUsingETH(addresses['NCT'], window.carbonToOffset.asBigNumber(), { value: window.paymentAmount.asBigNumber(), gasLimit: 600000 });
     await transaction.wait();
     readyOffsetButton();
@@ -414,7 +414,7 @@ async function doAutoOffsetUsingToken() {
   await calculateRequiredTokenPaymentForOffset();
   busyOffsetButton();
   try {
-    const transaction = await window.offsetHelperWithSigner
+    const transaction = await window.poolingWithSigner
       .autoOffsetUsingToken(addresses[window.paymentToken], addresses['NCT'], window.carbonToOffset.asBigNumber(), { gasLimit: 600000 });
     await transaction.wait();
     readyOffsetButton();
@@ -427,7 +427,7 @@ async function doAutoOffsetUsingToken() {
 async function doAutoOffsetUsingPoolToken() {
   busyOffsetButton();
   try {
-    const transaction = await window.offsetHelperWithSigner
+    const transaction = await window.poolingWithSigner
       .autoOffsetUsingPoolToken(addresses['NCT'], window.carbonToOffset.asBigNumber(), { gasLimit: 420000 });
     await transaction.wait();
     readyOffsetButton();
