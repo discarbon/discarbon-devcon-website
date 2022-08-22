@@ -317,8 +317,8 @@ function updateBalanceField() {
 
 async function calculateRequiredMaticPaymentForOffset() {
   let amount = await window.pooling
-    .calculateNeededETHAmount(addresses['NCT'], window.carbonToOffset.asBigNumber());
-  window.paymentAmount = new BigNumber(amount, tokenDecimals[window.paymentToken]);
+  amount = new BigNumber(amount, tokenDecimals[window.paymentToken]);
+  window.paymentAmount = new BigNumber(1.01 * amount.asFloat(), tokenDecimals[window.paymentToken]);
 }
 
 async function calculateRequiredTokenPaymentForOffset() {
