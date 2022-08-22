@@ -22,7 +22,7 @@ const tokenDecimals = {
   NCT: 18,
   MATIC: 18,
   USDC: 6,
-  WWETH: 18,
+  WETH: 18,
   WMATIC: 18
 };
 
