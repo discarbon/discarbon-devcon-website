@@ -780,10 +780,9 @@ async function calculateCarbonEmission() {
   let passengers = parseFloat(document.getElementById("passengers").value);
   emission *= passengers;
 
-  let roundTrip = document.getElementById("roundtrip").checked;
-  if (roundTrip) {
-    emission *= 2;
-  }
+  // multiplier for round trip
+  emission *= 2;
+
   window.carbonToOffset = new BigNumber(emission, tokenDecimals["NCT"]);
   await updatePaymentFields();
   updateUIvalues();
@@ -871,7 +870,7 @@ window.addEventListener('load', async () => {
   document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
   document.querySelector("#network-modal-button").addEventListener("click", onDisconnect);
   document.querySelector("#list-payment-tokens").addEventListener("change", updateUIvalues);
-  document.querySelector("#roundtrip").addEventListener("click", calculateFlightDistance);
+  // document.querySelector("#roundtrip").addEventListener("click", calculateFlightDistance);
   document.querySelector('#flightclass').addEventListener("change", calculateFlightDistance);
   document.querySelector('#carbon-to-offset').addEventListener("change", handleManuallyEnteredTCO2);
   document.querySelector('#passengers').addEventListener("change", updatePassengerField);
