@@ -1,7 +1,7 @@
 # discarbon-devcon-website
 Frontend for offsetting devcon 6
 
-The website can be accessed under `https://flight.discarbon.earth/`. This directly reflects the main branch.
+The website can be accessed under `http://event-offset-dev.discarbon.earth/`. This directly reflects the main branch. This is in development so expect things to change and break. For development purposes, the smart contract running on the polygon chain sends all funds to an address we control. This will change once we get closer to the final version.
 
 
 ## How to develop
@@ -20,8 +20,6 @@ npm i -g --only=prod https-localhost
 sudo serve .
 ```
 See [web3modal-vanilla-js-example][https://github.com/Web3Modal/web3modal-vanilla-js-example] for more info.
-
-The website in the dev branch can be accessed under `https://flight-dev.discarbon.earth/`.
 
 
 ### List of airports
