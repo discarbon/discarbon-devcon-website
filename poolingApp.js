@@ -135,7 +135,7 @@ async function updateUIvalues() {
     var fieldDistance = document.getElementById("distance");
     fieldDistance.innerHTML = "--.-- km";
   }
-  var fieldCarbonToOffset = document.getElementById("carbon-to-offset");
+  var fieldCarbonToOffset = document.getElementById("flight-emission");
   if (window.carbonToOffset.asFloat() > 0) {
     fieldCarbonToOffset.innerHTML = window.carbonToOffset.asString(3) + " tCO<sub>2</sub>";
   } else {
@@ -806,13 +806,13 @@ function singleEmissionCalc(em) {
   return emission
 }
 
-async function handleManuallyEnteredTCO2() {
-  let TCO2 = parseFloat(document.getElementById("carbon-to-offset").value);
-  if (TCO2 && TCO2 > 0) {
-    window.carbonToOffset = new BigNumber(TCO2, tokenDecimals["NCT"]);
-  }
-  updateUIvalues();
-}
+// async function handleManuallyEnteredTCO2() {
+//   let TCO2 = parseFloat(document.getElementById("carbon-to-offset").value);
+//   if (TCO2 && TCO2 > 0) {
+//     window.carbonToOffset = new BigNumber(TCO2, tokenDecimals["NCT"]);
+//   }
+//   updateUIvalues();
+// }
 
 /**
  * Make autocomplete list for airports
@@ -872,7 +872,7 @@ window.addEventListener('load', async () => {
   document.querySelector("#list-payment-tokens").addEventListener("change", updateUIvalues);
   // document.querySelector("#roundtrip").addEventListener("click", calculateFlightDistance);
   document.querySelector('#flightclass').addEventListener("change", calculateFlightDistance);
-  document.querySelector('#carbon-to-offset').addEventListener("change", handleManuallyEnteredTCO2);
+  // document.querySelector('#carbon-to-offset').addEventListener("change", handleManuallyEnteredTCO2);
   document.querySelector('#passengers').addEventListener("change", updatePassengerField);
   document.querySelector('#start').addEventListener("change", calculateFlightDistance);
   document.querySelector('#destination').addEventListener("change", calculateFlightDistance);
