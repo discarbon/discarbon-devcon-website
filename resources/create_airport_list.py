@@ -33,7 +33,8 @@ with open(INPUT_FILE, mode='r')as input_file:
         # only airports with IATA codes, schedules services and of a certain size
         selector = IATA_code and \
                    scheduled_service == "yes" \
-                   and (size == "medium_airport" or size == "large_airport")
+                   and (size == "medium_airport" or size == "large_airport") \
+                   and (name != "El Dorado International Airport")  # Filter out Bogota airport
 
         if selector:
             # Fix airports with empty municipalities (should work...)

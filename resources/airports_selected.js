@@ -322,7 +322,6 @@ export const airports = [
 ["BOB, Bora Bora Airport, Motu Mute, French Polynesia", -16.444400787353516, -151.75100708007812],
 ["BOC, Bocas del Toro International Airport, Isla Colón, Panama", 9.34085, -82.250801],
 ["BOD, Bordeaux-Mérignac Airport, Bordeaux/Mérignac, France", 44.8283, -0.715556],
-["BOG, El Dorado International Airport, Bogota, Colombia", 4.70159, -74.1469],
 ["BOH, Bournemouth Airport, Bournemouth, United Kingdom", 50.779999, -1.8425],
 ["BOI, Boise Air Terminal/Gowen Field, Boise, United States", 43.5644, -116.223],
 ["BOJ, Burgas Airport, Burgas, Bulgaria", 42.56959915161133, 27.515199661254883],
