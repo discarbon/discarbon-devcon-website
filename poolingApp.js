@@ -135,7 +135,9 @@ async function fetchAccountData() {
 }
 
 function updateTotalEmission() {
-  window.carbonToOffset = new BigNumber(window.flightEmission.asBigNumber().add(window.eventEmission.asBigNumber()), tokenDecimals[18]);
+  let participants = parseFloat(document.getElementById("passengers").value);
+  window.carbonToOffset = new BigNumber(participants * (window.flightEmission.asFloat() + window.eventEmission.asFloat()));
+
 }
 
 async function updateUIvalues() {
@@ -644,7 +646,7 @@ function updatePassengerField() {
   } else {
     passengers = 1;
   }
-  passengers = passengers + " passenger";
+  passengers = passengers + " participant";
   if (parseFloat(passengers) > 1) {
     passengers += "s";
   }
@@ -794,10 +796,6 @@ async function calculateCarbonEmission() {
     let longDistFactor = (window.flightDistance - 1500) / 1000; // 0@1500km, 1@2500km
     emission = (1 - longDistFactor) * shortEM + longDistFactor * longEM; //interpolation
   }
-
-  // Handle multipliers and input from other fields
-  let passengers = parseFloat(document.getElementById("passengers").value);
-  emission *= passengers;
 
   // multiplier for round trip
   emission *= 2;
