@@ -41,8 +41,8 @@ class BigNumber {
     }
   }
 
-  asString() {
-    let precision = parseFloat(this.string).toPrecision(3)
+  asString(digits = 4) {
+    let precision = parseFloat(this.string).toPrecision(digits)
     if (precision.length < this.string.length) {
       return precision;
     } else {
@@ -137,7 +137,7 @@ async function updateUIvalues() {
   }
   var fieldCarbonToOffset = document.getElementById("carbon-to-offset");
   if (window.carbonToOffset.asFloat() > 0) {
-    fieldCarbonToOffset.innerHTML = window.carbonToOffset.asString() + " tCO<sub>2</sub>";
+    fieldCarbonToOffset.innerHTML = window.carbonToOffset.asString(3) + " tCO<sub>2</sub>";
   } else {
     fieldCarbonToOffset.value = "--.-- tCO<sub>2</sub>";
   }
