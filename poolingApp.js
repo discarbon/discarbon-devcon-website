@@ -700,10 +700,10 @@ async function calculateFlightDistance() {
   }
 
   let destinationName = "BOG, El Dorado International Airport, Bogota, Colombia"; //document.getElementById('destination').value
-  let destinationLocation;
-  if (destinationName) {
-    destinationLocation = await findLatLong(destinationName)
-  }
+  let destinationLocation = new Location(4.70159, -74.1469);  // hard code Bogota International Airport coorrdinates
+  // if (destinationName) {
+  //   destinationLocation = await findLatLong(destinationName)
+  // }
 
   if (startLocation && destinationLocation) {
     window.flightDistance = calcGeodesicDistance(startLocation, destinationLocation)
