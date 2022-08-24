@@ -29,7 +29,7 @@ input[type=number] {
   text-align: left;
 }
 
-#carbon-to-offset {
+/* #carbon-to-offset {
   grid-column-start: 1;
   font-size: 1.5rem;
   line-height: 2rem;
@@ -43,7 +43,7 @@ input[type=number] {
 }
 #carbon-to-offset::placeholder{
   color: rgb(70, 70, 70);
-}
+} */
 #list-payment-tokens {
   font-size: 1.875rem;
   line-height: 2.5rem;

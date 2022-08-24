@@ -60,9 +60,8 @@ class BigNumber {
 }
 
 // Initial values
-let carbonToOffset = new BigNumber("0.0", tokenDecimals[18]);
-let paymentToken = "MATIC";
-let paymentAmount = new BigNumber("0.0", tokenDecimals[paymentToken]);
+
+
 
 import { airports } from './resources/airports_selected.js'
 
@@ -102,6 +101,17 @@ function init() {
   });
   disableOffsetButton();
   console.log("Web3Modal instance is", web3Modal);
+
+  // Set initial values
+  window.eventEmission = new BigNumber("0.923", tokenDecimals[18]);
+  window.carbonToOffset = new BigNumber("0.0", tokenDecimals[18]);
+  window.flightEmission = new BigNumber("0.0", tokenDecimals[18]);
+  window.paymentToken = "MATIC";
+  window.paymentAmount = new BigNumber("0.0", tokenDecimals[paymentToken]);
+
+  // set even emission value
+  var fieldCarbonToOffset = document.getElementById("event-emission");
+  fieldCarbonToOffset.innerHTML = window.eventEmission.asString(3) + " tCO<sub>2</sub>";
 }
 
 async function createContractObject() {
@@ -124,9 +134,11 @@ async function fetchAccountData() {
   document.querySelector("#disconnect-button-div").style.display = "block";
 }
 
+function updateTotalEmission() {
+  window.carbonToOffset = new BigNumber(window.flightEmission.asBigNumber().add(window.eventEmission.asBigNumber()), tokenDecimals[18]);
+}
+
 async function updateUIvalues() {
-  window.paymentToken = paymentToken;
-  window.paymentAmount = paymentAmount;
 
   if (window.flightDistance > 0) {
     var fieldDistance = document.getElementById("distance");
@@ -135,9 +147,16 @@ async function updateUIvalues() {
     var fieldDistance = document.getElementById("distance");
     fieldDistance.innerHTML = "--.-- km";
   }
-  var fieldCarbonToOffset = document.getElementById("flight-emission");
+  var fieldFlightEmission = document.getElementById("flight-emission");
+  if (window.flightEmission.asFloat() > 0) {
+    fieldFlightEmission.innerHTML = window.flightEmission.asString(3) + " tCO<sub>2</sub>";
+  } else {
+    fieldFlightEmission.value = "--.-- tCO<sub>2</sub>";
+  }
+
+  var fieldCarbonToOffset = document.getElementById("carbon-to-offset");
   if (window.carbonToOffset.asFloat() > 0) {
-    fieldCarbonToOffset.innerHTML = window.carbonToOffset.asString(3) + " tCO<sub>2</sub>";
+    fieldCarbonToOffset.innerHTML = window.carbonToOffset.asString(4) + " tCO<sub>2</sub>";
   } else {
     fieldCarbonToOffset.value = "--.-- tCO<sub>2</sub>";
   }
@@ -588,7 +607,7 @@ async function onConnect() {
   else if (btnApprove.attachEvent) btnApprove.attachEvent("onclick", approveErc20);
 
   await refreshAccountData();
-  await handleManuallyEnteredTCO2();
+  // await handleManuallyEnteredTCO2();
   await updatePaymentFields();
 }
 
@@ -783,7 +802,8 @@ async function calculateCarbonEmission() {
   // multiplier for round trip
   emission *= 2;
 
-  window.carbonToOffset = new BigNumber(emission, tokenDecimals["NCT"]);
+  window.flightEmission = new BigNumber(emission, tokenDecimals["NCT"]);
+  updateTotalEmission();
   await updatePaymentFields();
   updateUIvalues();
 }
@@ -875,5 +895,5 @@ window.addEventListener('load', async () => {
   // document.querySelector('#carbon-to-offset').addEventListener("change", handleManuallyEnteredTCO2);
   document.querySelector('#passengers').addEventListener("change", updatePassengerField);
   document.querySelector('#start').addEventListener("change", calculateFlightDistance);
-  document.querySelector('#destination').addEventListener("change", calculateFlightDistance);
+  // document.querySelector('#destination').addEventListener("change", calculateFlightDistance);
 });
