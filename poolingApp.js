@@ -137,9 +137,9 @@ async function updateUIvalues() {
   }
   var fieldCarbonToOffset = document.getElementById("carbon-to-offset");
   if (window.carbonToOffset.asFloat() > 0) {
-    fieldCarbonToOffset.value = window.carbonToOffset.asString();
+    fieldCarbonToOffset.innerHTML = window.carbonToOffset.asString() + " tCO<sub>2</sub>";
   } else {
-    fieldCarbonToOffset.value = "--.--";
+    fieldCarbonToOffset.value = "--.-- tCO<sub>2</sub>";
   }
 
   if (window.isConnected && (window.carbonToOffset.asFloat())) {
