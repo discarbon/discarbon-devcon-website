@@ -191,6 +191,7 @@ async function updateBalance() {
       window.allowance = window.balance;
       break;
     case "USDC":
+    case "DAI":
     case "WMATIC":
     case "WETH":
     case "NCT":
@@ -221,6 +222,7 @@ async function updatePaymentFields() {
         await calculateRequiredMaticPaymentForOffset();
         break;
       case "USDC":
+      case "DAI":
       case "WMATIC":
       case "WETH":
       case "NCT":
@@ -402,6 +404,7 @@ async function doAutoOffset() {
       await doAutoOffsetUsingETH();
       break;
     case "USDC":
+    case "DAI":
     case "WMATIC":
     case "WETH":
     case "NCT":
