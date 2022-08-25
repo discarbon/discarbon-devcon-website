@@ -404,10 +404,8 @@ async function doAutoOffset() {
     case "USDC":
     case "WMATIC":
     case "WETH":
-      await doAutoOffsetUsingToken();
-      break;
     case "NCT":
-      await doAutoOffsetUsingPoolToken();
+      await doAutoOffsetUsingToken();
       break;
     default: console.log("Unsupported token! ", window.paymentToken);
   }
@@ -437,7 +435,7 @@ async function doAutoOffsetUsingToken() {
   busyOffsetButton();
   try {
     const transaction = await window.poolingWithSigner
-      .autoOffsetUsingToken(addresses[window.paymentToken], addresses['NCT'], window.carbonToOffset.asBigNumber(), { gasLimit: 600000 });
+      .participateWithToken(addresses[window.paymentToken], window.carbonToOffset.asBigNumber(), { gasLimit: 600000 });
     await transaction.wait();
     readyOffsetButton();
   } catch (e) {
@@ -446,18 +444,18 @@ async function doAutoOffsetUsingToken() {
   }
 }
 
-async function doAutoOffsetUsingPoolToken() {
-  busyOffsetButton();
-  try {
-    const transaction = await window.poolingWithSigner
-      .autoOffsetUsingPoolToken(addresses['NCT'], window.carbonToOffset.asBigNumber(), { gasLimit: 420000 });
-    await transaction.wait();
-    readyOffsetButton();
-  } catch (e) {
-    readyOffsetButton();
-    throw e;
-  }
-}
+// async function doAutoOffsetUsingPoolToken() {
+//   busyOffsetButton();
+//   try {
+//     const transaction = await window.poolingWithSigner
+//       .autoOffsetUsingPoolToken(addresses['NCT'], window.carbonToOffset.asBigNumber(), { gasLimit: 420000 });
+//     await transaction.wait();
+//     readyOffsetButton();
+//   } catch (e) {
+//     readyOffsetButton();
+//     throw e;
+//   }
+// }
 
 /**
  * Creates Locations from Latitude Longitude. Usage: let pointA = new Location(x.xx, x.xx)
