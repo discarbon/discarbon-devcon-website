@@ -87,22 +87,22 @@
       <div class="flex justify-center">
 
         <div class="max-w-[1200px]">
-          <div class="flex flex-col w-full lg:flex-row">
-            <div class="form-control w-80 card rounded-box space-y-2 mb-10 lg:mb-0 lg:mr-10">
+          <div class="flex flex-col w-full md:flex-row">
+            <div class="form-control w-80 card rounded-box space-y-2 mb-10 md:mb-0 md:mr-10">
               <h2 class="card-title">Configure Event</h2>
               <div class="grid flex-grow rounded-box place-items-left space-y-2">
                 <div>
                   <input name="start" type="text" id="start" placeholder="From"
-                    class="input input-bordered input-primary max-w-xs w-full lg:h-[60px] lg:text-xl">
+                    class="input input-bordered input-primary max-w-xs w-full md:h-[60px] md:text-xl">
                 </div>
                 <!-- <div>
                   <input id="destination" type="text" id="destination" placeholder="To"
-                    class="input input-bordered input-primary max-w-xs w-full lg:h-[60px] lg:text-xl" />
+                    class="input input-bordered input-primary max-w-xs w-full md:h-[60px] md:text-xl" />
                 </div> -->
                 <div>
                   <div class="flex flex-row w-full rounded-lg bg-transparent mt-1">
                     <select id="flightclass"
-                      class="select select-bordered select-primary w-full max-w-xs font-normal lg:h-[60px] lg:text-xl">
+                      class="select select-bordered select-primary w-full max-w-xs font-normal md:h-[60px] md:text-xl">
                       <option value="economy">Economy class</option>
                       <option value="business">Business class</option>
                       <option value="first">First class</option>
@@ -132,7 +132,7 @@
               </div>
 
               <!-- <h2 class="title">Devcon 6 Emission per person</h2> -->
-              <div class="stats stats-vertical lg:stats-vertical w-full">
+              <div class="stats stats-vertical md:stats-vertical w-full">
                 <div class="stat">
 
                   <div class="stat-title w-full">Devcon 6 Emission per person</div>
@@ -143,23 +143,23 @@
                 </div>
               </div>
               <div>
-                <div class="flex flex-row w-full h-12 rounded-xl relative bg-transparent mt-1 lg:h-[54px] lg:text-xl">
+                <div class="flex flex-row w-full h-12 rounded-xl relative bg-transparent mt-1 md:h-[54px] md:text-xl">
                   <button data-action="decrement"
-                    class="btn-primary h-full w-20 lg:w-24 rounded-l-lg cursor-pointer outline-none">
+                    class="btn-primary h-full w-20 md:w-24 rounded-l-md cursor-pointer outline-none">
                     <span class="m-auto text-2xl">−</span>
                   </button>
                   <input type="text"
-                    class="input input-bordered input-primary rounded-none text-center w-full text-md flex items-center text-gray-700 h-12 lg:h-[54px] lg:text-xl"
+                    class="input input-bordered input-primary rounded-none text-center w-full text-md flex items-center text-gray-700 h-12 md:h-[54px] md:text-xl"
                     id="passengers" value="1 participant"></input>
-                  <button data-action="increment" class="btn-primary w-20 lg:w-24 rounded-r-lg cursor-pointer">
+                  <button data-action="increment" class="btn-primary w-20 md:w-24 rounded-r-lg cursor-pointer">
                     <span class="m-auto text-2xl">+</span>
                   </button>
                 </div>
               </div>
               <!-- <div class="relative ">
                   <label class="label cursor-pointer">
-                    <span class="label-text lg:text-xl">Round Trip:</span>
-                    <input type="checkbox" id="roundtrip" checked="checked" class="checkbox checkbox-primary lg:checkbox-lg" />
+                    <span class="label-text md:text-xl">Round Trip:</span>
+                    <input type="checkbox" id="roundtrip" checked="checked" class="checkbox checkbox-primary md:checkbox-lg" />
                   </label>
                 </div> -->
             </div>
@@ -169,7 +169,7 @@
               <div class="flex flex-wrap justify-center">
                 <img src="./images/dummy-statistics.png" alt="detailed carbon emission" class="w-3/4" >
               </div>
-              <div class="stats stats-vertical lg:stats-vertical w-full">
+              <div class="stats stats-vertical md:stats-vertical w-full">
                 <!-- <div class="stat">
                   <div class="stat-title">Distance</div>
                   <div class="stat-value text-3xl" id="distance">--.-- km</div>
@@ -211,7 +211,7 @@
     </section>
   </div>
 
-  <footer class="footer bg-transparent p-2 text-neutral-content grid-flow-col lg:fixed bottom-0">
+  <footer class="footer bg-transparent p-2 text-neutral-content grid-flow-col md:fixed bottom-0">
     <div class="grid-flow-col">
       <img src="./images/CO2_logo.png" alt="CO2 Logo" style="width:20px;">
       <p>Copyright © 2022 - disCarbon</p>
