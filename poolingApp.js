@@ -219,8 +219,6 @@ async function updatePaymentFields() {
   } else {
     switch (window.paymentToken) {
       case "MATIC":
-        await calculateRequiredMaticPaymentForOffset();
-        break;
       case "USDC":
       case "DAI":
       case "WMATIC":
