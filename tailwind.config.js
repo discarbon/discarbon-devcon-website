@@ -16,7 +16,7 @@ module.exports = {
       }),
       fontFamily: {
         sans: [
-          'Tahoma', 'Helvetica',
+          'Helvetica', 'FreeSans',
           ...defaultTheme.fontFamily.sans,
         ],
       },
