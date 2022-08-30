@@ -7,9 +7,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'landscape': "url('/images/landscape.svg')",
-        'RollingHills': "url('/images/RollingHills.svg')",
-        'airplane': "url('/images/airplane.svg')",
+        'RollingHills': "url('/images/RollingHillsWithElements.svg')",
+        'RollingHills_smallScreen': "url('/images/RollingHillsWithElements_smallScreen.svg')",
       },
       minHeight: (theme) => ({
         ...theme('spacing'),

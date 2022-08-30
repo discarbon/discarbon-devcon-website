@@ -1885,10 +1885,6 @@ body[dir="rtl"] .checkbox:checked,
   margin: auto;
 }
 
-.m-6 {
-  margin: 1.5rem;
-}
-
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
@@ -1930,6 +1926,18 @@ body[dir="rtl"] .checkbox:checked,
 
 .mt-6 {
   margin-top: 1.5rem;
+}
+
+.mb-36 {
+  margin-bottom: 9rem;
+}
+
+.mb-72 {
+  margin-bottom: 18rem;
+}
+
+.mb-56 {
+  margin-bottom: 14rem;
 }
 
 .block {
@@ -2103,7 +2111,11 @@ body[dir="rtl"] .checkbox:checked,
 }
 
 .bg-RollingHills {
-  background-image: url('/images/RollingHills.svg');
+  background-image: url('/images/RollingHillsWithElements.svg');
+}
+
+.bg-RollingHills_smallScreen {
+  background-image: url('/images/RollingHillsWithElements_smallScreen.svg');
 }
 
 .bg-cover {
@@ -2310,6 +2322,10 @@ body[dir="rtl"] .checkbox:checked,
     flex-direction: row;
   }
 
+  .md\:bg-RollingHills {
+    background-image: url('/images/RollingHillsWithElements.svg');
+  }
+
   .md\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
@@ -2323,11 +2339,6 @@ body[dir="rtl"] .checkbox:checked,
   .md\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
-  }
-
-  .md\:text-2xl {
-    font-size: 1.5rem;
-    line-height: 2rem;
   }
 
   .md\:text-3xl {
