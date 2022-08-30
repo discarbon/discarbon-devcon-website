@@ -1928,6 +1928,10 @@ body[dir="rtl"] .checkbox:checked,
   margin-top: 0.25rem;
 }
 
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
 .block {
   display: block;
 }
@@ -2284,6 +2288,10 @@ body[dir="rtl"] .checkbox:checked,
 
   .md\:mr-10 {
     margin-right: 2.5rem;
+  }
+
+  .md\:mt-10 {
+    margin-top: 2.5rem;
   }
 
   .md\:h-\[60px\] {
