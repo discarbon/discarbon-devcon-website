@@ -171,9 +171,13 @@
             <div
               class="grid flex-grow form-control w-80 card rounded-box place-items-left space-y-2 mb-10 lg:mb-0 lg:mr-10">
               <h2 class="card-title">Contribute to Offset Pool</h2>
-              <div class="flex flex-wrap justify-center">
+              <!-- <div class="flex flex-wrap justify-center">
                 <img src="./images/dummy-statistics.png" alt="detailed carbon emission" class="w-3/4">
-              </div>
+              </div> -->
+
+              <canvas id="EmissionChart" class=""></canvas>
+              <!-- <canvas id="EmissionChart" style="width:80%;max-width:70px"></canvas> -->
+
               <div class="stats stats-vertical md:stats-vertical w-full">
                 <!-- <div class="stat">
                   <div class="stat-title">Distance</div>
@@ -262,7 +266,7 @@
   <script src="./resources/jquery.ui.autocomplete.scroll.js"></script>
   <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.js"></script> -->
 
-  <!-- Load flight offsetter app -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <!-- Load flight offsetter app -->
   <script type="module" src="./poolingApp.js"></script>
 </body>
 

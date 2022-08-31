@@ -152,12 +152,12 @@ async function updateUIvalues() {
     var fieldDistance = document.getElementById("distance");
     fieldDistance.innerHTML = "--.-- km";
   }
-  var fieldFlightEmission = document.getElementById("flight-emission");
-  if (window.flightEmission.asFloat() > 0) {
-    fieldFlightEmission.innerHTML = window.flightEmission.asString(3) + " tCO<sub>2</sub>";
-  } else {
-    fieldFlightEmission.value = "--.-- tCO<sub>2</sub>";
-  }
+  // var fieldFlightEmission = document.getElementById("flight-emission");
+  // if (window.flightEmission.asFloat() > 0) {
+  //   fieldFlightEmission.innerHTML = window.flightEmission.asString(3) + " tCO<sub>2</sub>";
+  // } else {
+  //   fieldFlightEmission.value = "--.-- tCO<sub>2</sub>";
+  // }
 
   var fieldCarbonToOffset = document.getElementById("carbon-to-offset");
   if (window.carbonToOffset.asFloat() > 0) {
@@ -169,6 +169,8 @@ async function updateUIvalues() {
   if (window.isConnected && (window.carbonToOffset.asFloat())) {
     await updatePaymentFields();
   }
+
+  updateChart();
 }
 
 /**
@@ -883,6 +885,55 @@ $(function () {
 /**
  * Main entry point.
  */
+
+async function updateChart() {
+  var xValues = ["Flight", "Accomodation", "catering", "Event Infrastructure"];
+  let participants = parseFloat(document.getElementById("passengers").value);
+
+  var yValues = [
+    window.flightEmission.asFloat() * participants,
+    0.5 * participants,
+    0.3 * participants,
+    0.1 * participants];
+  var barColors = [
+    "#0077B6",
+    "#00B4D8",
+    "#90E0EF",
+    "#CAF0F8",
+  ];
+
+  const config = {
+    type: "doughnut",
+    data: {
+      labels: xValues,
+      datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+      }]
+    },
+    options: {
+      title: {
+        display: false,
+        text: "World Wide Wine Production 2018"
+      },
+      plugins: {
+        legend: {
+            display: false,
+        }
+    }
+    }
+  }
+
+  if (window.emissionChart) {
+    emissionChart.destroy();
+  }
+
+  window.emissionChart = new Chart("EmissionChart", config);
+
+  // emissionChart.label(false);
+
+}
+
 window.addEventListener('load', async () => {
   init();
   document.querySelector("#btn-connect").addEventListener("click", onConnect);
@@ -895,4 +946,5 @@ window.addEventListener('load', async () => {
   document.querySelector('#passengers').addEventListener("change", updatePassengerField);
   document.querySelector('#start').addEventListener("change", calculateFlightDistance);
   // document.querySelector('#destination').addEventListener("change", calculateFlightDistance);
+  updateChart();
 });
