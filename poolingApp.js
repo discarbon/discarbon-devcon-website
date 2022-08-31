@@ -219,6 +219,8 @@ async function updatePaymentFields() {
   } else {
     switch (window.paymentToken) {
       case "MATIC":
+        await calculateRequiredMaticPaymentForOffset();
+        break;
       case "USDC":
       case "DAI":
       case "WMATIC":
@@ -380,6 +382,7 @@ async function approveErc20() {
   busyApproveButton();
   // use a slightly higher approval allowance to allow a small price change between approve and offset
   const approvalAmount = new BigNumber(1.01 * window.paymentAmount.asFloat(), tokenDecimals[window.paymentToken]);
+  console.log("Approval amount: ", approvalAmount, "decimals: ", tokenDecimals[window.paymentToken] )
   try {
     const erc20WithSigner = window.erc20Contract.connect(window.signer);
     const transaction = await erc20WithSigner.approve(addresses["pooling"], approvalAmount.asBigNumber());
