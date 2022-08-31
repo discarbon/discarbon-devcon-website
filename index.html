@@ -56,7 +56,8 @@
   </div>
 </div>
 
-<body class="flex flex-col justify-between bg-no-repeat bg-bottom bg-cover bg-RollingHills_smallScreen md:bg-RollingHills min-h-screen font-sans">
+<body
+  class="flex flex-col justify-between bg-no-repeat bg-bottom bg-cover bg-RollingHills_smallScreen md:bg-RollingHills min-h-screen font-sans">
   <div class="navbar bg-base-500">
     <div class="flex-1">
       <a class="btn btn-ghost text-green-700 normal-case md:text-xl" href="https://www.discarbon.earth">disCarbon</a>
@@ -163,7 +164,8 @@
                 </div> -->
             </div>
 
-            <div class="grid flex-grow form-control w-80 card rounded-box place-items-left space-y-2">
+            <div
+              class="grid flex-grow form-control w-80 card rounded-box place-items-left space-y-2 mb-10 md:mb-0 md:mr-10">
               <h2 class="card-title">Offset Event</h2>
               <div class="flex flex-wrap justify-center">
                 <img src="./images/dummy-statistics.png" alt="detailed carbon emission" class="w-3/4">
@@ -202,13 +204,25 @@
               </div>
               <div class="relative">
                 <button class="btn btn-primary w-1/3 float-left" id="btn-approve" style="display:none">Approve</button>
-                <button class="btn btn-primary w-1/3 float-right" id="btn-offset" disabled>Offset<button>
+                <button class="btn btn-primary w-1/3 float-right" id="btn-offset" disabled>Send<button>
+              </div>
+            </div>
+
+            <div class="grid flex-grow form-control w-80 card rounded-box place-items-left space-y-2">
+              <h2 class="card-title">Claim POAP</h2>
+              <div class="flex justify-center">
+                <img src="./images/POAP/20220830_devcon offset POAP proposal.png" alt="POAP to claim" class="w-3/4">
+              </div>
+
+              <div class="relative">
+                <button class="btn btn-primary w-2/3 float-center" id="btn-claimPoap">Claim POAP</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <h1 class="text-xl md:text-3xl text-white mt-6 md:mt-10 mb-56">powered by <a href="https://toucan.earth/">Toucan</a> x <a href="https://www.discarbon.earth/">disCarbon</a></h1>
+      <h1 class="text-xl md:text-3xl text-white mt-6 md:mt-10 mb-56">powered by <a
+          href="https://toucan.earth/">Toucan</a> x <a href="https://www.discarbon.earth/">disCarbon</a></h1>
     </section>
   </div>
 

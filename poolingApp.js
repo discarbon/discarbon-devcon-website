@@ -31,10 +31,13 @@ class BigNumber {
   constructor(bigNumberOrString, decimals) {
     this.decimals = decimals
     if (typeof bigNumberOrString === "string") {
+      console.log("string")
       this.string = bigNumberOrString;
     } else if (bigNumberOrString._isBigNumber) {
+      console.log("big number")
       this.string = parseFloat(ethers.utils.formatUnits(bigNumberOrString, decimals)).toFixed(4);
     } else if (typeof bigNumberOrString === "number") {
+      console.log("number")
       this.string = parseFloat(bigNumberOrString).toFixed(4);
     } else {
       throw "Unexpected type whilst creating BigNumber: " + typeof bigNumberOrString;
@@ -378,7 +381,7 @@ async function approveErc20() {
   busyApproveButton();
   // use a slightly higher approval allowance to allow a small price change between approve and offset
   const approvalAmount = new BigNumber(1.01 * window.paymentAmount.asFloat(), tokenDecimals[window.paymentToken]);
-  console.log("Approval amount: ", approvalAmount, "decimals: ", tokenDecimals[window.paymentToken])
+  console.log("Approval amount: ", approvalAmount.asBigNumber(), "decimals: ", tokenDecimals[window.paymentToken])
   try {
     const erc20WithSigner = window.erc20Contract.connect(window.signer);
     const transaction = await erc20WithSigner.approve(addresses["pooling"], approvalAmount.asBigNumber());
