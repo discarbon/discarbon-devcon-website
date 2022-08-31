@@ -160,11 +160,11 @@ async function updateUIvalues() {
   // }
 
   var fieldCarbonToOffset = document.getElementById("carbon-to-offset");
-  if (window.carbonToOffset.asFloat() > 0) {
-    fieldCarbonToOffset.innerHTML = window.carbonToOffset.asString(4) + " tCO<sub>2</sub>";
-  } else {
-    fieldCarbonToOffset.value = "--.-- tCO<sub>2</sub>";
-  }
+  // if (window.carbonToOffset.asFloat() > 0) {
+  //   fieldCarbonToOffset.innerHTML = window.carbonToOffset.asString(4) + " tCO<sub>2</sub>";
+  // } else {
+  //   fieldCarbonToOffset.value = "--.-- tCO<sub>2</sub>";
+  // }
 
   if (window.isConnected && (window.carbonToOffset.asFloat())) {
     await updatePaymentFields();
@@ -931,7 +931,8 @@ async function updateChart() {
           minFontSize: 2, // Default is 20 (in px), set to false and text will not wrap.
           lineHeight: 2 // Default is 25 (in px), used for when text wraps
         }
-      }
+      },
+      aspectRatio: 1.4
     }
   }
   if (window.emissionChart) {
