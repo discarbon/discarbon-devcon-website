@@ -2023,6 +2023,10 @@ body[dir="rtl"] .checkbox:checked,
   flex-grow: 1;
 }
 
+.grow {
+  flex-grow: 1;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
