@@ -115,6 +115,7 @@ function init() {
   // set even emission value
   var fieldCarbonToOffset = document.getElementById("event-emission");
   fieldCarbonToOffset.innerHTML = window.eventEmission.asString(3) + " tCO<sub>2</sub>";
+  updateUIvalues();
 }
 
 async function createContractObject() {
@@ -913,26 +914,16 @@ async function updateChart() {
     type: "doughnut",
     data: data,
     options: {
-      title: {
-        display: false,
-        text: "World Wide Wine Production 2018"
-      },
       plugins: {
+        title: {
+          display: true,
+          text: 'Your Emission'
+        },
         legend: {
           display: false,
         }
       },
-      elements: {
-        center: {
-          text: 'Red is 2/3 of the total numbers',
-          color: '#FF6384', // Default is #000000
-          fontStyle: 'Arial', // Default is Arial
-          sidePadding: 2, // Default is 20 (as a percentage)
-          minFontSize: 2, // Default is 20 (in px), set to false and text will not wrap.
-          lineHeight: 2 // Default is 25 (in px), used for when text wraps
-        }
-      },
-      aspectRatio: 1.4
+      cutout: "80"
     }
   }
   if (window.emissionChart) {
@@ -953,18 +944,19 @@ const centerDoughnutPlugin = {
     let ctx = chart.ctx;
 
     ctx.restore();
-    let fontSize = (height / 200).toFixed(2);
+    let fontSize = (height / 160).toFixed(2);
     ctx.font = fontSize + "em sans-serif";
     ctx.textBaseline = "middle";
 
     let text = window.carbonToOffset.asString(3) + " tCO2";
     let textX = Math.round((width - ctx.measureText(text).width) / 2);
-    let textY = height / 1.87;
+    let textY = (height ) / 1.65;
 
     console.log("text x: ", textX);
     console.log("text y: ", textY);
 
     ctx.fillText(text, textX, textY);
+    ctx.fillText("Total", textX+25, textY-30);
     ctx.save();
   },
 };

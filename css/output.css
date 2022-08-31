@@ -1438,13 +1438,6 @@ body[dir="rtl"] .checkbox:checked,
   color: hsl(var(--bc) / var(--tw-text-opacity));
 }
 
-.label-text-alt {
-  font-size: 0.75rem;
-  line-height: 1rem;
-  --tw-text-opacity: 1;
-  color: hsl(var(--bc) / var(--tw-text-opacity));
-}
-
 .label a:hover {
   --tw-text-opacity: 1;
   color: hsl(var(--bc) / var(--tw-text-opacity));
@@ -1808,10 +1801,6 @@ body[dir="rtl"] .checkbox:checked,
   padding: 0px;
 }
 
-.stats-horizontal {
-  grid-auto-flow: column;
-}
-
 .stats-vertical {
   grid-auto-flow: row;
 }
@@ -1844,19 +1833,6 @@ body[dir="rtl"] .checkbox:checked,
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   border-bottom-left-radius: var(--rounded-box, 1rem);
   border-bottom-right-radius: var(--rounded-box, 1rem);
-}
-
-.stats-horizontal > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-x-reverse: 0;
-  border-right-width: calc(1px * var(--tw-divide-x-reverse));
-  border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
-  --tw-divide-y-reverse: 0;
-  border-top-width: calc(0px * calc(1 - var(--tw-divide-y-reverse)));
-  border-bottom-width: calc(0px * var(--tw-divide-y-reverse));
-}
-
-.stats-horizontal {
-  overflow-x: auto;
 }
 
 .stats-vertical > :not([hidden]) ~ :not([hidden]) {
@@ -1983,6 +1959,10 @@ body[dir="rtl"] .checkbox:checked,
   width: 75%;
 }
 
+.w-1\/2 {
+  width: 50%;
+}
+
 .w-auto {
   width: auto;
 }
@@ -1993,10 +1973,6 @@ body[dir="rtl"] .checkbox:checked,
 
 .w-2\/3 {
   width: 66.666667%;
-}
-
-.w-1\/2 {
-  width: 50%;
 }
 
 .max-w-\[800px\] {
@@ -2020,10 +1996,6 @@ body[dir="rtl"] .checkbox:checked,
 }
 
 .flex-grow {
-  flex-grow: 1;
-}
-
-.grow {
   flex-grow: 1;
 }
 
@@ -2077,12 +2049,12 @@ body[dir="rtl"] .checkbox:checked,
   border-radius: 0.5rem;
 }
 
-.rounded-none {
-  border-radius: 0px;
-}
-
 .rounded-xl {
   border-radius: 0.75rem;
+}
+
+.rounded-none {
+  border-radius: 0px;
 }
 
 .rounded-l-md {
@@ -2204,14 +2176,14 @@ body[dir="rtl"] .checkbox:checked,
   line-height: 1;
 }
 
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .text-3xl {
@@ -2313,14 +2285,6 @@ body[dir="rtl"] .checkbox:checked,
     position: fixed;
   }
 
-  .md\:mb-0 {
-    margin-bottom: 0px;
-  }
-
-  .md\:mr-10 {
-    margin-right: 2.5rem;
-  }
-
   .md\:mt-10 {
     margin-top: 2.5rem;
   }
@@ -2335,14 +2299,6 @@ body[dir="rtl"] .checkbox:checked,
 
   .md\:w-24 {
     width: 6rem;
-  }
-
-  .md\:flex-row {
-    flex-direction: row;
-  }
-
-  .md\:bg-RollingHills {
-    background-image: url('/images/RollingHillsWithElements.svg');
   }
 
   .md\:text-xl {
