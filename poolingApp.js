@@ -934,21 +934,43 @@ async function updateChart() {
       }
     }
   }
-
   if (window.emissionChart) {
     emissionChart.destroy();
   }
 
-  window.emissionChart = new Chart("EmissionChart", config);
+  window.emissionChart = new Chart(document.getElementById('EmissionChart'), config);
 
   // emissionChart.label(false);
 
 }
 
-var getTotal = function (myDoughnutChart) {
-  var sum = myDoughnutChart.config.data.datasets[0].data.reduce((a, b) => a + b, 0);
-  return `Total: ${sum}`;
-}
+const centerDoughnutPlugin = {
+  id: "annotateDoughnutCenter",
+  beforeDraw: (chart) => {
+    let width = chart.width;
+    let height = chart.height;
+    let ctx = chart.ctx;
+
+    ctx.restore();
+    let fontSize = (height / 200).toFixed(2);
+    ctx.font = fontSize + "em sans-serif";
+    ctx.textBaseline = "middle";
+
+    let text = window.carbonToOffset.asString(3) + " tCO2";
+    let textX = Math.round((width - ctx.measureText(text).width) / 2);
+    let textY = height / 1.87;
+
+    console.log("text x: ", textX);
+    console.log("text y: ", textY);
+
+    ctx.fillText(text, textX, textY);
+    ctx.save();
+  },
+};
+
+// Register Donut Plugin
+Chart.register(centerDoughnutPlugin);
+
 
 window.addEventListener('load', async () => {
   init();
