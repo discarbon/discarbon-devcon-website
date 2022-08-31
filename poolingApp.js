@@ -219,14 +219,12 @@ async function updatePaymentFields() {
   } else {
     switch (window.paymentToken) {
       case "MATIC":
-        await calculateRequiredMaticPaymentForOffset();
-        break;
       case "USDC":
       case "DAI":
       case "WMATIC":
       case "WETH":
       case "NCT":
-        await calculateRequiredTokenPaymentForOffset();
+        await calculateRequiredAmountForOffset();
         break;
       default:
         console.log("Unsupported token! ", window.paymentToken);
@@ -338,16 +336,14 @@ function updateBalanceField() {
   balanceField.innerHTML = "Balance: " + window.balance.asString() + " " + window.paymentToken;
 }
 
-async function calculateRequiredMaticPaymentForOffset() {
-  let amount = await window.pooling
-    .calculateNeededAmount(addresses['WMATIC'], window.carbonToOffset.asBigNumber());
-  amount = new BigNumber(amount, tokenDecimals[window.paymentToken]);
-  window.paymentAmount = new BigNumber(1.01 * amount.asFloat(), tokenDecimals[window.paymentToken]);
-}
-
-async function calculateRequiredTokenPaymentForOffset() {
+async function calculateRequiredAmountForOffset() {
   if (window.paymentToken === "NCT") {
     window.paymentAmount = new BigNumber(window.carbonToOffset.asBigNumber(), tokenDecimals[window.paymentToken]);
+  } else if (window.paymentToken === "MATIC") {
+    let amount = await window.pooling
+      .calculateNeededAmount(addresses['WMATIC'], window.carbonToOffset.asBigNumber());
+    amount = new BigNumber(amount, tokenDecimals[window.paymentToken]);
+    window.paymentAmount = new BigNumber(1.01 * amount.asFloat(), tokenDecimals[window.paymentToken]);
   } else {
     let amount = await window.pooling
       .calculateNeededAmount(addresses[window.paymentToken], window.carbonToOffset.asBigNumber());
@@ -382,7 +378,7 @@ async function approveErc20() {
   busyApproveButton();
   // use a slightly higher approval allowance to allow a small price change between approve and offset
   const approvalAmount = new BigNumber(1.01 * window.paymentAmount.asFloat(), tokenDecimals[window.paymentToken]);
-  console.log("Approval amount: ", approvalAmount, "decimals: ", tokenDecimals[window.paymentToken] )
+  console.log("Approval amount: ", approvalAmount, "decimals: ", tokenDecimals[window.paymentToken])
   try {
     const erc20WithSigner = window.erc20Contract.connect(window.signer);
     const transaction = await erc20WithSigner.approve(addresses["pooling"], approvalAmount.asBigNumber());
@@ -419,7 +415,7 @@ async function doAutoOffset() {
 async function doAutoOffsetUsingETH() {
   // Update matic value before sending txn to account for any price change
   // (an outdated value can lead to gas estimation error)
-  await calculateRequiredMaticPaymentForOffset();
+  await calculateRequiredAmountForOffset();
   busyOffsetButton();
   try {
     const transaction = await window.poolingWithSigner
@@ -435,7 +431,7 @@ async function doAutoOffsetUsingETH() {
 async function doAutoOffsetUsingToken() {
   // Update token amount before sending txn to account for any price change
   // (an outdated value can lead to gas estimation error)
-  await calculateRequiredTokenPaymentForOffset();
+  await calculateRequiredAmountForOffset();
   busyOffsetButton();
   try {
     const transaction = await window.poolingWithSigner
