@@ -1438,6 +1438,13 @@ body[dir="rtl"] .checkbox:checked,
   color: hsl(var(--bc) / var(--tw-text-opacity));
 }
 
+.label-text-alt {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  --tw-text-opacity: 1;
+  color: hsl(var(--bc) / var(--tw-text-opacity));
+}
+
 .label a:hover {
   --tw-text-opacity: 1;
   color: hsl(var(--bc) / var(--tw-text-opacity));
@@ -1988,6 +1995,10 @@ body[dir="rtl"] .checkbox:checked,
   width: 66.666667%;
 }
 
+.w-1\/2 {
+  width: 50%;
+}
+
 .max-w-\[800px\] {
   max-width: 800px;
 }
@@ -2030,6 +2041,10 @@ body[dir="rtl"] .checkbox:checked,
 
 .flex-wrap {
   flex-wrap: wrap;
+}
+
+.place-content-center {
+  place-content: center;
 }
 
 .items-center {
@@ -2356,8 +2371,20 @@ body[dir="rtl"] .checkbox:checked,
     margin-bottom: 1rem;
   }
 
+  .lg\:mb-0 {
+    margin-bottom: 0px;
+  }
+
+  .lg\:mr-10 {
+    margin-right: 2.5rem;
+  }
+
   .lg\:flex-row {
     flex-direction: row;
+  }
+
+  .lg\:bg-RollingHills {
+    background-image: url('/images/RollingHillsWithElements.svg');
   }
 
   .lg\:text-5xl {

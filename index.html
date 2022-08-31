@@ -57,7 +57,7 @@
 </div>
 
 <body
-  class="flex flex-col justify-between bg-no-repeat bg-bottom bg-cover bg-RollingHills_smallScreen md:bg-RollingHills min-h-screen font-sans">
+  class="flex flex-col justify-between bg-no-repeat bg-bottom bg-cover bg-RollingHills_smallScreen lg:bg-RollingHills min-h-screen font-sans">
   <div class="navbar bg-base-500">
     <div class="flex-1">
       <a class="btn btn-ghost text-green-700 normal-case md:text-xl" href="https://www.discarbon.earth">disCarbon</a>
@@ -87,12 +87,15 @@
       <h1 class="text-5xl font-bold mb-8">Devcon Offset</h1>
       <div class="flex justify-center">
         <div class="max-w-[1200px]">
-          <div class="flex flex-col w-full md:flex-row">
-            <div class="form-control w-80 card rounded-box space-y-2 mb-10 md:mb-0 md:mr-10">
-              <h2 class="card-title">Configure Event</h2>
+          <div class="flex flex-col w-full lg:flex-row">
+            <div class="form-control w-80 card rounded-box space-y-2 mb-10 lg:mb-0 lg:mr-10">
+              <h2 class="card-title">Configure Flight and Event</h2>
               <div class="grid flex-grow rounded-box place-items-left space-y-2">
                 <div>
-                  <input name="start" type="text" id="start" placeholder="From"
+                  <label class="label">
+                    <span class="label-text">From where are you flying to Bogota?</span>
+                  </label>
+                  <input name="start" type="text" id="start" placeholder="Departure AIrport"
                     class="input input-bordered input-primary max-w-xs w-full md:h-[60px] md:text-xl">
                 </div>
                 <!-- <div>
@@ -100,6 +103,9 @@
                     class="input input-bordered input-primary max-w-xs w-full md:h-[60px] md:text-xl" />
                 </div> -->
                 <div>
+                  <label class="label">
+                    <span class="label-text">Which class are you flying?</span>
+                  </label>
                   <div class="flex flex-row w-full rounded-lg bg-transparent mt-1">
                     <select id="flightclass"
                       class="select select-bordered select-primary w-full max-w-xs font-normal md:h-[60px] md:text-xl">
@@ -111,23 +117,18 @@
                 </div>
                 <div class="stats stats-horizontal">
                   <div class="stat">
-                    <div class="stat-title text-sm">Distance</div>
-                    <div class="stat-value text-2xl" id="distance">--.-- km</div>
+                    <div class="stat-title">Distance</div>
+                    <div class="stat-value text-3xl" id="distance">--.-- km</div>
                     <div class="stat-desc">One way</div>
                   </div>
 
-                  <div class="stat">
+                  <!-- <div class="stat">
                     <div class="stat-title text-sm">Flight emission</div>
                     <div class="stat-value align-middle">
                       <div class="stat-value text-2xl" id="flight-emission">--.-- tCO<sub>2</sub></div>
-                      <!-- <input id="carbon-to-offset" type="text" placeholder="--.--"
-                        class="input input-bordered input-primary align-middle select-primary rounded-none border-l-[0px] border-r-[0px] border-t-[0px] border-b-[1px]"> -->
-                      <!-- <label class="align-middle text-2xl">
-                        tCO<sub>2</sub>
-                      </label> -->
                     </div>
-                    <div class="stat-desc"></div> <!-- show nothing here -->
-                  </div>
+                    <div class="stat-desc"></div>
+                  </div> -->
                 </div>
               </div>
 
@@ -143,6 +144,9 @@
                 </div>
               </div>
               <div>
+                <label class="label">
+                  <span class="label-text">For how many people do you want to offset?</span>
+                </label>
                 <div class="flex flex-row w-full h-12 rounded-xl relative bg-transparent mt-1 md:h-[54px] md:text-xl">
                   <button data-action="decrement"
                     class="btn-primary h-full w-20 md:w-24 rounded-l-md cursor-pointer outline-none">
@@ -165,8 +169,8 @@
             </div>
 
             <div
-              class="grid flex-grow form-control w-80 card rounded-box place-items-left space-y-2 mb-10 md:mb-0 md:mr-10">
-              <h2 class="card-title">Offset Event</h2>
+              class="grid flex-grow form-control w-80 card rounded-box place-items-left space-y-2 mb-10 lg:mb-0 lg:mr-10">
+              <h2 class="card-title">Contribute to Offset Pool</h2>
               <div class="flex flex-wrap justify-center">
                 <img src="./images/dummy-statistics.png" alt="detailed carbon emission" class="w-3/4">
               </div>
@@ -208,10 +212,15 @@
               </div>
             </div>
 
-            <div class="grid flex-grow form-control w-80 card rounded-box place-items-left space-y-2">
+            <div class="flex flex-col justify-between grid flex-grow form-control w-80 card place-content-center rounded-box space-y-2">
               <h2 class="card-title">Claim POAP</h2>
               <div class="flex justify-center">
                 <img src="./images/POAP/20220830_devcon offset POAP proposal.png" alt="POAP to claim" class="w-3/4">
+              </div>
+              <div class="">
+              <p class="">
+                To be eligible to claim the POAP, send at least the Devcon 6 Emission person the the pool.
+              </p>
               </div>
 
               <div class="relative">
