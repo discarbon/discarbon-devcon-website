@@ -2323,6 +2323,10 @@ body[dir="rtl"] .checkbox:checked,
 }
 
 @media (min-width: 1024px) {
+  .lg\:fixed {
+    position: fixed;
+  }
+
   .lg\:mb-24 {
     margin-bottom: 6rem;
   }
