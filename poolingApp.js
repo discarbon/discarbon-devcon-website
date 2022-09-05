@@ -153,12 +153,12 @@ async function updateUIvalues() {
     var fieldDistance = document.getElementById("distance");
     fieldDistance.innerHTML = "--.-- km";
   }
-  // var fieldFlightEmission = document.getElementById("flight-emission");
-  // if (window.flightEmission.asFloat() > 0) {
-  //   fieldFlightEmission.innerHTML = window.flightEmission.asString(3) + " tCO<sub>2</sub>";
-  // } else {
-  //   fieldFlightEmission.value = "--.-- tCO<sub>2</sub>";
-  // }
+  var fieldFlightEmission = document.getElementById("flight-emission");
+  if (window.flightEmission.asFloat() > 0) {
+    fieldFlightEmission.innerHTML = window.flightEmission.asString(3) + " tCO<sub>2</sub>";
+  } else {
+    fieldFlightEmission.value = "--.-- tCO<sub>2</sub>";
+  }
 
   var fieldCarbonToOffset = document.getElementById("carbon-to-offset");
   // if (window.carbonToOffset.asFloat() > 0) {

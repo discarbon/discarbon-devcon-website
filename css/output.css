@@ -1801,6 +1801,10 @@ body[dir="rtl"] .checkbox:checked,
   padding: 0px;
 }
 
+.stats-horizontal {
+  grid-auto-flow: column;
+}
+
 .stats-vertical {
   grid-auto-flow: row;
 }
@@ -1833,6 +1837,19 @@ body[dir="rtl"] .checkbox:checked,
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   border-bottom-left-radius: var(--rounded-box, 1rem);
   border-bottom-right-radius: var(--rounded-box, 1rem);
+}
+
+.stats-horizontal > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-x-reverse: 0;
+  border-right-width: calc(1px * var(--tw-divide-x-reverse));
+  border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
+  --tw-divide-y-reverse: 0;
+  border-top-width: calc(0px * calc(1 - var(--tw-divide-y-reverse)));
+  border-bottom-width: calc(0px * var(--tw-divide-y-reverse));
+}
+
+.stats-horizontal {
+  overflow-x: auto;
 }
 
 .stats-vertical > :not([hidden]) ~ :not([hidden]) {

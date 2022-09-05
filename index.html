@@ -115,21 +115,23 @@
                     </select>
                   </div>
                 </div>
-                <div class="stats stats-vertical">
+                <div class="stats stats-horizontal">
                   <div class="stat">
                     <div class="stat-title">Distance</div>
-                    <div class="stat-value text-2xl" id="distance">--.-- km</div>
+                    <div class="stat-value text-xl" id="distance">--.-- km</div>
                     <div class="stat-desc">One way</div>
                   </div>
 
-                  <!-- <div class="stat">
+                  <div class="stat">
                     <div class="stat-title text-sm">Flight emission</div>
                     <div class="stat-value align-middle">
-                      <div class="stat-value text-2xl" id="flight-emission">--.-- tCO<sub>2</sub></div>
+                      <div class="stat-value text-xl" id="flight-emission">--.-- tCO<sub>2</sub></div>
                     </div>
                     <div class="stat-desc"></div>
-                  </div> -->
+                  </div>
+                </div>
 
+                <div class="stats stats-horizontal">
                   <div class="stat">
                     <div class="stat-title w-full">Devcon 6 Emission per person</div>
                     <div class="stat-value align-middle w-full">
@@ -138,30 +140,30 @@
                     <div class="stat-desc"></div> <!-- show nothing here -->
                   </div>
                 </div>
-                <div>
-                  <label class="label">
-                    <span class="label-text">For how many people do you want to offset?</span>
-                  </label>
-                  <div class="flex flex-row w-full h-12 rounded-xl relative bg-transparent mt-1 md:h-[54px] md:text-xl">
-                    <button data-action="decrement"
-                      class="btn-primary h-full w-20 md:w-24 rounded-l-md cursor-pointer outline-none">
-                      <span class="m-auto text-2xl">−</span>
-                    </button>
-                    <input type="text"
-                      class="input input-bordered input-primary rounded-none text-center w-full text-md flex items-center text-gray-700 h-12 md:h-[54px] md:text-xl"
-                      id="passengers" value="1 participant"></input>
-                    <button data-action="increment" class="btn-primary w-20 md:w-24 rounded-r-lg cursor-pointer">
-                      <span class="m-auto text-2xl">+</span>
-                    </button>
-                  </div>
+              </div>
+              <div class="mb-2 ">
+                <label class="label">
+                  <span class="label-text">For how many people do you want to offset?</span>
+                </label>
+                <div class="flex flex-row w-full h-12 rounded-xl relative bg-transparent mt-1 md:h-[54px] md:text-xl">
+                  <button data-action="decrement"
+                    class="btn-primary h-full w-20 md:w-24 rounded-l-md cursor-pointer outline-none">
+                    <span class="m-auto text-2xl">−</span>
+                  </button>
+                  <input type="text"
+                    class="input input-bordered input-primary rounded-none text-center w-full text-md flex items-center text-gray-700 h-12 md:h-[54px] md:text-xl"
+                    id="passengers" value="1 participant"></input>
+                  <button data-action="increment" class="btn-primary w-20 md:w-24 rounded-r-lg cursor-pointer">
+                    <span class="m-auto text-2xl">+</span>
+                  </button>
                 </div>
-                <!-- <div class="relative ">
+              </div>
+              <!-- <div class="relative ">
                   <label class="label cursor-pointer">
                     <span class="label-text md:text-xl">Round Trip:</span>
                     <input type="checkbox" id="roundtrip" checked="checked" class="checkbox checkbox-primary md:checkbox-lg" />
                   </label>
                 </div> -->
-              </div>
             </div>
 
             <div
@@ -207,7 +209,7 @@
                   <div class="stat-desc" id="balance">User balance: --.--</div>
                 </div>
               </div>
-              <div class="relative">
+              <div class="relative mb-2">
                 <button class="btn btn-primary w-1/3 float-left" id="btn-approve" style="display:none">Approve</button>
                 <button class="btn btn-primary w-1/3 float-right" id="btn-offset" disabled>Send<button>
               </div>
@@ -226,7 +228,7 @@
                 </p>
               </div>
               <div class="relative">
-                <button class="btn btn-primary w-2/3 float-center  mb-2" id="btn-claimPoap">Claim POAP</button>
+                <button class="btn btn-primary w-2/3 float-center mb-2" id="btn-claimPoap">Claim POAP</button>
               </div>
             </div>
           </div>
