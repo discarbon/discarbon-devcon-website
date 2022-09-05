@@ -146,19 +146,19 @@ function updateTotalEmission() {
 
 async function updateUIvalues() {
 
-  if (window.flightDistance > 0) {
+  // if (window.flightDistance > 0) {
     var fieldDistance = document.getElementById("distance");
     fieldDistance.innerHTML = window.flightDistance.toFixed(0) + " km";
-  } else {
-    var fieldDistance = document.getElementById("distance");
-    fieldDistance.innerHTML = "--.-- km";
-  }
+  // } else {
+  //   var fieldDistance = document.getElementById("distance");
+  //   fieldDistance.innerHTML = "--.-- km";
+  // }
   var fieldFlightEmission = document.getElementById("flight-emission");
-  if (window.flightEmission.asFloat() > 0) {
+  // if (window.flightEmission.asFloat() > 0) {
     fieldFlightEmission.innerHTML = window.flightEmission.asString(3) + " tCO<sub>2</sub>";
-  } else {
-    fieldFlightEmission.value = "--.-- tCO<sub>2</sub>";
-  }
+  // } else {
+  //   fieldFlightEmission.value = "--.-- tCO<sub>2</sub>";
+  // }
 
   var fieldCarbonToOffset = document.getElementById("carbon-to-offset");
   // if (window.carbonToOffset.asFloat() > 0) {
@@ -923,7 +923,7 @@ async function updateChart() {
           display: false,
         }
       },
-      cutout: "80"
+      cutout: "85"
     }
   }
   if (window.emissionChart) {
