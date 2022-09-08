@@ -1,6 +1,6 @@
 // Addresses of used contracts
 export const addressesMainnet = {
-    pooling: "0x2608cDFCAe67d96A120bba7407d75c1F871221f6", // Deployed 20220621
+    pooling: "0x2608cDFCAe67d96A120bba7407d75c1F871221f6", // Deployed 20220818
     NCT: "0xD838290e877E0188a4A44700463419ED96c16107",
     USDC: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
     DAI: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
