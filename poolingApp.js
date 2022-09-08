@@ -112,7 +112,7 @@ function init() {
   console.log("Web3Modal instance is", web3Modal);
 
   // Set initial values
-  window.eventEmission = new BigNumber("0.923", tokenDecimals[18]);
+  window.eventEmission = new BigNumber("0.0923", tokenDecimals[18]);
   window.carbonToOffset = new BigNumber("0.0", tokenDecimals[18]);
   window.flightEmission = new BigNumber("0.0", tokenDecimals[18]);
   window.flightDistance = 0;
