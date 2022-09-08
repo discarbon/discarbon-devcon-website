@@ -4,7 +4,7 @@ import { addressesMainnet } from './addresses.js';
 
 // Unpkg imports
 const Web3Modal = window.Web3Modal.default;
-// const WalletConnectProvider = window.WalletConnectProvider.default;
+const WalletConnectProvider = window.WalletConnectProvider.default;
 // const Fortmatic = window.Fortmatic;
 const evmChains = window.evmChains;
 
@@ -80,13 +80,19 @@ function init() {
   console.log("Initializing");
   // Tell Web3modal what providers we have available.
   const providerOptions = {
-    // walletconnect: {
-    //   package: WalletConnectProvider,
-    //   options: {
-    //     // haurogs key
-    //     infuraId: "95a164372c0a4d0f8847bc5c173c9fa0",
-    //   }
-    // },
+    walletconnect: {
+      package: WalletConnectProvider,
+      options: {
+        // haurogs key
+        // infuraId: {
+        //   137: "95a164372c0a4d0f8847bc5c173c9fa0"},
+        rpc: {
+          137: "https://polygon-mainnet.infura.io/v3/95a164372c0a4d0f8847bc5c173c9fa0",
+
+       },
+       network: "matic",
+      }
+    },
 
     // fortmatic: {
     //   package: Fortmatic,
@@ -98,17 +104,18 @@ function init() {
   };
 
   web3Modal = new Web3Modal({
-    cacheProvider: false, // optional
+    cacheProvider: false, // choose every time
     providerOptions, // required
-    disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
+    disableInjectedProvider: false, // For MetaMask / Brave / Opera.
   });
   disableOffsetButton();
   console.log("Web3Modal instance is", web3Modal);
 
   // Set initial values
-  window.eventEmission = new BigNumber("0.923", tokenDecimals[18]);
+  window.eventEmission = new BigNumber("0.0923", tokenDecimals[18]);
   window.carbonToOffset = new BigNumber("0.0", tokenDecimals[18]);
   window.flightEmission = new BigNumber("0.0", tokenDecimals[18]);
+  window.flightDistance = 0;
   window.paymentToken = "MATIC";
   window.paymentAmount = new BigNumber("0.0", tokenDecimals[paymentToken]);
 
@@ -552,11 +559,11 @@ async function onConnect() {
   console.log("Opening a dialog", web3Modal);
 
   // Needs to be removed if more wallets than metamask are allowed
-  if (typeof window.ethereum == 'undefined') {
-    document.getElementById("Metamask-Warning-Modal").checked = true;
-    console.log("No MetaMask compatible wallet found.")
-    return;
-  }
+  // if (typeof window.ethereum == 'undefined') {
+  //   document.getElementById("Metamask-Warning-Modal").checked = true;
+  //   console.log("No MetaMask compatible wallet found.")
+  //   return;
+  // }
 
   let instance
   try {
@@ -952,8 +959,8 @@ const centerDoughnutPlugin = {
     let textX = Math.round((width - ctx.measureText(text).width) / 2);
     let textY = (height ) / 1.65;
 
-    console.log("text x: ", textX);
-    console.log("text y: ", textY);
+    // console.log("text x: ", textX);
+    // console.log("text y: ", textY);
 
     ctx.fillText(text, textX, textY);
     ctx.fillText("Total", textX+25, textY-30);
