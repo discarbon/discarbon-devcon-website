@@ -5,7 +5,7 @@ import { addressesMainnet } from './addresses.js';
 // Unpkg imports
 const Web3Modal = window.Web3Modal.default;
 const WalletConnectProvider = window.WalletConnectProvider.default;
-const Fortmatic = window.Fortmatic;
+// const Fortmatic = window.Fortmatic;
 const evmChains = window.evmChains;
 
 // Web3modal instance
@@ -94,13 +94,13 @@ function init() {
       }
     },
 
-    fortmatic: {
-      package: Fortmatic,
-      options: {
-        // Mikko's TESTNET api key
-        key: "pk_test_391E26A3B43A3350"
-      }
-    }
+    // fortmatic: {
+    //   package: Fortmatic,
+    //   options: {
+    //     // Mikko's TESTNET api key
+    //     key: "pk_test_391E26A3B43A3350"
+    //   }
+    // }
   };
 
   web3Modal = new Web3Modal({
