@@ -559,11 +559,11 @@ async function onConnect() {
   console.log("Opening a dialog", web3Modal);
 
   // Needs to be removed if more wallets than metamask are allowed
-  if (typeof window.ethereum == 'undefined') {
-    document.getElementById("Metamask-Warning-Modal").checked = true;
-    console.log("No MetaMask compatible wallet found.")
-    return;
-  }
+  // if (typeof window.ethereum == 'undefined') {
+  //   document.getElementById("Metamask-Warning-Modal").checked = true;
+  //   console.log("No MetaMask compatible wallet found.")
+  //   return;
+  // }
 
   let instance
   try {
