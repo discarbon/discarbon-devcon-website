@@ -16,10 +16,13 @@ Open a console and start the tailwind css watcher which compiles the css automat
 
 Run site for local development with HTTPS via [https-localhost](https://github.com/daquinoaldo/https-localhost):
 ```sh
-npm i -g --only=prod https-localhost
+sudo npm i -g --only=prod https-localhost
 sudo serve .
 ```
+Without HTTPS Walletconnect will fail in weird ways.
+
 See [web3modal-vanilla-js-example][https://github.com/Web3Modal/web3modal-vanilla-js-example] for more info.
+
 
 
 ### List of airports
