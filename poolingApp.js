@@ -87,7 +87,7 @@ function init() {
         // infuraId: {
         //   137: "95a164372c0a4d0f8847bc5c173c9fa0"},
         rpc: {
-          137: "https://polygon-mainnet.infura.io/v3/95a164372c0a4d0f8847bc5c173c9fa0",
+          137: "https://polygon-rpc.com",
 
        },
        network: "matic",
