@@ -1,4 +1,5 @@
 import { addressesMainnet } from './addresses.js';
+import "./resources/wallet-sdk-bundle.js";
 
 "use strict";
 
@@ -89,9 +90,21 @@ function init() {
         rpc: {
           137: "https://polygon-rpc.com",
 
-       },
-       network: "matic",
-      }
+        },
+        network: "matic",
+      },
+    },
+
+    coinbasewallet: {
+      package: CoinbaseWalletSDK,
+      options: {
+        appName: "disCarbon: Devcon Offset",
+        // infuraId: "95a164372c0a4d0f8847bc5c173c9fa0",
+        rpc: {
+          137: "https://polygon-rpc.com",
+        },
+        network: "matic",
+      },
     },
 
     // fortmatic: {
