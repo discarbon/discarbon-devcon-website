@@ -101,19 +101,11 @@ function init() {
         },
       },
     },
-
-    // fortmatic: {
-    //   package: Fortmatic,
-    //   options: {
-    //     // Mikko's TESTNET api key
-    //     key: "pk_test_391E26A3B43A3350"
-    //   }
-    // }
   };
 
   web3Modal = new Web3Modal({
     network: "matic", // optional
-    chainId: "0x89",
+    chainId: "0x89",  // polygons 137 in hex
     cacheProvider: false, // choose every time
     providerOptions, // required
     disableInjectedProvider: false, // For MetaMask / Brave / Opera.
