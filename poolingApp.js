@@ -584,7 +584,7 @@ async function onConnect() {
     window.provider = new ethers.providers.Web3Provider(instance);
     window.signer = window.provider.getSigner();
   } catch (e) {
-    document.getElementById("Metamask-Warning-Modal").checked = true;
+    // document.getElementById("Metamask-Warning-Modal").checked = true;
     console.log("Could not get a wallet connection", e)
     return;
   }
