@@ -578,38 +578,38 @@ async function onConnect() {
     return;
   }
 
-  try {
-    console.log("Before Switching chain");
-    await window.provider.provider.request({
-      method: "wallet_switchEthereumChain",
-      params: [{ chainId: toHex(137) }],
-    });
-    console.log("Switching chain");
-  } catch (switchError) {
-    // This error code indicates that the chain has not been added to MetaMask.
-    if (switchError.code === 4902) {
-      try {
-        await window.provider.provider.request({
-          method: "wallet_addEthereumChain",
-          params: [
-            {
-              chainId: toHex(137),
-              chainName: "Polygon Mainnet",
-              nativeCurrency: {
-                name: "MATIC",
-                symbol: "MATIC",
-                decimals: 18
-             },
-              rpcUrls: ["https://polygon-rpc.com/"],
-              blockExplorerUrls: ["https://polygonscan.com/"],
-            },
-          ],
-        });
-      } catch (addError) {
-        throw addError;
-      }
-    }
-  };
+  // try {
+  //   console.log("Before Switching chain");
+  //   await window.provider.provider.request({
+  //     method: "wallet_switchEthereumChain",
+  //     params: [{ chainId: toHex(137) }],
+  //   });
+  //   console.log("Switching chain");
+  // } catch (switchError) {
+  //   // This error code indicates that the chain has not been added to MetaMask.
+  //   if (switchError.code === 4902) {
+  //     try {
+  //       await window.provider.provider.request({
+  //         method: "wallet_addEthereumChain",
+  //         params: [
+  //           {
+  //             chainId: toHex(137),
+  //             chainName: "Polygon Mainnet",
+  //             nativeCurrency: {
+  //               name: "MATIC",
+  //               symbol: "MATIC",
+  //               decimals: 18
+  //            },
+  //             rpcUrls: ["https://polygon-rpc.com/"],
+  //             blockExplorerUrls: ["https://polygonscan.com/"],
+  //           },
+  //         ],
+  //       });
+  //     } catch (addError) {
+  //       throw addError;
+  //     }
+  //   }
+  // };
 
   window.carbonToOffset = carbonToOffset;
   window.paymentAmount = paymentAmount;
