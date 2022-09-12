@@ -667,15 +667,14 @@ async function onDisconnect() {
   console.log("Killing the wallet connection", window.provider);
 
   // TODO: Which providers have close method?
-  if (window.provider.close) {
-    await window.provider.close();
+  if (window.provider.provider.close) {
+    await window.provider.provider.close();
     await web3Modal.clearCachedProvider();
     window.provider = null;
     console.log("in IF: ")
   }
   await web3Modal.clearCachedProvider();
   window.provider = null;
-  console.log("in IF: ")
   console.log("after IF: ")
 
   // Set the UI back to the initial state
