@@ -459,6 +459,12 @@ async function doAutoOffsetUsingToken() {
   }
 }
 
+async function mintPoap() {
+  console.log("Minting POAP for ", await window.signer.getAddress())
+
+
+}
+
 // async function doAutoOffsetUsingPoolToken() {
 //   busyOffsetButton();
 //   try {
@@ -646,6 +652,11 @@ async function onConnect() {
   var btnApprove = document.getElementById("btn-approve");
   if (btnApprove.addEventListener) btnApprove.addEventListener("click", approveErc20, false);
   else if (btnApprove.attachEvent) btnApprove.attachEvent("onclick", approveErc20);
+
+  var btnMintPoap = document.getElementById("btn-mintPoap");
+  if (btnMintPoap.addEventListener) btnMintPoap.addEventListener("click", mintPoap, false);
+  else if (btnMintPoap.attachEvent) btnMintPoap.attachEvent("onclick", mintPoap);
+
 
   await refreshAccountData();
   // await handleManuallyEnteredTCO2();
