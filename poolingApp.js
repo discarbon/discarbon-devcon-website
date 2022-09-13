@@ -105,7 +105,7 @@ function init() {
 
   web3Modal = new Web3Modal({
     network: "matic", // optional
-    chainId: "0x89",  // polygons 137 in hex
+    networkID: 137,
     cacheProvider: false, // choose every time
     providerOptions, // required
     disableInjectedProvider: false, // For MetaMask / Brave / Opera.
@@ -560,13 +560,6 @@ async function onConnect() {
 
   console.log("Opening a dialog", web3Modal);
 
-  // Needs to be removed if more wallets than metamask are allowed
-  // if (typeof window.ethereum == 'undefined') {
-  //   document.getElementById("Metamask-Warning-Modal").checked = true;
-  //   console.log("No MetaMask compatible wallet found.")
-  //   return;
-  // }
-
   let instance
   try {
     instance = await web3Modal.connect();
@@ -657,6 +650,64 @@ async function onConnect() {
   await refreshAccountData();
   // await handleManuallyEnteredTCO2();
   await updatePaymentFields();
+}
+
+async function switchToPolygon() {
+
+  await window.provider.provider.request({
+    method: "wallet_switchEthereumChain",
+    params: [{ chainId: toHex(137) }],
+  });
+
+
+  // await window.provider.provider.request({
+  //   method: "wallet_addEthereumChain",
+  //   params: [{
+  //     chainId: "0x89",
+  //     rpcUrls: ["https://rpc-mainnet.matic.network/"],
+  //     chainName: "Matic Mainnet",
+  //     nativeCurrency: {
+  //       name: "MATIC",
+  //       symbol: "MATIC",
+  //       decimals: 18
+  //     },
+  //     blockExplorerUrls: ["https://polygonscan.com/"]
+  //   }]
+  // });
+
+
+  // try {
+  //   console.log("Before Switching chain");
+  //   await window.provider.provider.request({
+  //     method: "wallet_switchEthereumChain",
+  //     params: [{ chainId: toHex(137) }],
+  //   });
+  //   console.log("Switching chain");
+  // } catch (switchError) {
+  //   // This error code indicates that the chain has not been added to MetaMask.
+  //   if (switchError.code === 4902) {
+  //     try {
+  //       await window.provider.provider.request({
+  //         method: "wallet_addEthereumChain",
+  //         params: [
+  //           {
+  //             chainId: toHex(137),
+  //             chainName: "Polygon Mainnet",
+  //             nativeCurrency: {
+  //               name: "MATIC",
+  //               symbol: "MATIC",
+  //               decimals: 18
+  //             },
+  //             rpcUrls: ["https://polygon-rpc.com/"],
+  //             blockExplorerUrls: ["https://polygonscan.com/"],
+  //           },
+  //         ],
+  //       });
+  //     } catch (addError) {
+  //       throw addError;
+  //     }
+  //   }
+  // };
 }
 
 /**
