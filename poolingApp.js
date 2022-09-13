@@ -1,10 +1,14 @@
 import { addressesMainnet } from './addresses.js';
+// import WalletConnect from "./node_modules/@walletconnect/web3-provider";
+// import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
+import "./resources/wallet-sdk-bundle.js";
 
 "use strict";
 
 // Unpkg imports
 const Web3Modal = window.Web3Modal.default;
 const WalletConnectProvider = window.WalletConnectProvider.default;
+// const CoinbaseWalletSDK = window.CoinbaseWalletSDK;
 // const Fortmatic = window.Fortmatic;
 const evmChains = window.evmChains;
 
@@ -78,32 +82,30 @@ let airportsList = airports.map(value => {
 function init() {
 
   console.log("Initializing");
-  // Tell Web3modal what providers we have available.
   const providerOptions = {
     walletconnect: {
       package: WalletConnectProvider,
       options: {
-        // haurogs key
-        // infuraId: {
-        //   137: "95a164372c0a4d0f8847bc5c173c9fa0"},
         rpc: {
-          137: "https://polygon-mainnet.infura.io/v3/95a164372c0a4d0f8847bc5c173c9fa0",
-
-       },
-       network: "matic",
-      }
+          137: "https://polygon-rpc.com",
+        },
+      },
     },
 
-    // fortmatic: {
-    //   package: Fortmatic,
-    //   options: {
-    //     // Mikko's TESTNET api key
-    //     key: "pk_test_391E26A3B43A3350"
-    //   }
-    // }
+    coinbasewallet: {
+      package: CoinbaseWalletSDK,
+      options: {
+        appName: "disCarbon: Devcon Offset",
+        rpc: {
+          137: "https://polygon-rpc.com",
+        },
+      },
+    },
   };
 
   web3Modal = new Web3Modal({
+    network: "matic", // optional
+    networkID: 137,
     cacheProvider: false, // choose every time
     providerOptions, // required
     disableInjectedProvider: false, // For MetaMask / Brave / Opera.
@@ -119,7 +121,7 @@ function init() {
   window.paymentToken = "MATIC";
   window.paymentAmount = new BigNumber("0.0", tokenDecimals[paymentToken]);
 
-  // set even emission value
+  // set event emission value
   var fieldCarbonToOffset = document.getElementById("event-emission");
   fieldCarbonToOffset.innerHTML = window.eventEmission.asString(3) + " tCO<sub>2</sub>";
   updateUIvalues();
@@ -154,15 +156,15 @@ function updateTotalEmission() {
 async function updateUIvalues() {
 
   // if (window.flightDistance > 0) {
-    var fieldDistance = document.getElementById("distance");
-    fieldDistance.innerHTML = window.flightDistance.toFixed(0) + " km";
+  var fieldDistance = document.getElementById("distance");
+  fieldDistance.innerHTML = window.flightDistance.toFixed(0) + " km";
   // } else {
   //   var fieldDistance = document.getElementById("distance");
   //   fieldDistance.innerHTML = "--.-- km";
   // }
   var fieldFlightEmission = document.getElementById("flight-emission");
   // if (window.flightEmission.asFloat() > 0) {
-    fieldFlightEmission.innerHTML = window.flightEmission.asString(3) + " tCO<sub>2</sub>";
+  fieldFlightEmission.innerHTML = window.flightEmission.asString(3) + " tCO<sub>2</sub>";
   // } else {
   //   fieldFlightEmission.value = "--.-- tCO<sub>2</sub>";
   // }
@@ -558,23 +560,49 @@ async function onConnect() {
 
   console.log("Opening a dialog", web3Modal);
 
-  // Needs to be removed if more wallets than metamask are allowed
-  // if (typeof window.ethereum == 'undefined') {
-  //   document.getElementById("Metamask-Warning-Modal").checked = true;
-  //   console.log("No MetaMask compatible wallet found.")
-  //   return;
-  // }
-
   let instance
   try {
     instance = await web3Modal.connect();
     window.provider = new ethers.providers.Web3Provider(instance);
     window.signer = window.provider.getSigner();
   } catch (e) {
-    document.getElementById("Metamask-Warning-Modal").checked = true;
+    // document.getElementById("Metamask-Warning-Modal").checked = true;
     console.log("Could not get a wallet connection", e)
     return;
   }
+
+  // try {
+  //   console.log("Before Switching chain");
+  //   await window.provider.provider.request({
+  //     method: "wallet_switchEthereumChain",
+  //     params: [{ chainId: toHex(137) }],
+  //   });
+  //   console.log("Switching chain");
+  // } catch (switchError) {
+  //   // This error code indicates that the chain has not been added to MetaMask.
+  //   if (switchError.code === 4902) {
+  //     try {
+  //       await window.provider.provider.request({
+  //         method: "wallet_addEthereumChain",
+  //         params: [
+  //           {
+  //             chainId: toHex(137),
+  //             chainName: "Polygon Mainnet",
+  //             nativeCurrency: {
+  //               name: "MATIC",
+  //               symbol: "MATIC",
+  //               decimals: 18
+  //            },
+  //             rpcUrls: ["https://polygon-rpc.com/"],
+  //             blockExplorerUrls: ["https://polygonscan.com/"],
+  //           },
+  //         ],
+  //       });
+  //     } catch (addError) {
+  //       throw addError;
+  //     }
+  //   }
+  // };
 
   window.carbonToOffset = carbonToOffset;
   window.paymentAmount = paymentAmount;
@@ -624,6 +652,64 @@ async function onConnect() {
   await updatePaymentFields();
 }
 
+async function switchToPolygon() {
+
+  await window.provider.provider.request({
+    method: "wallet_switchEthereumChain",
+    params: [{ chainId: toHex(137) }],
+  });
+
+
+  // await window.provider.provider.request({
+  //   method: "wallet_addEthereumChain",
+  //   params: [{
+  //     chainId: "0x89",
+  //     rpcUrls: ["https://rpc-mainnet.matic.network/"],
+  //     chainName: "Matic Mainnet",
+  //     nativeCurrency: {
+  //       name: "MATIC",
+  //       symbol: "MATIC",
+  //       decimals: 18
+  //     },
+  //     blockExplorerUrls: ["https://polygonscan.com/"]
+  //   }]
+  // });
+
+
+  // try {
+  //   console.log("Before Switching chain");
+  //   await window.provider.provider.request({
+  //     method: "wallet_switchEthereumChain",
+  //     params: [{ chainId: toHex(137) }],
+  //   });
+  //   console.log("Switching chain");
+  // } catch (switchError) {
+  //   // This error code indicates that the chain has not been added to MetaMask.
+  //   if (switchError.code === 4902) {
+  //     try {
+  //       await window.provider.provider.request({
+  //         method: "wallet_addEthereumChain",
+  //         params: [
+  //           {
+  //             chainId: toHex(137),
+  //             chainName: "Polygon Mainnet",
+  //             nativeCurrency: {
+  //               name: "MATIC",
+  //               symbol: "MATIC",
+  //               decimals: 18
+  //             },
+  //             rpcUrls: ["https://polygon-rpc.com/"],
+  //             blockExplorerUrls: ["https://polygonscan.com/"],
+  //           },
+  //         ],
+  //       });
+  //     } catch (addError) {
+  //       throw addError;
+  //     }
+  //   }
+  // };
+}
+
 /**
  * Disconnect wallet button pressed.
  */
@@ -632,11 +718,15 @@ async function onDisconnect() {
   console.log("Killing the wallet connection", window.provider);
 
   // TODO: Which providers have close method?
-  if (window.provider.close) {
-    await window.provider.close();
+  if (window.provider.provider.close) {
+    await window.provider.provider.close();
     await web3Modal.clearCachedProvider();
     window.provider = null;
+    console.log("in IF: ")
   }
+  await web3Modal.clearCachedProvider();
+  window.provider = null;
+  console.log("after IF: ")
 
   // Set the UI back to the initial state
   document.querySelector("#connect-button-div").style.display = "block";
@@ -835,6 +925,11 @@ function singleEmissionCalc(em) {
   return emission
 }
 
+function toHex(num) {
+  const val = Number(num);
+  return "0x" + val.toString(16);
+};
+
 // async function handleManuallyEnteredTCO2() {
 //   let TCO2 = parseFloat(document.getElementById("carbon-to-offset").value);
 //   if (TCO2 && TCO2 > 0) {
@@ -957,13 +1052,13 @@ const centerDoughnutPlugin = {
 
     let text = window.carbonToOffset.asString(3) + " tCO2";
     let textX = Math.round((width - ctx.measureText(text).width) / 2);
-    let textY = (height ) / 1.65;
+    let textY = (height) / 1.65;
 
     // console.log("text x: ", textX);
     // console.log("text y: ", textY);
 
     ctx.fillText(text, textX, textY);
-    ctx.fillText("Total", textX+25, textY-30);
+    ctx.fillText("Total", textX + 25, textY - 30);
     ctx.save();
   },
 };
