@@ -341,6 +341,35 @@ function readyOffsetButton() {
   offsetButton.innerHTML = "Offset";
 }
 
+function disableMintPoapButton() {
+  let MintPoapButton = document.getElementById("btn-mintPoap");
+  MintPoapButton.setAttribute("disabled", "disabled");
+}
+
+function enableMintPoapButton() {
+  let MintPoapButton = document.getElementById("btn-mintPoap");
+  MintPoapButton.removeAttribute("disabled");
+}
+
+function busyMintPoapButton() {
+  let MintPoapButton = document.getElementById("btn-mintPoap");
+  MintPoapButton.innerHTML = "";
+  MintPoapButton.classList.add("loading");
+}
+
+function successfulMintPoapButton() {
+  let MintPoapButton = document.getElementById("btn-mintPoap");
+  MintPoapButton.setAttribute("disabled", "disabled");
+  MintPoapButton.classList.remove("loading");
+  MintPoapButton.innerHTML = "POAP Minted!";
+}
+
+function readyMintPoapButton() {
+  let MintPoapButton = document.getElementById("btn-mintPoap");
+  MintPoapButton.classList.remove("loading");
+  MintPoapButton.innerHTML = "Mint POAP";
+}
+
 function updatePaymentAmountField() {
   var paymentAmountField = document.getElementById("payment-amount");
   paymentAmountField.innerHTML = window.paymentAmount.asString();
@@ -460,9 +489,11 @@ async function doAutoOffsetUsingToken() {
 }
 
 async function mintPoap() {
-  console.log("Minting POAP for ", await window.signer.getAddress())
-
-
+  busyMintPoapButton();
+  const delay = ms => new Promise(res => setTimeout(res, ms));
+  await delay(3000);
+  console.log("Minting POAP for ", await window.signer.getAddress());
+  successfulMintPoapButton();
 }
 
 // async function doAutoOffsetUsingPoolToken() {
