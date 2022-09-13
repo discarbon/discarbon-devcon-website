@@ -80,6 +80,14 @@ let airportsList = airports.map(value => {
  * Setup the orchestra
  */
 function init() {
+    // Set initial values
+    window.eventEmission = new BigNumber("0.923", tokenDecimals[18]);
+    window.carbonToOffset = new BigNumber("0.0", tokenDecimals[18]);
+    window.flightEmission = new BigNumber("0.0", tokenDecimals[18]);
+    window.flightDistance = 0;
+    window.paymentToken = "MATIC";
+    window.paymentAmount = new BigNumber("0.0", tokenDecimals[paymentToken]);
+    updateTotalEmission();
 
   console.log("Initializing");
   const providerOptions = {
@@ -112,14 +120,6 @@ function init() {
   });
   disableOffsetButton();
   console.log("Web3Modal instance is", web3Modal);
-
-  // Set initial values
-  window.eventEmission = new BigNumber("0.0923", tokenDecimals[18]);
-  window.carbonToOffset = new BigNumber("0.0", tokenDecimals[18]);
-  window.flightEmission = new BigNumber("0.0", tokenDecimals[18]);
-  window.flightDistance = 0;
-  window.paymentToken = "MATIC";
-  window.paymentAmount = new BigNumber("0.0", tokenDecimals[paymentToken]);
 
   // set event emission value
   var fieldCarbonToOffset = document.getElementById("event-emission");
