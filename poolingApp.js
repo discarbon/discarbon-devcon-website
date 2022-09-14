@@ -338,7 +338,7 @@ function busyOffsetButton() {
 function readyOffsetButton() {
   let offsetButton = document.getElementById("btn-offset");
   offsetButton.classList.remove("loading");
-  offsetButton.innerHTML = "Offset";
+  offsetButton.innerHTML = "Send";
 }
 
 function disableMintPoapButton() {
