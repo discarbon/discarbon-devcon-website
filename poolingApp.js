@@ -1033,13 +1033,18 @@ $(function () {
 
 async function updateChart() {
   var xValues = ["Flight", "Accommodation", "Catering", "Event Infrastructure"];
+
+  let accommodation = 0.5;  // Emission in TCO2
+  let catering = 0.3;
+  let eventInfrastructure = 0.1;
+
   let participants = parseFloat(document.getElementById("passengers").value);
 
   var yValues = [
     window.flightEmission.asFloat() * participants,
-    0.5 * participants,
-    0.3 * participants,
-    0.1 * participants];
+    accommodation * participants,
+    catering * participants,
+    eventInfrastructure * participants];
   var barColors = [
     "#0077B6",
     "#00B4D8",
