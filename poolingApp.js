@@ -1032,7 +1032,7 @@ $(function () {
  */
 
 async function updateChart() {
-  var xValues = ["Flight", "Accommodation", "catering", "Event Infrastructure"];
+  var xValues = ["Flight", "Accommodation", "Catering", "Event Infrastructure"];
   let participants = parseFloat(document.getElementById("passengers").value);
 
   var yValues = [
@@ -1050,7 +1050,27 @@ async function updateChart() {
     labels: xValues,
     datasets: [{
       backgroundColor: barColors,
-      data: yValues
+      data: yValues,
+      tooltip: {
+        callbacks: {
+            label: function(context) {
+                let label = context.label;
+                let value = context.formattedValue;
+
+                if (!label)
+                    label = 'Unknown'
+
+                let sum = 0;
+                let dataArr = context.chart.data.datasets[0].data;
+                dataArr.map(data => {
+                    sum += Number(data);
+                });
+
+                let percentage = (value * 100 / sum).toFixed(2) + '%';
+                return label + ": " + percentage;
+            }
+        }
+      }
     }]
   }
 
