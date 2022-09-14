@@ -81,7 +81,7 @@ let airportsList = airports.map(value => {
  */
 function init() {
   // Set initial values
-  window.eventEmission = new BigNumber("0.923", tokenDecimals[18]);
+  window.eventEmission = new BigNumber("0.0923", tokenDecimals[18]);
   window.carbonToOffset = new BigNumber("0.0", tokenDecimals[18]);
   window.flightEmission = new BigNumber("0.0", tokenDecimals[18]);
   window.flightDistance = 0;
@@ -463,7 +463,7 @@ async function doAutoOffsetUsingETH() {
   busyOffsetButton();
   try {
     const transaction = await window.poolingWithSigner
-      .participateWithMatic(window.carbonToOffset.asBigNumber(), { value: window.paymentAmount.asBigNumber(), gasLimit: 600000 });
+      .participateWithMatic(window.carbonToOffset.asBigNumber(), { value: window.paymentAmount.asBigNumber(), gasLimit: 400000 });
     await transaction.wait();
     readyOffsetButton();
   } catch (e) {
@@ -479,7 +479,7 @@ async function doAutoOffsetUsingToken() {
   busyOffsetButton();
   try {
     const transaction = await window.poolingWithSigner
-      .participateWithToken(addresses[window.paymentToken], window.carbonToOffset.asBigNumber(), { gasLimit: 600000 });
+      .participateWithToken(addresses[window.paymentToken], window.carbonToOffset.asBigNumber(), { gasLimit: 400000 });
     await transaction.wait();
     readyOffsetButton();
   } catch (e) {
