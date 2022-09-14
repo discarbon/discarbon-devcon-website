@@ -1101,7 +1101,7 @@ async function updateChart() {
 
   window.emissionChart = new Chart(document.getElementById('EmissionChart'), config);
 
-  emissionChart.label(false);
+  // emissionChart.label(false);
 
 }
 
