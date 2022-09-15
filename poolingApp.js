@@ -66,8 +66,12 @@ class BigNumber {
   }
 }
 
-// Initial values
-
+// Globals
+const poapEventId = "62944"
+// const urlBase = "http://127.0.0.1:8000/"
+const poapBaseUrl = "https://poap.discarbon.earth/"
+const poapMintEndpoint = "mintWithEligibilityTimeout/"
+const poapGetCollectorStatusEndpoint = "getCollectorStatus/"
 
 
 import { airports } from './resources/airports_selected.js'
@@ -251,6 +255,7 @@ async function updatePaymentFields() {
   updateApproveButton();
   updateOffsetButton();
   updatePaymentAmountField();
+  updateMintPoapButton();
 }
 
 function updateApproveButton() {
@@ -285,6 +290,25 @@ function updateOffsetButton() {
   }
   // console.log("enable offset button")
   enableOffsetButton();
+}
+
+async function updateMintPoapButton() {
+  const collectorStatus = await getPoapCollectorStatus();
+  console.log("updateMintPoapButton:", collectorStatus);
+
+  if (collectorStatus === "is_eligible") {
+    enableMintPoapButton();
+    return;
+  }
+  if (collectorStatus === "has_collected") {
+    disableMintPoapButton();
+    //TODO: indicate poap has already been collected
+    return;
+  }
+  if (collectorStatus === "is_not_eligible") {
+    disableMintPoapButton();
+    return;
+  }
 }
 
 function showApproveButton() {
@@ -488,26 +512,34 @@ async function doAutoOffsetUsingToken() {
   }
 }
 
-async function mintPoap() {
-  busyMintPoapButton();
-  const delay = ms => new Promise(res => setTimeout(res, ms));
-  await delay(3000);
-  console.log("Minting POAP for ", await window.signer.getAddress());
-  successfulMintPoapButton();
+async function getPoapCollectorStatus() {
+  const address = await window.signer.getAddress()
+  const url = poapBaseUrl + poapGetCollectorStatusEndpoint + poapEventId + "/" + address;
+  console.log("Getting POAP collector status for", address, "for event id", poapEventId);
+  console.log("url:", url)
+  try {
+    const response = await fetch(url);
+    console.log(response);
+  } catch (e) {
+    throw e;
+  }
+
 }
 
-// async function doAutoOffsetUsingPoolToken() {
-//   busyOffsetButton();
-//   try {
-//     const transaction = await window.poolingWithSigner
-//       .autoOffsetUsingPoolToken(addresses['NCT'], window.carbonToOffset.asBigNumber(), { gasLimit: 420000 });
-//     await transaction.wait();
-//     readyOffsetButton();
-//   } catch (e) {
-//     readyOffsetButton();
-//     throw e;
-//   }
-// }
+async function mintPoap() {
+  busyMintPoapButton();
+  const address = await window.signer.getAddress()
+  const url = poapBaseUrl + poapMintEndpoint + poapEventId + "/" + address;
+  console.log("Minting POAP for", address, "for event id", poapEventId);
+  console.log("mint url:", url)
+  try {
+    const mintResponse = await fetch(url);
+    console.log(mintResponse);
+  } catch (e) {
+    throw e;
+  }
+  successfulMintPoapButton();
+}
 
 /**
  * Creates Locations from Latitude Longitude. Usage: let pointA = new Location(x.xx, x.xx)
