@@ -68,8 +68,8 @@ class BigNumber {
 
 // Globals
 const poapEventId = "62944"
-// const urlBase = "http://127.0.0.1:8000/"
-const poapBaseUrl = "https://poap.discarbon.earth/"
+const poapBaseUrl = "https://127.0.0.1:8000/"
+//const poapBaseUrl = "https://poap.discarbon.earth/"
 const poapMintEndpoint = "mintWithEligibilityTimeout/"
 const poapGetCollectorStatusEndpoint = "getCollectorStatus/"
 
@@ -129,6 +129,10 @@ function init() {
   var fieldCarbonToOffset = document.getElementById("event-emission");
   fieldCarbonToOffset.innerHTML = window.eventEmission.asString(3) + " tCO<sub>2</sub>";
   updateUIvalues();
+
+  let poapEventLink = document.getElementById("poapEvent-link");
+  poapEventLink.removeAttribute("disabled");
+  poapEventLink.setAttribute("href", "https://poap.gallery/event/" + poapEventId);
 }
 
 async function createContractObject() {
@@ -252,10 +256,10 @@ async function updatePaymentFields() {
         fieldpaymentAmount.value = "unsupported token";
     }
   }
+  connectedMyPoapsButton();
   updateApproveButton();
   updateOffsetButton();
   updatePaymentAmountField();
-  updateMintPoapButton();
 }
 
 function updateApproveButton() {
@@ -293,19 +297,19 @@ function updateOffsetButton() {
 }
 
 async function updateMintPoapButton() {
-  const collectorStatus = await getPoapCollectorStatus();
-  console.log("updateMintPoapButton:", collectorStatus);
+  const state = await getPoapCollectorStatus();
+  console.log("updateMintPoapButton:", state);
+  console.log("updateMintPoapButton:", state.status);
 
-  if (collectorStatus === "is_eligible") {
+  if (state.status === "is_eligible") {
     enableMintPoapButton();
     return;
   }
-  if (collectorStatus === "has_collected") {
-    disableMintPoapButton();
-    //TODO: indicate poap has already been collected
+  if (state.status === "has_collected") {
+    collectedMintPoapButton();
     return;
   }
-  if (collectorStatus === "is_not_eligible") {
+  if (state.status === "is_not_eligible") {
     disableMintPoapButton();
     return;
   }
@@ -370,28 +374,49 @@ function disableMintPoapButton() {
   MintPoapButton.setAttribute("disabled", "disabled");
 }
 
+function collectedMintPoapButton() {
+  let mintPoapButton = document.getElementById("btn-mintPoap");
+  mintPoapButton.setAttribute("disabled", "disabled");
+  mintPoapButton.classList.remove("loading");
+  mintPoapButton.innerHTML = "Collected";
+  // https://app.poap.xyz/token/631422
+}
+
 function enableMintPoapButton() {
-  let MintPoapButton = document.getElementById("btn-mintPoap");
-  MintPoapButton.removeAttribute("disabled");
+  let mintPoapButton = document.getElementById("btn-mintPoap");
+  mintPoapButton.removeAttribute("disabled");
 }
 
 function busyMintPoapButton() {
-  let MintPoapButton = document.getElementById("btn-mintPoap");
-  MintPoapButton.innerHTML = "";
-  MintPoapButton.classList.add("loading");
+  let mintPoapButton = document.getElementById("btn-mintPoap");
+  mintPoapButton.innerHTML = "";
+  mintPoapButton.classList.add("loading");
 }
 
 function successfulMintPoapButton() {
-  let MintPoapButton = document.getElementById("btn-mintPoap");
-  MintPoapButton.setAttribute("disabled", "disabled");
-  MintPoapButton.classList.remove("loading");
-  MintPoapButton.innerHTML = "POAP Minted!";
+  let mintPoapButton = document.getElementById("btn-mintPoap");
+  mintPoapButton.setAttribute("disabled", "disabled");
+  mintPoapButton.classList.remove("loading");
+  mintPoapButton.innerHTML = "POAP Minted!";
 }
 
 function readyMintPoapButton() {
-  let MintPoapButton = document.getElementById("btn-mintPoap");
-  MintPoapButton.classList.remove("loading");
-  MintPoapButton.innerHTML = "Mint POAP";
+  let mintPoapButton = document.getElementById("btn-mintPoap");
+  mintPoapButton.classList.remove("loading");
+  mintPoapButton.innerHTML = "Mint POAP";
+}
+
+async function connectedMyPoapsButton() {
+  const address = await window.signer.getAddress();
+  let myPoapsLink = document.getElementById("myPoaps-link");
+  myPoapsLink.removeAttribute("disabled");
+  myPoapsLink.setAttribute("href", "https://app.poap.xyz/scan/" + address);
+}
+
+function disconnectedMyPoapsButton() {
+  let myPoapsLink = document.getElementById("myPoaps-link");
+  myPoapsLink.setAttribute("disabled", "");
+  myPoapsLink.setAttribute("href", "https://app.poap.xyz/scan/");
 }
 
 function updatePaymentAmountField() {
@@ -490,6 +515,7 @@ async function doAutoOffsetUsingETH() {
       .participateWithMatic(window.carbonToOffset.asBigNumber(), { value: window.paymentAmount.asBigNumber(), gasLimit: 400000 });
     await transaction.wait();
     readyOffsetButton();
+    enableMintPoapButton();
   } catch (e) {
     readyOffsetButton();
     throw e;
@@ -506,6 +532,7 @@ async function doAutoOffsetUsingToken() {
       .participateWithToken(addresses[window.paymentToken], window.carbonToOffset.asBigNumber(), { gasLimit: 400000 });
     await transaction.wait();
     readyOffsetButton();
+    enableMintPoapButton();
   } catch (e) {
     readyOffsetButton();
     throw e;
@@ -517,13 +544,27 @@ async function getPoapCollectorStatus() {
   const url = poapBaseUrl + poapGetCollectorStatusEndpoint + poapEventId + "/" + address;
   console.log("Getting POAP collector status for", address, "for event id", poapEventId);
   console.log("url:", url)
+  var response;
   try {
-    const response = await fetch(url);
-    console.log(response);
-  } catch (e) {
-    throw e;
-  }
+    response = await fetch(url, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
 
+  } catch (e) {
+    // TODO
+    // throw e;
+    return { success: false }
+  }
+  const getCollectorStatusResponse = await response.json();
+  console.log(getCollectorStatusResponse);
+  return {
+    status: getCollectorStatusResponse.collector_status,
+    success: getCollectorStatusResponse.success
+  }
 }
 
 async function mintPoap() {
@@ -531,13 +572,17 @@ async function mintPoap() {
   const address = await window.signer.getAddress()
   const url = poapBaseUrl + poapMintEndpoint + poapEventId + "/" + address;
   console.log("Minting POAP for", address, "for event id", poapEventId);
-  console.log("mint url:", url)
+  var response;
+  var mintResponse;
   try {
-    const mintResponse = await fetch(url);
-    console.log(mintResponse);
+    response = await fetch(url, { mode: 'cors' });
+    console.log(response);
+    mintResponse = await response.json();
   } catch (e) {
     throw e;
   }
+  console.log("https://app.poap.xyz/scan/" + address);
+  console.log(mintResponse)
   successfulMintPoapButton();
 }
 
@@ -724,6 +769,7 @@ async function onConnect() {
   await refreshAccountData();
   // await handleManuallyEnteredTCO2();
   await updatePaymentFields();
+  updateMintPoapButton();
 }
 
 async function switchToPolygon() {
@@ -810,6 +856,8 @@ async function onDisconnect() {
   document.getElementById("payment-amount").innerHTML = "&emsp;--.--";
   window.paymentAmount = new BigNumber("0.0")
   document.getElementById("balance").innerHTML = "User balance: --.--";
+  disableMintPoapButton();
+  disconnectedMyPoapsButton();
   disableOffsetButton();
   window.isConnected = false;
 }
