@@ -67,9 +67,9 @@ class BigNumber {
 }
 
 // Globals
-const poapEventId = "62944"
-const poapBaseUrl = "https://127.0.0.1:8000/"
-//const poapBaseUrl = "https://poap.discarbon.earth/"
+const poapEventId = "65132"
+// const poapBaseUrl = "https://127.0.0.1:8000/"
+const poapBaseUrl = "https://poap.discarbon.earth/"
 const poapMintEndpoint = "mintWithEligibilityTimeout/"
 const poapGetCollectorStatusEndpoint = "getCollectorStatus/"
 
