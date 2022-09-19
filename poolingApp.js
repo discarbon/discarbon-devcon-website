@@ -389,7 +389,7 @@ function enableMintPoapButton() {
 
 function busyMintPoapButton() {
   let mintPoapButton = document.getElementById("btn-mintPoap");
-  mintPoapButton.innerHTML = "";
+  mintPoapButton.innerHTML = "Minting";
   mintPoapButton.classList.add("loading");
 }
 
