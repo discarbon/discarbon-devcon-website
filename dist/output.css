@@ -2045,6 +2045,10 @@ body[dir="rtl"] .checkbox:checked,
   width: 33.333333%;
 }
 
+.w-2\/5 {
+  width: 40%;
+}
+
 .max-w-\[800px\] {
   max-width: 800px;
 }
