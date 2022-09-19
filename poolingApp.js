@@ -100,19 +100,20 @@ function init() {
       options: {
         rpc: {
           137: "https://polygon-rpc.com",
+          1: "https://eth-rpc.gateway.pokt.network"
         },
       },
     },
 
-    coinbasewallet: {
-      package: CoinbaseWalletSDK,
-      options: {
-        appName: "disCarbon: Devcon Offset",
-        rpc: {
-          137: "https://polygon-rpc.com",
-        },
-      },
-    },
+    // coinbasewallet: {
+    //   package: CoinbaseWalletSDK,
+    //   options: {
+    //     appName: "disCarbon: Devcon Offset",
+    //     rpc: {
+    //       137: "https://polygon-rpc.com",
+    //     },
+    //   },
+    // },
   };
 
   web3Modal = new Web3Modal({
@@ -685,69 +686,23 @@ async function onConnect() {
     return;
   }
 
-  // try {
-  //   console.log("Before Switching chain");
-  //   await window.provider.provider.request({
-  //     method: "wallet_switchEthereumChain",
-  //     params: [{ chainId: toHex(137) }],
-  //   });
-  //   console.log("Switching chain");
-  // } catch (switchError) {
-  //   // This error code indicates that the chain has not been added to MetaMask.
-  //   if (switchError.code === 4902) {
-  //     try {
-  //       await window.provider.provider.request({
-  //         method: "wallet_addEthereumChain",
-  //         params: [
-  //           {
-  //             chainId: toHex(137),
-  //             chainName: "Polygon Mainnet",
-  //             nativeCurrency: {
-  //               name: "MATIC",
-  //               symbol: "MATIC",
-  //               decimals: 18
-  //            },
-  //             rpcUrls: ["https://polygon-rpc.com/"],
-  //             blockExplorerUrls: ["https://polygonscan.com/"],
-  //           },
-  //         ],
-  //       });
-  //     } catch (addError) {
-  //       throw addError;
-  //     }
-  //   }
-  // };
-
   window.carbonToOffset = carbonToOffset;
   window.paymentAmount = paymentAmount;
 
   let correctChainId
   const { chainId } = await window.provider.getNetwork();
   correctChainId = await isCorrectChainId(chainId);
-  // Subscribe to accounts change
-  window.provider.provider.on("accountsChanged", (accounts) => {
-    fetchAccountData();
-    updateAccountInHeader();
-    console.log("accounts Changed");
-  });
 
-  // Subscribe to chainId change
-  window.provider.provider.on("chainChanged", (chainId) => {
-    console.log("chain Changed", chainId);
-    correctChainId = isCorrectChainId(parseInt(chainId, 16));
-    if (correctChainId) {
-      fetchAccountData();
-    } else {
-      onDisconnect();
-    }
-
-  });
-
-  if (correctChainId === false) {
-    console.log("wrong network, disconnect")
-    onDisconnect();
+  if (correctChainId === true) {
+    finalizeConnect();
+  }
+  else {
     return;
   }
+}
+
+
+async function finalizeConnect() {
 
   window.isConnected = true;
   console.log("window signer", window.signer)
@@ -770,14 +725,40 @@ async function onConnect() {
   // await handleManuallyEnteredTCO2();
   await updatePaymentFields();
   updateMintPoapButton();
+
+  // // Subscribe to accounts change
+  // window.provider.provider.on("accountsChanged", (accounts) => {
+  //   fetchAccountData();
+  //   updateAccountInHeader();
+  //   console.log("accounts Changed");
+  // });
+
+  // // Subscribe to chainId change
+  // window.provider.provider.on("chainChanged", (chainId) => {
+  //   console.log("chain Changed", chainId);
+  //   let correctChainId = isCorrectChainId(parseInt(chainId, 16));
+  //   if (correctChainId) {
+  //     fetchAccountData();
+  //   }
+  //   // else {
+  //   //   onDisconnect();
+  //   // }
+  // });
 }
 
 async function switchToPolygon() {
 
+  console.log("before switching");
   await window.provider.provider.request({
     method: "wallet_switchEthereumChain",
     params: [{ chainId: toHex(137) }],
   });
+  console.log("after switching");
+
+  document.getElementById("Network-Warning-Modal").checked = false;
+
+  await finalizeConnect();
+
 
 
   // await window.provider.provider.request({
@@ -846,7 +827,6 @@ async function onDisconnect() {
   }
   await web3Modal.clearCachedProvider();
   window.provider = null;
-  console.log("after IF: ")
 
   // Set the UI back to the initial state
   document.querySelector("#connect-button-div").style.display = "block";
@@ -1219,6 +1199,7 @@ window.addEventListener('load', async () => {
   document.querySelector("#btn-connect").addEventListener("click", onConnect);
   document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
   document.querySelector("#network-modal-button").addEventListener("click", onDisconnect);
+  document.querySelector('#switch-to-polygon-button').addEventListener("click", switchToPolygon);
   document.querySelector("#list-payment-tokens").addEventListener("change", updateUIvalues);
   // document.querySelector("#roundtrip").addEventListener("click", calculateFlightDistance);
   document.querySelector('#flightclass').addEventListener("change", calculateFlightDistance);

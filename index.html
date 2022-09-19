@@ -35,11 +35,17 @@
 <div class="modal">
   <div class="modal-box">
     <h3 class="font-bold text-lg">Connected to Wrong Network</h3>
-    <span class="py-4">Please select Polygon as Network before connecting. For Metamask you can add the Polygon network manually from
+    <span class="py-4">Please select Polygon as Network before connecting. For Metamask you can add the Polygon network
+      manually from
       <a class="link" href="https://chainlist.org/?search=polygon">chainlist.org</a>.</span>
-    <div class="modal-action">
-      <label for="Network-Warning-Modal" id="network-modal-button" class="btn btn-primary">Disconnect</label>
-    </div>
+    <!-- <div>
+      <button class="btn btn-primary btn-sm md:btn-md text-xs md:text-sm" id="switch-to-polygon-button">
+        Switch Network
+      </button>
+    </div> -->
+      <div class="modal-action">
+        <label for="Network-Warning-Modal" id="network-modal-button" class="btn btn-primary">Disconnect</label>
+      </div>
   </div>
 </div>
 
@@ -219,8 +225,9 @@
               place-items-left rounded-box space-y-2">
               <h2 class="card-title mb-8">Mint POAP</h2>
               <div class="flex justify-center mb-16">
-                <a  class="w-3/4 mb-8" href="https://poap.gallery/event/" id="poapEvent-link">
-                <img src="./images/POAP/20220830_devcon offset POAP proposal.png" alt="Climate Friendly POAP design"></a>
+                <a class="w-3/4 mb-8" href="https://poap.gallery/event/" id="poapEvent-link">
+                  <img src="./images/POAP/20220830_devcon offset POAP proposal.png"
+                    alt="Climate Friendly POAP design"></a>
               </div>
               <div class="flex justify-center">
                 <p class="text-left w-3/4 mb-8">
@@ -229,9 +236,9 @@
               </div>
               <div>
                 <button class="btn btn-primary w-39 float-left" id="btn-mintPoap" disabled>Mint POAP</button>
-                <a class="btn btn-primary w-35 float-right"
-                    href="https://app.poap.xyz/scan/" id="myPoaps-link" disabled>My POAPs&#160;&#128279;</a>
-            </div>
+                <a class="btn btn-primary w-35 float-right" href="https://app.poap.xyz/scan/" id="myPoaps-link"
+                  disabled>My POAPs&#160;&#128279;</a>
+              </div>
             </div>
           </div>
         </div>
