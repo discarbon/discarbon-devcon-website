@@ -1198,7 +1198,7 @@ window.addEventListener('load', async () => {
   document.querySelector("#btn-connect").addEventListener("click", onConnect);
   document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
   document.querySelector("#network-modal-button").addEventListener("click", onDisconnect);
-  document.querySelector('#switch-to-polygon-button').addEventListener("click", switchToPolygon);
+  // document.querySelector('#switch-to-polygon-button').addEventListener("click", switchToPolygon);
   document.querySelector("#list-payment-tokens").addEventListener("change", updateUIvalues);
   // document.querySelector("#roundtrip").addEventListener("click", calculateFlightDistance);
   document.querySelector('#flightclass').addEventListener("change", calculateFlightDistance);
