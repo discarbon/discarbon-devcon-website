@@ -35,13 +35,13 @@ class BigNumber {
   constructor(bigNumberOrString, decimals) {
     this.decimals = decimals
     if (typeof bigNumberOrString === "string") {
-      console.log("string")
+      // console.log("string")
       this.string = bigNumberOrString;
     } else if (bigNumberOrString._isBigNumber) {
-      console.log("big number")
+      // console.log("big number")
       this.string = parseFloat(ethers.utils.formatUnits(bigNumberOrString, decimals)).toFixed(4);
     } else if (typeof bigNumberOrString === "number") {
-      console.log("number")
+      // console.log("number")
       this.string = parseFloat(bigNumberOrString).toFixed(4);
     } else {
       throw "Unexpected type whilst creating BigNumber: " + typeof bigNumberOrString;
@@ -93,7 +93,7 @@ function init() {
   window.paymentAmount = new BigNumber("0.0", tokenDecimals[paymentToken]);
   updateTotalEmission();
 
-  console.log("Initializing");
+  // console.log("Initializing");
   const providerOptions = {
     walletconnect: {
       package: WalletConnectProvider,
@@ -705,7 +705,7 @@ async function onConnect() {
 async function finalizeConnect() {
 
   window.isConnected = true;
-  console.log("window signer", window.signer)
+  // console.log("window signer", window.signer)
   await createContractObject();
 
   var el = document.getElementById("btn-offset");
@@ -823,7 +823,6 @@ async function onDisconnect() {
     await window.provider.provider.close();
     await web3Modal.clearCachedProvider();
     window.provider = null;
-    console.log("in IF: ")
   }
   await web3Modal.clearCachedProvider();
   window.provider = null;
