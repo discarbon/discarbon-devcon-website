@@ -1093,8 +1093,8 @@ $(function () {
 async function updateChart() {
   var xValues = ["Flight", "Accommodation", "Catering", "Event Infrastructure"];
 
-  let accommodation = 0.5;  // Emission in TCO2
-  let catering = 0.3;
+  let accommodation = 0.25;  // Emission in TCO2
+  let catering = 0.15;
   let eventInfrastructure = 0.1;
 
   let participants = parseFloat(document.getElementById("passengers").value);
