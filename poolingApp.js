@@ -67,7 +67,7 @@ class BigNumber {
 }
 
 // Globals
-const poapEventId = "65132"
+const poapEventId = "62477"
 // const poapBaseUrl = "https://127.0.0.1:8000/"
 const poapBaseUrl = "https://poap.discarbon.earth/"
 const poapMintEndpoint = "mintWithEligibilityTimeout/"
@@ -85,7 +85,7 @@ let airportsList = airports.map(value => {
  */
 function init() {
   // Set initial values
-  window.eventEmission = new BigNumber("0.01", tokenDecimals[18]);
+  window.eventEmission = new BigNumber("0.5", tokenDecimals[18]);
   window.carbonToOffset = new BigNumber("0.0", tokenDecimals[18]);
   window.flightEmission = new BigNumber("0.0", tokenDecimals[18]);
   window.flightDistance = 0;
