@@ -1160,6 +1160,8 @@ async function updateChart() {
         }
       },
       cutout: "85",
+      animation: {
+        animateRotate: true}
     }
   }
   if (window.emissionChart) {
