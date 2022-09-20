@@ -32,7 +32,7 @@ const tokenDecimals = {
 
 class BigNumber {
 
-  constructor(bigNumberOrString, decimals) {
+  constructor(bigNumberOrString, decimals = 18) {
     this.decimals = decimals
     if (typeof bigNumberOrString === "string") {
       // console.log("string")
@@ -42,7 +42,7 @@ class BigNumber {
       this.string = parseFloat(ethers.utils.formatUnits(bigNumberOrString, decimals));
     } else if (typeof bigNumberOrString === "number") {
       // console.log("number")
-      this.string = parseFloat(bigNumberOrString).toFixed(18);
+      this.string = parseFloat(bigNumberOrString).toFixed(decimals);
     } else {
       throw "Unexpected type whilst creating BigNumber: " + typeof bigNumberOrString;
     }
@@ -63,7 +63,7 @@ class BigNumber {
   }
 
   asBigNumber() {
-    return ethers.utils.parseEther(this.string, this.decimals);
+    return ethers.utils.parseUnits(this.string, this.decimals);
   }
 
   asFloat() {
