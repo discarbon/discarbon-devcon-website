@@ -32,33 +32,38 @@ const tokenDecimals = {
 
 class BigNumber {
 
-  constructor(bigNumberOrString, decimals) {
+  constructor(bigNumberOrString, decimals = 18) {
     this.decimals = decimals
     if (typeof bigNumberOrString === "string") {
       // console.log("string")
       this.string = bigNumberOrString;
     } else if (bigNumberOrString._isBigNumber) {
       // console.log("big number")
-      this.string = parseFloat(ethers.utils.formatUnits(bigNumberOrString, decimals)).toFixed(4);
+      this.string = parseFloat(ethers.utils.formatUnits(bigNumberOrString, decimals));
     } else if (typeof bigNumberOrString === "number") {
       // console.log("number")
-      this.string = parseFloat(bigNumberOrString).toFixed(4);
+      this.string = parseFloat(bigNumberOrString).toFixed(decimals);
     } else {
       throw "Unexpected type whilst creating BigNumber: " + typeof bigNumberOrString;
     }
   }
 
-  asString(digits = 4) {
+  asString() {
+    return this.string;
+  }
+
+  asStringLimitedLength(digits = 4) {
     let precision = parseFloat(this.string).toPrecision(digits)
-    if (precision.length < this.string.length) {
+    let fixed = parseFloat(this.string).toFixed(3)
+    if (precision.length < fixed.length) {
       return precision;
     } else {
-      return this.string;
+      return fixed;
     }
   }
 
   asBigNumber() {
-    return ethers.utils.parseEther(this.string, this.decimals);
+    return ethers.utils.parseUnits(this.string, this.decimals);
   }
 
   asFloat() {
@@ -128,7 +133,7 @@ function init() {
 
   // set event emission value
   var fieldCarbonToOffset = document.getElementById("event-emission");
-  fieldCarbonToOffset.innerHTML = window.eventEmission.asString(3) + " tCO<sub>2</sub>";
+  fieldCarbonToOffset.innerHTML = window.eventEmission.asStringLimitedLength(3) + " tCO<sub>2</sub>";
   updateUIvalues();
 
   let poapEventLink = document.getElementById("poapEvent-link");
@@ -173,7 +178,7 @@ async function updateUIvalues() {
   // }
   var fieldFlightEmission = document.getElementById("flight-emission");
   // if (window.flightEmission.asFloat() > 0) {
-  fieldFlightEmission.innerHTML = window.flightEmission.asString(3) + " tCO<sub>2</sub>";
+  fieldFlightEmission.innerHTML = window.flightEmission.asStringLimitedLength(3) + " tCO<sub>2</sub>";
   // } else {
   //   fieldFlightEmission.value = "--.-- tCO<sub>2</sub>";
   // }
@@ -422,12 +427,12 @@ function disconnectedMyPoapsButton() {
 
 function updatePaymentAmountField() {
   var paymentAmountField = document.getElementById("payment-amount");
-  paymentAmountField.innerHTML = window.paymentAmount.asString();
+  paymentAmountField.innerHTML = window.paymentAmount.asStringLimitedLength(4);
 }
 
 function updateBalanceField() {
   var balanceField = document.getElementById("balance");
-  balanceField.innerHTML = "Balance: " + window.balance.asString() + " " + window.paymentToken;
+  balanceField.innerHTML = "Balance: " + window.balance.asStringLimitedLength(4) + " " + window.paymentToken;
 }
 
 async function calculateRequiredAmountForOffset() {
@@ -472,7 +477,10 @@ async function approveErc20() {
   busyApproveButton();
   // use a slightly higher approval allowance to allow a small price change between approve and offset
   const approvalAmount = new BigNumber(1.01 * window.paymentAmount.asFloat(), tokenDecimals[window.paymentToken]);
-  console.log("Approval amount: ", approvalAmount.asBigNumber(), "decimals: ", tokenDecimals[window.paymentToken])
+  // console.log("Estimated cost: ", window.paymentAmount.asFloat())
+  // console.log("Approval amount: ", approvalAmount.asBigNumber(), "decimals: ", tokenDecimals[window.paymentToken])
+  // console.log("Approval amount string: ", approvalAmount.asString(), "decimals: ", tokenDecimals[window.paymentToken])
+  // console.log("Approval amount float: ", approvalAmount.asFloat(), "decimals: ", tokenDecimals[window.paymentToken])
   try {
     const erc20WithSigner = window.erc20Contract.connect(window.signer);
     const transaction = await erc20WithSigner.approve(addresses["pooling"], approvalAmount.asBigNumber());
@@ -1152,6 +1160,8 @@ async function updateChart() {
         }
       },
       cutout: "85",
+      animation: {
+        animateRotate: true}
     }
   }
   if (window.emissionChart) {
@@ -1176,7 +1186,7 @@ const centerDoughnutPlugin = {
     ctx.font = fontSize + "em sans-serif";
     ctx.textBaseline = "middle";
 
-    let text = window.carbonToOffset.asString(3) + " tCO2";
+    let text = window.carbonToOffset.asStringLimitedLength(3) + " tCO2";
     let textX = Math.round((width - ctx.measureText(text).width) / 2);
     let textY = (height) / 1.65;
 

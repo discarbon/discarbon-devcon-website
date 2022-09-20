@@ -1926,6 +1926,10 @@ body[dir="rtl"] .checkbox:checked,
   overflow-y: auto;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .relative {
   position: relative;
 }
