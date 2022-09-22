@@ -607,7 +607,6 @@ async function mintPoap() {
   var mintResponse;
   try {
     response = await fetch(url, { mode: 'cors' });
-    console.log(response);
     mintResponse = await response.json();
   } catch (e) {
     document.getElementById("poap-mint-error-modal").checked = true;
