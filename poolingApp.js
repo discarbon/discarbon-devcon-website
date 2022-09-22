@@ -558,6 +558,9 @@ async function doAutoOffsetUsingToken() {
       .participateWithToken(addresses[window.paymentToken], window.carbonToOffset.asBigNumber(), { gasLimit: 400000 });
     await transaction.wait();
     readyOffsetButton();
+    if (poapCollectorStatus === "has_collected") {
+      return;
+    }
     enableMintPoapButton();
   } catch (e) {
     readyOffsetButton();
