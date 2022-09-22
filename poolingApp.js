@@ -398,6 +398,7 @@ function collectedMintPoapButton() {
 function enableMintPoapButton() {
   let mintPoapButton = document.getElementById("btn-mintPoap");
   mintPoapButton.removeAttribute("disabled");
+  mintPoapButton.innerHTML = "Mint POAP";
 }
 
 function busyMintPoapButton() {
