@@ -34,13 +34,10 @@ class BigNumber {
   constructor(bigNumberOrString, decimals = 18) {
     this.decimals = decimals
     if (typeof bigNumberOrString === "string") {
-      // console.log("string")
       this.string = bigNumberOrString;
     } else if (bigNumberOrString._isBigNumber) {
-      // console.log("big number")
       this.string = parseFloat(ethers.utils.formatUnits(bigNumberOrString, decimals));
     } else if (typeof bigNumberOrString === "number") {
-      // console.log("number")
       this.string = parseFloat(bigNumberOrString).toFixed(decimals);
     } else {
       throw "Unexpected type whilst creating BigNumber: " + typeof bigNumberOrString;
@@ -128,7 +125,7 @@ function init() {
     disableInjectedProvider: false, // For MetaMask / Brave / Opera.
   });
   disableOffsetButton();
-  console.log("Web3Modal instance is", web3Modal);
+  // console.log("Web3Modal instance is", web3Modal);
 
   // set event emission value
   var fieldCarbonToOffset = document.getElementById("event-emission");
@@ -232,7 +229,7 @@ async function updateBalance() {
       console.log("Unsupported token! ", window.paymentToken);
   }
   updateBalanceField();
-  console.log("allowance:", window.allowance.asString());
+  // console.log("allowance:", window.allowance.asString());
 }
 
 async function updatePaymentFields() {
@@ -750,12 +747,10 @@ async function finalizeConnect() {
 
 async function switchToPolygon() {
 
-  console.log("before switching");
   await window.provider.provider.request({
     method: "wallet_switchEthereumChain",
     params: [{ chainId: toHex(137) }],
   });
-  console.log("after switching");
 
   document.getElementById("Network-Warning-Modal").checked = false;
   window.isConnected = true;
