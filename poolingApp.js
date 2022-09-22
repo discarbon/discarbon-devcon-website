@@ -142,6 +142,7 @@ function init() {
 }
 
 async function createContractObject() {
+  // console.log("in create Contract Object")
   let jsonFile = "./ABI/Pooling_" + addresses["pooling"] + ".json";
   var poolingABI = await $.getJSON(jsonFile);
   window.pooling = new ethers.Contract(addresses["pooling"], poolingABI, window.provider);
@@ -686,7 +687,7 @@ async function onConnect() {
   let instance
   try {
     instance = await web3Modal.connect();
-    window.provider = new ethers.providers.Web3Provider(instance);
+    window.provider = new ethers.providers.Web3Provider(instance, "any");
     window.signer = window.provider.getSigner();
   } catch (e) {
     // document.getElementById("Metamask-Warning-Modal").checked = true;
@@ -712,8 +713,8 @@ async function onConnect() {
 
 async function finalizeConnect() {
 
+
   window.isConnected = true;
-  // console.log("window signer", window.signer)
   await createContractObject();
 
   var el = document.getElementById("btn-offset");
@@ -728,30 +729,47 @@ async function finalizeConnect() {
   if (btnMintPoap.addEventListener) btnMintPoap.addEventListener("click", mintPoap, false);
   else if (btnMintPoap.attachEvent) btnMintPoap.attachEvent("onclick", mintPoap);
 
+  // Subscribe to accounts change
+  window.provider.provider.on("accountsChanged", (accounts) => {
+    fetchAccountData();
+    updateAccountInHeader();
+    console.log("accounts Changed");
+  });
+
+  // Subscribe to chainId change
+  window.provider.provider.on("chainChanged", (chainId) => {
+    console.log("chain Changed", chainId);
+    isCorrectChainId(parseInt(chainId, 16))
+
+    // isCorrectChainId(parseInt(chainId, 16)).then(correctChainId => {
+    //   console.log("correctChainID: ", correctChainId);
+    //   console.log("outside chain id if")
+    //   if (correctChainId) {
+    //     console.log("in chain id if")
+    //     window.signer = window.provider.getSigner();
+    //     finalizeConnect();
+    //     fetchAccountData();
+    //   }
+    //   // else {
+    //   //   onDisconnect();
+    //   // }
+    // })
+
+    // console.log("correctChainID: ", correctChainId);
+    // if (correctChainId) {
+    //   finalizeConnect();
+    //   // fetchAccountData();
+    // }
+    // else {
+    //   onDisconnect();
+    // }
+  });
+
 
   await refreshAccountData();
   // await handleManuallyEnteredTCO2();
   await updatePaymentFields();
   updateMintPoapButton();
-
-  // // Subscribe to accounts change
-  // window.provider.provider.on("accountsChanged", (accounts) => {
-  //   fetchAccountData();
-  //   updateAccountInHeader();
-  //   console.log("accounts Changed");
-  // });
-
-  // // Subscribe to chainId change
-  // window.provider.provider.on("chainChanged", (chainId) => {
-  //   console.log("chain Changed", chainId);
-  //   let correctChainId = isCorrectChainId(parseInt(chainId, 16));
-  //   if (correctChainId) {
-  //     fetchAccountData();
-  //   }
-  //   // else {
-  //   //   onDisconnect();
-  //   // }
-  // });
 }
 
 async function switchToPolygon() {
@@ -764,59 +782,8 @@ async function switchToPolygon() {
   console.log("after switching");
 
   document.getElementById("Network-Warning-Modal").checked = false;
-
-  await finalizeConnect();
-
-
-
-  // await window.provider.provider.request({
-  //   method: "wallet_addEthereumChain",
-  //   params: [{
-  //     chainId: "0x89",
-  //     rpcUrls: ["https://rpc-mainnet.matic.network/"],
-  //     chainName: "Matic Mainnet",
-  //     nativeCurrency: {
-  //       name: "MATIC",
-  //       symbol: "MATIC",
-  //       decimals: 18
-  //     },
-  //     blockExplorerUrls: ["https://polygonscan.com/"]
-  //   }]
-  // });
-
-
-  // try {
-  //   console.log("Before Switching chain");
-  //   await window.provider.provider.request({
-  //     method: "wallet_switchEthereumChain",
-  //     params: [{ chainId: toHex(137) }],
-  //   });
-  //   console.log("Switching chain");
-  // } catch (switchError) {
-  //   // This error code indicates that the chain has not been added to MetaMask.
-  //   if (switchError.code === 4902) {
-  //     try {
-  //       await window.provider.provider.request({
-  //         method: "wallet_addEthereumChain",
-  //         params: [
-  //           {
-  //             chainId: toHex(137),
-  //             chainName: "Polygon Mainnet",
-  //             nativeCurrency: {
-  //               name: "MATIC",
-  //               symbol: "MATIC",
-  //               decimals: 18
-  //             },
-  //             rpcUrls: ["https://polygon-rpc.com/"],
-  //             blockExplorerUrls: ["https://polygonscan.com/"],
-  //           },
-  //         ],
-  //       });
-  //     } catch (addError) {
-  //       throw addError;
-  //     }
-  //   }
-  // };
+  window.isConnected = true;
+  finalizeConnect();
 }
 
 /**
@@ -1161,7 +1128,8 @@ async function updateChart() {
       },
       cutout: "85",
       animation: {
-        animateRotate: true}
+        animateRotate: true
+      }
     }
   }
   if (window.emissionChart) {
@@ -1208,7 +1176,7 @@ window.addEventListener('load', async () => {
   document.querySelector("#btn-connect").addEventListener("click", onConnect);
   document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
   document.querySelector("#network-modal-button").addEventListener("click", onDisconnect);
-  // document.querySelector('#switch-to-polygon-button').addEventListener("click", switchToPolygon);
+  document.querySelector('#switch-to-polygon-button').addEventListener("click", switchToPolygon);
   document.querySelector("#list-payment-tokens").addEventListener("change", updateUIvalues);
   // document.querySelector("#roundtrip").addEventListener("click", calculateFlightDistance);
   document.querySelector('#flightclass').addEventListener("change", calculateFlightDistance);
