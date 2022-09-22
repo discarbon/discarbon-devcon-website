@@ -604,10 +604,15 @@ async function mintPoap() {
     console.log(response);
     mintResponse = await response.json();
   } catch (e) {
-    throw e;
+    document.getElementById("poap-mint-error-modal").checked = true;
+    document.getElementById("poap-mint-error").innerHTML = e;
+    return;
   }
-  console.log("https://app.poap.xyz/scan/" + address);
-  console.log(mintResponse)
+  if (mintResponse.success === false) {
+    document.getElementById("poap-mint-error-modal").checked = true;
+    document.getElementById("poap-mint-error").innerHTML = mintResponse.message;
+    return;
+  }
   successfulMintPoapButton();
 }
 
