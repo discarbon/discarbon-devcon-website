@@ -131,6 +131,7 @@ function init() {
     disableInjectedProvider: false, // For MetaMask / Brave / Opera.
   });
   disableOffsetButton();
+  disableMintPoapButton();
   console.log("Web3Modal instance is", web3Modal);
 
   // set event emission value
