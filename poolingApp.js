@@ -578,7 +578,7 @@ async function getPoapCollectorStatus() {
 
 async function mintPoap() {
   busyMintPoapButton();
-  const address = await window.signer.getAddress()
+  const address = await window.signer.getAddress();
   const url = poapBaseUrl + poapMintEndpoint + poapEventId + "/" + address;
   console.log("Minting POAP for", address, "for event id", poapEventId);
   var response;
@@ -1161,7 +1161,8 @@ async function updateChart() {
       },
       cutout: "85",
       animation: {
-        animateRotate: true}
+        animateRotate: true
+      }
     }
   }
   if (window.emissionChart) {
