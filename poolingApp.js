@@ -753,7 +753,6 @@ async function switchToPolygon() {
   });
 
   document.getElementById("Network-Warning-Modal").checked = false;
-  window.isConnected = true;
   finalizeConnect();
 }
 
