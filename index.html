@@ -7,7 +7,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="Lets Devcon VI Attendees compensate for event emissions using on-chain nature-based carbon credits" />
+  <meta name="description"
+    content="Lets Devcon VI Attendees compensate for event emissions using on-chain nature-based carbon credits" />
   <meta name="author" content="disCarbon" />
   <meta property="og:title" content="Climate Friendly Devcon VI from disCarbon x Toucan" />
   <meta property="og:description"
@@ -35,18 +36,20 @@
 <div class="modal">
   <div class="modal-box">
     <h3 class="font-bold text-lg">Connected to Wrong Network</h3>
-    <span class="py-4">Please select Polygon as Network before connecting. For Metamask you can add the Polygon network
-      manually from
-      <a class="link" href="https://chainlist.org/?search=polygon">chainlist.org</a>.</span>
-    <div>
-      <button class="btn btn-primary btn-sm md:btn-md text-xs md:text-sm" id="switch-to-polygon-button">
-        Switch Network
-      </button>
-    </div>
-      <div class="modal-action">
-        <label for="Network-Warning-Modal" id="network-modal-button" class="btn btn-primary">Disconnect</label>
-      </div>
+    <span class="py-4">Please switch to the Polygon Network. Some wallets work better if you switch to the Polygon
+      network before connecting the the dApp.
+
+  <div class="">
+    <button class="btn btn-primary btn-md text-sm float-left" id="switch-to-polygon-button">
+      Switch Network
+    </button>
+    <button class="btn btn-primary btn-md text-sm float-right" id="network-modal-button">
+      Disconnect
+    </button>
+    <!-- <label for="Network-Warning-Modal" id="switch-to-polygon-button" class="btn btn-primary">Switch Network</label> -->
+    <!-- <label for="Network-Warning-Modal" id="network-modal-button" class="btn btn-primary float-right modal-action">Disconnect</label> -->
   </div>
+</div>
 </div>
 
 <!-- Install Metamask -->

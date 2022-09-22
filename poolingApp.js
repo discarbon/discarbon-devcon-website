@@ -739,29 +739,6 @@ async function finalizeConnect() {
   window.provider.provider.on("chainChanged", (chainId) => {
     console.log("chain Changed", chainId);
     isCorrectChainId(parseInt(chainId, 16))
-
-    // isCorrectChainId(parseInt(chainId, 16)).then(correctChainId => {
-    //   console.log("correctChainID: ", correctChainId);
-    //   console.log("outside chain id if")
-    //   if (correctChainId) {
-    //     console.log("in chain id if")
-    //     window.signer = window.provider.getSigner();
-    //     finalizeConnect();
-    //     fetchAccountData();
-    //   }
-    //   // else {
-    //   //   onDisconnect();
-    //   // }
-    // })
-
-    // console.log("correctChainID: ", correctChainId);
-    // if (correctChainId) {
-    //   finalizeConnect();
-    //   // fetchAccountData();
-    // }
-    // else {
-    //   onDisconnect();
-    // }
   });
 
 
@@ -789,6 +766,8 @@ async function switchToPolygon() {
  * Disconnect wallet button pressed.
  */
 async function onDisconnect() {
+
+  document.getElementById("Network-Warning-Modal").checked = false;
 
   console.log("Killing the wallet connection", window.provider);
 
