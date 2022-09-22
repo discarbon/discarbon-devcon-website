@@ -78,6 +78,8 @@ const poapEventId = "65132";
 const poapBaseUrl = "https://poap.discarbon.earth/";
 const poapMintEndpoint = "mintWithEligibilityTimeout/";
 const poapGetCollectorStatusEndpoint = "getCollectorStatus/";
+var poapCollectorStatus = "unknown";
+
 
 import { airports } from './resources/airports_selected.js'
 
@@ -303,9 +305,12 @@ function updateOffsetButton() {
 }
 
 async function updateMintPoapButton() {
+  getCollectorStatusMintPoapButton();
   const state = await getPoapCollectorStatus();
   console.log("updateMintPoapButton:", state);
   console.log("updateMintPoapButton:", state.status);
+  // Save as global to help with updating state post "Send"
+  poapCollectorStatus = state.status;
 
   if (state.status === "is_eligible") {
     enableMintPoapButton();
@@ -376,8 +381,10 @@ function readyOffsetButton() {
 }
 
 function disableMintPoapButton() {
-  let MintPoapButton = document.getElementById("btn-mintPoap");
-  MintPoapButton.setAttribute("disabled", "disabled");
+  let mintPoapButton = document.getElementById("btn-mintPoap");
+  mintPoapButton.setAttribute("disabled", "disabled");
+  mintPoapButton.classList.remove("loading");
+  mintPoapButton.innerHTML = "Collected";
 }
 
 function collectedMintPoapButton() {
@@ -396,6 +403,12 @@ function enableMintPoapButton() {
 function busyMintPoapButton() {
   let mintPoapButton = document.getElementById("btn-mintPoap");
   mintPoapButton.innerHTML = "Minting";
+  mintPoapButton.classList.add("loading");
+}
+
+function getCollectorStatusMintPoapButton() {
+  let mintPoapButton = document.getElementById("btn-mintPoap");
+  mintPoapButton.innerHTML = "";
   mintPoapButton.classList.add("loading");
 }
 
@@ -524,6 +537,9 @@ async function doAutoOffsetUsingETH() {
       .participateWithMatic(window.carbonToOffset.asBigNumber(), { value: window.paymentAmount.asBigNumber(), gasLimit: 400000 });
     await transaction.wait();
     readyOffsetButton();
+    if (poapCollectorStatus === "has_collected") {
+      return;
+    }
     enableMintPoapButton();
   } catch (e) {
     readyOffsetButton();
