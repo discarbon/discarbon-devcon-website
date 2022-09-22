@@ -1,5 +1,4 @@
 import { addressesMainnet } from './addresses.js';
-// import WalletConnect from "./node_modules/@walletconnect/web3-provider";
 // import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
 import "./resources/wallet-sdk-bundle.js";
 
@@ -8,7 +7,7 @@ import "./resources/wallet-sdk-bundle.js";
 // Unpkg imports
 const Web3Modal = window.Web3Modal.default;
 const WalletConnectProvider = window.WalletConnectProvider.default;
-// const CoinbaseWalletSDK = window.CoinbaseWalletSDK;
+const CoinbaseWalletSDK = window.CoinbaseWalletSDK;
 // const Fortmatic = window.Fortmatic;
 const evmChains = window.evmChains;
 
@@ -110,15 +109,15 @@ function init() {
       },
     },
 
-    // coinbasewallet: {
-    //   package: CoinbaseWalletSDK,
-    //   options: {
-    //     appName: "disCarbon: Devcon Offset",
-    //     rpc: {
-    //       137: "https://polygon-rpc.com",
-    //     },
-    //   },
-    // },
+    coinbasewallet: {
+      package: CoinbaseWalletSDK,
+      options: {
+        appName: "disCarbon: Devcon Offset",
+        rpc: {
+          137: "https://polygon-rpc.com",
+        },
+      },
+    },
   };
 
   web3Modal = new Web3Modal({
