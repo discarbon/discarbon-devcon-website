@@ -385,7 +385,7 @@ function disableMintPoapButton() {
   let mintPoapButton = document.getElementById("btn-mintPoap");
   mintPoapButton.setAttribute("disabled", "disabled");
   mintPoapButton.classList.remove("loading");
-  mintPoapButton.innerHTML = "Collected";
+  mintPoapButton.innerHTML = "Mint POAP";
 }
 
 function collectedMintPoapButton() {
