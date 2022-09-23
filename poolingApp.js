@@ -68,11 +68,13 @@ class BigNumber {
 }
 
 // Globals
-const poapEventId = "62477"
-// const poapBaseUrl = "https://127.0.0.1:8000/"
-const poapBaseUrl = "https://poap.discarbon.earth/"
-const poapMintEndpoint = "mintWithEligibilityTimeout/"
-const poapGetCollectorStatusEndpoint = "getCollectorStatus/"
+const poapEventId = "62477";
+// const poapEventId = "65132";
+// const poapBaseUrl = "https://127.0.0.1:8000/";
+const poapBaseUrl = "https://poap.discarbon.earth/";
+const poapMintEndpoint = "mintWithEligibilityTimeout/";
+const poapGetCollectorStatusEndpoint = "getCollectorStatus/";
+var poapCollectorStatus = "unknown";
 
 
 import { airports } from './resources/airports_selected.js'
@@ -125,7 +127,8 @@ function init() {
     disableInjectedProvider: false, // For MetaMask / Brave / Opera.
   });
   disableOffsetButton();
-  // console.log("Web3Modal instance is", web3Modal);
+  disableMintPoapButton();
+  console.log("Web3Modal instance is", web3Modal);
 
   // set event emission value
   var fieldCarbonToOffset = document.getElementById("event-emission");
@@ -300,9 +303,12 @@ function updateOffsetButton() {
 }
 
 async function updateMintPoapButton() {
+  getCollectorStatusMintPoapButton();
   const state = await getPoapCollectorStatus();
   console.log("updateMintPoapButton:", state);
   console.log("updateMintPoapButton:", state.status);
+  // Save as global to help with updating state post "Send"
+  poapCollectorStatus = state.status;
 
   if (state.status === "is_eligible") {
     enableMintPoapButton();
@@ -373,8 +379,10 @@ function readyOffsetButton() {
 }
 
 function disableMintPoapButton() {
-  let MintPoapButton = document.getElementById("btn-mintPoap");
-  MintPoapButton.setAttribute("disabled", "disabled");
+  let mintPoapButton = document.getElementById("btn-mintPoap");
+  mintPoapButton.setAttribute("disabled", "disabled");
+  mintPoapButton.classList.remove("loading");
+  mintPoapButton.innerHTML = "Mint POAP";
 }
 
 function collectedMintPoapButton() {
@@ -388,11 +396,19 @@ function collectedMintPoapButton() {
 function enableMintPoapButton() {
   let mintPoapButton = document.getElementById("btn-mintPoap");
   mintPoapButton.removeAttribute("disabled");
+  mintPoapButton.classList.remove("loading");
+  mintPoapButton.innerHTML = "Mint POAP";
 }
 
 function busyMintPoapButton() {
   let mintPoapButton = document.getElementById("btn-mintPoap");
   mintPoapButton.innerHTML = "Minting";
+  mintPoapButton.classList.add("loading");
+}
+
+function getCollectorStatusMintPoapButton() {
+  let mintPoapButton = document.getElementById("btn-mintPoap");
+  mintPoapButton.innerHTML = "";
   mintPoapButton.classList.add("loading");
 }
 
@@ -521,6 +537,9 @@ async function doAutoOffsetUsingETH() {
       .participateWithMatic(window.carbonToOffset.asBigNumber(), { value: window.paymentAmount.asBigNumber(), gasLimit: 400000 });
     await transaction.wait();
     readyOffsetButton();
+    if (poapCollectorStatus === "has_collected") {
+      return;
+    }
     enableMintPoapButton();
   } catch (e) {
     readyOffsetButton();
@@ -538,6 +557,9 @@ async function doAutoOffsetUsingToken() {
       .participateWithToken(addresses[window.paymentToken], window.carbonToOffset.asBigNumber(), { gasLimit: 400000 });
     await transaction.wait();
     readyOffsetButton();
+    if (poapCollectorStatus === "has_collected") {
+      return;
+    }
     enableMintPoapButton();
   } catch (e) {
     readyOffsetButton();
@@ -575,20 +597,24 @@ async function getPoapCollectorStatus() {
 
 async function mintPoap() {
   busyMintPoapButton();
-  const address = await window.signer.getAddress()
+  const address = await window.signer.getAddress();
   const url = poapBaseUrl + poapMintEndpoint + poapEventId + "/" + address;
   console.log("Minting POAP for", address, "for event id", poapEventId);
   var response;
   var mintResponse;
   try {
     response = await fetch(url, { mode: 'cors' });
-    console.log(response);
     mintResponse = await response.json();
   } catch (e) {
-    throw e;
+    document.getElementById("poap-mint-error-modal").checked = true;
+    document.getElementById("poap-mint-error").innerHTML = e;
+    return;
   }
-  console.log("https://app.poap.xyz/scan/" + address);
-  console.log(mintResponse)
+  if (mintResponse.success === false) {
+    document.getElementById("poap-mint-error-modal").checked = true;
+    document.getElementById("poap-mint-error").innerHTML = mintResponse.message;
+    return;
+  }
   successfulMintPoapButton();
 }
 
