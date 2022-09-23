@@ -721,9 +721,9 @@ async function updateAccountInHeader() {
   if (window.innerWidth > 640) {
     shortAddress += address.slice(-num);
   }
-  console.log("adress: ", address)
-  console.log("shortAddress: ", shortAddress)
-  console.log("polygon link : ", "https://polygonscan.com/address/" + address)
+  // console.log("adress: ", address)
+  // console.log("shortAddress: ", shortAddress)
+  // console.log("polygon link : ", "https://polygonscan.com/address/" + address)
   const addressWithLink =
     document.querySelector('#account-link').setAttribute("href", "https://polygonscan.com/address/" + address);
   document.querySelector('#account-link').innerHTML = shortAddress;
