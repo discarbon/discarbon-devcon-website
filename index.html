@@ -37,16 +37,18 @@
 <div class="modal">
   <div class="modal-box">
     <h3 class="font-bold text-lg">Connected to Wrong Network</h3>
-    <span class="py-4">Please switch to the Polygon Network. Some wallets work better if you switch to the Polygon
-      network before connecting the the dApp.
-
-  <div class="">
-    <button class="btn btn-primary btn-md text-sm float-left" id="switch-to-polygon-button">
-      Switch Network
-    </button>
-    <button class="btn btn-primary btn-md text-sm float-right" id="network-modal-button">
-      Disconnect
-    </button>
+    <div class="mt-2 mb-4">
+      <span class="">Please switch to the Polygon Network. Some wallets work better if you switch to the Polygon
+        network before connecting the the dApp.</span>
+    </div>
+    <div class="flex flex-col justify-between sm:flex-row ">
+      <button class="btn btn-primary mb-2" id="switch-to-polygon-button">
+        Switch Network
+      </button>
+      <button class="btn btn-primary" id="network-modal-button">
+        Disconnect
+      </button>
+    </div>
   </div>
 </div>
 </div>
@@ -69,8 +71,9 @@
   <div class="modal-box">
     <h3 class="font-bold text-lg">Error Minting POAP</h3>
     <p class="py-4">Please try again a little later. If the error persists, drop by the
-      <a href="https://discord.gg/NfCdbzQwuj">disCarbon Discord</a> and we'll be happy to help.</p>
-      <code id="poap-mint-error"></code>
+      <a href="https://discord.gg/NfCdbzQwuj">disCarbon Discord</a> and we'll be happy to help.
+    </p>
+    <code id="poap-mint-error"></code>
     <div class="modal-action">
       <label for="poap-mint-error-modal" class="btn">OK</label>
     </div>
