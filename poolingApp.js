@@ -140,6 +140,29 @@ function init() {
   poapEventLink.setAttribute("href", "https://poap.gallery/event/" + poapEventId);
 }
 
+function showNotification(message, link, type) {
+  let backgroundColor = "#66cc8a";
+  if (type == "info") {
+    backgroundColor = "#dcdcdc";
+  }
+  Toastify({
+    text: message,
+    duration: 5000,
+    destination: link,
+    newWindow: true,
+    close: true,
+    gravity: "bottom", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background: backgroundColor,
+      "border-radius": "10px",
+      color: "black",
+    },
+    // onClick: function(){} // Callback after click
+  }).showToast();
+}
+
 async function createContractObject() {
   // console.log("in create Contract Object")
   let jsonFile = "./ABI/Pooling_" + addresses["pooling"] + ".json";
@@ -497,7 +520,9 @@ async function approveErc20() {
   try {
     const erc20WithSigner = window.erc20Contract.connect(window.signer);
     const transaction = await erc20WithSigner.approve(addresses["pooling"], approvalAmount.asBigNumber());
+    showNotification("Approval sent", "https://polygonscan.com/tx/" + transaction.hash, "info")
     await transaction.wait();
+    showNotification("Approved", "https://polygonscan.com/tx/" + transaction.hash, "success")
     readyApproveButton();
     enableOffsetButton();
   } catch (e) {
@@ -535,7 +560,9 @@ async function doAutoOffsetUsingETH() {
   try {
     const transaction = await window.poolingWithSigner
       .participateWithMatic(window.carbonToOffset.asBigNumber(), { value: window.paymentAmount.asBigNumber(), gasLimit: 400000 });
+    showNotification("Transaction sent", "https://polygonscan.com/tx/" + transaction.hash, "info")
     await transaction.wait();
+    showNotification("Transaction Succeeded", "https://polygonscan.com/tx/" + transaction.hash, "success")
     readyOffsetButton();
     if (poapCollectorStatus === "has_collected") {
       return;
@@ -555,7 +582,9 @@ async function doAutoOffsetUsingToken() {
   try {
     const transaction = await window.poolingWithSigner
       .participateWithToken(addresses[window.paymentToken], window.carbonToOffset.asBigNumber(), { gasLimit: 400000 });
+    showNotification("Transaction sent", "https://polygonscan.com/tx/" + transaction.hash, "info")
     await transaction.wait();
+    showNotification("Transaction Succeeded", "https://polygonscan.com/tx/" + transaction.hash, "success")
     readyOffsetButton();
     if (poapCollectorStatus === "has_collected") {
       return;
