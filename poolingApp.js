@@ -142,15 +142,20 @@ function init() {
 
 function showNotification(message, link, type) {
   let backgroundColor = "#66cc8a";
+  let timer = -1;
+  let hasCloseButton = true;
   if (type == "info") {
     backgroundColor = "#dcdcdc";
+    timer = 5000;
+    hasCloseButton = false;
   }
+
   Toastify({
     text: message,
-    duration: 5000,
+    duration: timer,
     destination: link,
     newWindow: true,
-    close: true,
+    close: hasCloseButton,
     gravity: "bottom", // `top` or `bottom`
     position: "right", // `left`, `center` or `right`
     stopOnFocus: true, // Prevents dismissing of toast on hover
