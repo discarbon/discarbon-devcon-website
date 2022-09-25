@@ -164,7 +164,7 @@ function showNotification(message, link, type) {
   }
 
   Toastify({
-    text: message,
+    text: message + "&nbsp&nbsp",
     duration: timer,
     destination: link,
     newWindow: true,
@@ -172,12 +172,12 @@ function showNotification(message, link, type) {
     gravity: "bottom", // `top` or `bottom`
     position: "right", // `left`, `center` or `right`
     stopOnFocus: true, // Prevents dismissing of toast on hover
+    escapeMarkup: false,
     style: {
       background: backgroundColor,
       "border-radius": "10px",
       color: "black",
     },
-    // onClick: function(){} // Callback after click
   }).showToast();
 }
 
