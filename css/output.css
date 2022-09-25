@@ -353,6 +353,13 @@ input::-moz-placeholder, textarea::-moz-placeholder {
   /* 2 */
 }
 
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  opacity: 1;
+  /* 1 */
+  color: #9ca3af;
+  /* 2 */
+}
+
 input::placeholder,
 textarea::placeholder {
   opacity: 1;
@@ -554,6 +561,7 @@ html {
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
+      -ms-user-select: none;
           user-select: none;
   flex-wrap: wrap;
   align-items: center;
@@ -789,6 +797,7 @@ html {
   display: flex;
   -webkit-user-select: none;
      -moz-user-select: none;
+      -ms-user-select: none;
           user-select: none;
   align-items: center;
   justify-content: space-between;
@@ -802,6 +811,7 @@ html {
   display: flex !important;
   -webkit-user-select: none !important;
      -moz-user-select: none !important;
+      -ms-user-select: none !important;
           user-select: none !important;
   align-items: center !important;
   justify-content: space-between !important;
@@ -864,7 +874,8 @@ html {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-property: transform, opacity;
   overflow-y: hidden;
-  overscroll-behavior: contain;
+  -ms-scroll-chaining: none;
+      overscroll-behavior: contain;
 }
 
 :where(.modal) {
@@ -892,7 +903,8 @@ html {
   border-bottom-right-radius: var(--rounded-box, 1rem);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   overflow-y: auto;
-  overscroll-behavior: contain;
+  -ms-scroll-chaining: none;
+      overscroll-behavior: contain;
 }
 
 .modal-open, .modal:target, .modal-toggle:checked + .modal {
@@ -936,6 +948,7 @@ html {
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
+      -ms-user-select: none;
           user-select: none;
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -1520,6 +1533,11 @@ body[dir="rtl"] .checkbox:checked,
   --tw-placeholder-opacity: 0.2;
 }
 
+.input-disabled:-ms-input-placeholder, .input[disabled]:-ms-input-placeholder {
+  color: hsl(var(--bc) / var(--tw-placeholder-opacity));
+  --tw-placeholder-opacity: 0.2;
+}
+
 .input-disabled::placeholder, .input[disabled]::placeholder {
   color: hsl(var(--bc) / var(--tw-placeholder-opacity));
   --tw-placeholder-opacity: 0.2;
@@ -1545,6 +1563,7 @@ body[dir="rtl"] .checkbox:checked,
 .menu li.disabled > * {
   -webkit-user-select: none;
      -moz-user-select: none;
+      -ms-user-select: none;
           user-select: none;
   color: hsl(var(--bc) / var(--tw-text-opacity));
   --tw-text-opacity: 0.2;
@@ -1660,6 +1679,11 @@ body[dir="rtl"] .checkbox:checked,
 }
 
 .select-disabled::-moz-placeholder, .select[disabled]::-moz-placeholder {
+  color: hsl(var(--bc) / var(--tw-placeholder-opacity));
+  --tw-placeholder-opacity: 0.2;
+}
+
+.select-disabled:-ms-input-placeholder, .select[disabled]:-ms-input-placeholder {
   color: hsl(var(--bc) / var(--tw-placeholder-opacity));
   --tw-placeholder-opacity: 0.2;
 }
@@ -2368,10 +2392,6 @@ body[dir="rtl"] .checkbox:checked,
     width: 6rem;
   }
 
-  .md\:flex-row {
-    flex-direction: row;
-  }
-
   .md\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
@@ -2389,79 +2409,6 @@ body[dir="rtl"] .checkbox:checked,
 }
 
 @media (min-width: 1024px) {
-  .btn-outline.lg\:btn-secondary .badge {
-    --tw-border-opacity: 1;
-    border-color: hsl(var(--s) / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: hsl(var(--s) / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: hsl(var(--sc) / var(--tw-text-opacity));
-  }
-
-  .btn-outline.lg\:btn-secondary .badge-outline {
-    --tw-border-opacity: 1;
-    border-color: hsl(var(--s) / var(--tw-border-opacity));
-    background-color: transparent;
-    --tw-text-opacity: 1;
-    color: hsl(var(--s) / var(--tw-text-opacity));
-  }
-
-  .btn-outline.lg\:btn-secondary:hover .badge {
-    --tw-border-opacity: 1;
-    border-color: hsl(var(--sc) / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: hsl(var(--sc) / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: hsl(var(--s) / var(--tw-text-opacity));
-  }
-
-  .btn-outline.lg\:btn-secondary:hover .badge.outline {
-    --tw-border-opacity: 1;
-    border-color: hsl(var(--sc) / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: hsl(var(--sf, var(--s)) / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: hsl(var(--sc) / var(--tw-text-opacity));
-  }
-
-  .lg\:btn-secondary {
-    --tw-border-opacity: 1;
-    border-color: hsl(var(--s) / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: hsl(var(--s) / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: hsl(var(--sc) / var(--tw-text-opacity));
-  }
-
-  .lg\:btn-secondary:hover, .btn-secondary.btn-active {
-    --tw-border-opacity: 1;
-    border-color: hsl(var(--sf, var(--s)) / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: hsl(var(--sf, var(--s)) / var(--tw-bg-opacity));
-  }
-
-  .lg\:btn-secondary:focus-visible {
-    outline: 2px solid hsl(var(--s));
-  }
-
-  .btn-outline.lg\:btn-secondary {
-    --tw-text-opacity: 1;
-    color: hsl(var(--s) / var(--tw-text-opacity));
-  }
-
-  .btn-outline.lg\:btn-secondary:hover {
-    --tw-border-opacity: 1;
-    border-color: hsl(var(--sf, var(--s)) / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: hsl(var(--sf, var(--s)) / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: hsl(var(--sc) / var(--tw-text-opacity));
-  }
-
-  .drawer-toggle:focus-visible ~ .drawer-content .drawer-button.lg\:btn-secondary {
-    outline: 2px solid hsl(var(--s));
-  }
-
   .lg\:fixed {
     position: fixed;
   }
@@ -2472,10 +2419,6 @@ body[dir="rtl"] .checkbox:checked,
 
   .lg\:mb-4 {
     margin-bottom: 1rem;
-  }
-
-  .lg\:-mb-20 {
-    margin-bottom: -5rem;
   }
 
   .lg\:mb-0 {
