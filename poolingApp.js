@@ -143,6 +143,7 @@ function init() {
   // let faqContractLink = document.getElementById("faq-contract-link");
   updateContractLink(mainContractLink);
   // updateContractLink(faqContractLink);
+
 }
 
 function updateContractLink(contractLink) {
