@@ -716,17 +716,21 @@ async function isCorrectChainId(chainId) {
   }
 }
 
-/**
- * Update account in header upon connect
- */
-async function updateAccountInHeader() {
-  let address = await window.signer.getAddress()
+function shortenAddress(address) {
   const num = 4;
   let shortAddress = address.slice(0, num + 2) + "...";
   if (window.innerWidth > 640) {
     shortAddress += address.slice(-num);
   }
-  // console.log("adress: ", address)
+  return shortAddress
+}
+/**
+ * Update account in header upon connect
+ */
+async function updateAccountInHeader() {
+  let address = await window.signer.getAddress()
+  let shortAddress = shortenAddress(address)
+  // console.log("address: ", address)
   // console.log("shortAddress: ", shortAddress)
   // console.log("polygon link : ", "https://polygonscan.com/address/" + address)
   const addressWithLink =
