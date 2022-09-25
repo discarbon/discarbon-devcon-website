@@ -138,7 +138,20 @@ function init() {
   let poapEventLink = document.getElementById("poapEvent-link");
   poapEventLink.removeAttribute("disabled");
   poapEventLink.setAttribute("href", "https://poap.gallery/event/" + poapEventId);
+
+  let mainContractLink = document.getElementById("contract-link");
+  // let faqContractLink = document.getElementById("faq-contract-link");
+  updateContractLink(mainContractLink);
+  // updateContractLink(faqContractLink);
 }
+
+function updateContractLink(contractLink) {
+  contractLink.removeAttribute("disabled");
+  contractLink.setAttribute("href", "https://polygonscan.com/address/" + addresses['pooling']);
+  let shortAddress = shortenAddress(addresses['pooling']);
+  contractLink.innerHTML = "Contract: " + shortAddress;
+}
+
 
 function showNotification(message, link, type) {
   let backgroundColor = "#66cc8a";
