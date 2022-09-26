@@ -141,7 +141,7 @@ function init() {
 
   let mainContractLink = document.getElementById("contract-link");
   // let faqContractLink = document.getElementById("faq-contract-link");
-  updateContractLink(mainContractLink);
+  // updateContractLink(mainContractLink);
   // updateContractLink(faqContractLink);
   // showNotification("Approval sent", "https://polygonscan.com/tx/", "info")
   // showNotification("Approved", "https://polygonscan.com/tx/", "success")
