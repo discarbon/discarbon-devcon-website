@@ -55,3 +55,8 @@ input[type=number] {
   width: 130px;
   background-position-x: -10px;
 }
+
+/*For fontawesome svgs to make them white*/
+.invert-colours{
+  filter: invert(100%);
+}
