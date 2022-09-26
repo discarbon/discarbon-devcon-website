@@ -145,6 +145,8 @@ function init() {
   // updateContractLink(faqContractLink);
   // showNotification("Approval sent", "https://polygonscan.com/tx/", "info")
   // showNotification("Approved", "https://polygonscan.com/tx/", "success")
+  // showNotification("Approval sent", null, "info")
+  // showNotification("Approved", "https://polygonscan.com/tx/", "success")
 
 }
 
@@ -166,8 +168,12 @@ function showNotification(message, link, type) {
     hasCloseButton = false;
   }
 
+  if (link) {  // Add link symbol if a link is supplied
+    message += "&nbsp<img src='images/FontAwesome/arrow-up-right-from-square-solid.svg' width='15' style='position: relative; top: -2px;' class='inline'/>&nbsp&nbsp"
+  }
+
   Toastify({
-    text: message + " <img src='images/FontAwesome/arrow-up-right-from-square-solid.svg' width='13' class='inline'/>&nbsp&nbsp",
+    text: message,
     duration: timer,
     destination: link,
     newWindow: true,
