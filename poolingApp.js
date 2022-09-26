@@ -650,6 +650,7 @@ async function mintPoap() {
   console.log("Minting POAP for", address, "for event id", poapEventId);
   var response;
   var mintResponse;
+  showNotification("Checking POAP eligibility", null, "info");
   try {
     response = await fetch(url, { mode: 'cors' });
     mintResponse = await response.json();
@@ -663,6 +664,18 @@ async function mintPoap() {
     document.getElementById("poap-mint-error").innerHTML = mintResponse.message;
     return;
   }
+  showNotification("Minting POAP...", null, "info");
+  const mint_url = poapBaseUrl + "waitForMintWithTimeout/" + poapEventId + "/" + mintResponse.uid;
+  console.log("Waiting for mint to complete", address, "for event id", poapEventId);
+  var waitForMintResponse;
+  try {
+    response = await fetch(mint_url, { mode: 'cors' });
+    //response = await waitForPoapMintTxnHash(mintResponse.uuid);
+    waitForMintResponse = await response.json();
+  } catch (e) {
+    console.log(e)
+  }
+  showNotification("POAP minted", "https://gnosisscan.io/tx/" + waitForMintResponse.tx_hash, "success")
   successfulMintPoapButton();
 }
 
