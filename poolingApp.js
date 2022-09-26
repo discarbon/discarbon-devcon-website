@@ -143,6 +143,8 @@ function init() {
   // let faqContractLink = document.getElementById("faq-contract-link");
   updateContractLink(mainContractLink);
   // updateContractLink(faqContractLink);
+  // showNotification("Approval sent", "https://polygonscan.com/tx/", "info")
+  // showNotification("Approved", "https://polygonscan.com/tx/", "success")
 
 }
 
@@ -165,7 +167,7 @@ function showNotification(message, link, type) {
   }
 
   Toastify({
-    text: message + "&nbsp&nbsp",
+    text: message + " <img src='images/FontAwesome/arrow-up-right-from-square-solid.svg' width='13' class='inline'/>&nbsp&nbsp",
     duration: timer,
     destination: link,
     newWindow: true,

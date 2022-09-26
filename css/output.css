@@ -2014,6 +2014,10 @@ body[dir="rtl"] .checkbox:checked,
   display: block;
 }
 
+.inline {
+  display: inline;
+}
+
 .flex {
   display: flex;
 }
