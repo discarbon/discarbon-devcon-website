@@ -91,7 +91,7 @@ let airportsList = airports.map(value => {
  */
 function init() {
   // Set initial values
-  window.eventEmission = new BigNumber("0.5", tokenDecimals[18]);
+  window.eventEmission = new BigNumber("0.3", tokenDecimals[18]);
   window.carbonToOffset = new BigNumber("0.0", tokenDecimals[18]);
   window.flightEmission = new BigNumber("0.0", tokenDecimals[18]);
   window.flightDistance = 0;
@@ -1148,9 +1148,9 @@ $(function () {
 async function updateChart() {
   var xValues = ["Flight", "Accommodation", "Catering", "Event Infrastructure"];
 
-  let accommodation = 0.25;  // Emission in TCO2
-  let catering = 0.15;
-  let eventInfrastructure = 0.1;
+  let accommodation = 0.2;  // Emission in TCO2
+  let catering = 0.06;
+  let eventInfrastructure = 0.04;
 
   let participants = parseFloat(document.getElementById("passengers").value);
 
@@ -1185,7 +1185,7 @@ async function updateChart() {
               sum += Number(data);
             });
 
-            let percentage = (value * 100 / sum).toFixed(2) + '%';
+            let percentage = (value * 100 / sum).toFixed(0) + '%';
             return label + ": " + percentage;
           }
         }
