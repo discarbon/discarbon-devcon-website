@@ -16,7 +16,7 @@
   <div class="navbar bg-base-500 lg:mb-24">
     <div class="flex-1">
       <!-- <a class="btn btn-ghost text-green-700 normal-case md:text-xl" href="https://www.discarbon.earth">disCarbon</a> -->
-      <a class="btn btn-ghost text-green-700 normal-case md:text-lg" href="/index.html">Climate Friendly Devcon</a>
+      <a class="btn btn-ghost text-green-700 normal-case md:text-lg" href="/index.html">Climate Friendly Devcon Dapp</a>
       <!-- <a class="btn btn-ghost text-green-700 normal-case md:text-xl" id="faq-contract-link" href="https://polygonscan.com/address/">Contract: 0x</a> -->
     </div>
   </div>
@@ -50,9 +50,11 @@
                 What is this site for?
               </div>
               <div class="collapse-content">
-                <p>This site can provide you with an estimate of the carbon emissions incurred due to plane
-                  travel and allows you to buy on-chain carbon credits and retire them on the Polygon network
-                  in order to offset the estimated emissions.
+                <p>
+                  This site provides an initial estimate of the carbon emissions incurred per person by attending Devcon VI and an estimate of the emissions incurred due to plane travel. An attendee may compensate their emissions by contributing to the Devcon VI "Community Offset Pool" by sending funds to the pooling contract that match their emissions estimate.
+                </p>
+                <p>
+                  These funds are gathered in NCT, an on-chain token represent CO2 emissions. In a second step, to be performed shortly after Devcon VI, the collected NCT will be redeemed for a carbon offset project and redeemed, "offsetting" or "compensating" emissions caused by Devcon VI. 
                 <p>
               </div>
             </div>
@@ -60,20 +62,38 @@
             <div class="collapse border border-base-300 bg-base-100 rounded-box">
               <input type="checkbox" />
               <div class="collapse-title text-xl font-medium">
-                What does clicking the Offset button do?
+                What does clicking the Send button do?
               </div>
               <div class="collapse-content">
-                <p>The carbon offset button initiates an on-chain transaction which exchanges the
-                  tokens specified by the user into NCT tokens on Sushiswap. It then exchanges (redeems) these NCT
-                  tokens
-                  into tokens of a specific carbon reduction project and then
-                  irrevocably retires these project tokens using
-                  <a class="link text-green-700" href="https://toucan.earth/">Toucan Protocol's
-                    smart contracts</a>. All these steps are done in one transaction and can be verified
-                  on-chain. Here is an example of such a transaction using USDC as an input token:
-                  <a class="link text-green-700"
-                    href="https://polygonscan.com/tx/0xdde1b7409696499b0744620cee9c5b591822fd794785cc821b8cd1fa0a806c2f">
-                    offset transaction</a>.
+                <p>
+                  The Send button initiates an on-chain transaction. It sends the tokens specified by the user to the Pooling Contract and then swaps them to NCT tokens on Sushiswap. Finally, the NCT tokens get sent to a multisig wallet under the control of the Devcon Team, Toucan and disCarbon.
+                </p>
+              </div>
+            </div>
+
+            <div class="collapse border border-base-300 bg-base-100 rounded-box">
+              <input type="checkbox" />
+              <div class="collapse-title text-xl font-medium">
+                Where can I find the smart contract source code?
+              </div>
+              <div class="collapse-content">
+                <p>
+                  You can find the source code on <a href="https://polygonscan.com/address/0x2608cDFCAe67d96A120bba7407d75c1F871221f6">Polygonscan</a> or <a href="https://github.com/discarbon/discarbon-devcon-attendee-contract">at its Github Repo</a>.
+                </p>              
+              </div>
+            </div>
+            
+            <div class="collapse border border-base-300 bg-base-100 rounded-box">
+              <input type="checkbox" />
+              <div class="collapse-title text-xl font-medium">
+                What happens to the tokens I send?
+              </div>
+              <div class="collapse-content">
+                <p>
+                  First, the tokens are swapped to NCT, a token representing a nature-based carbon credit and then sent to the "Community Offset Pool", a multisig wallet under the control of the Devcon Team, Toucan and disCarbon.
+                </p>
+                <p>
+                  In a second step, once a better estimate of Devcon VI's carbon emissions is available after the event, the funds will be redeemed for a specific carbon offset project and then retired. The choice of carbon offset project will be voted upon by contributors to the Community Offset Pool that hold the Climate Friendly POAP.
                 </p>
               </div>
             </div>
@@ -84,10 +104,7 @@
                 Are there any fees involved?
               </div>
               <div class="collapse-content">
-                <p>disCarbon does not currently add any fees. The entire offset amount stated is used to buy and retire
-                  carbon credits. In a later version we will enable users to make a voluntary contribution. If enabled,
-                  this will add a small percentage to the transaction which goes to disCarbon. This helps disCarbon keep
-                  this project up and running and build even better carbon offset tools.
+                <p>No, there are no fees involved.
                 </p>
               </div>
             </div>
@@ -98,10 +115,10 @@
                 What does tCO<sub>2</sub> stand for?
               </div>
               <div class="collapse-content">
-                <p>It stands for "tonnes of carbon dioxide"/"tonnes of CO<sub>2</sub>" that needs to
-                  be compensated so that a flight has zero impact on the climate. More precisely it actually stands for
-                  <b>CO<sub>2</sub> equivalent</b> emission, as an airplane emits more climate active pollutants than
-                  just CO<sub>2</sub>. The
+                <p>It stands for "tonnes of carbon dioxide"/"tonnes of CO<sub>2</sub>". This indicates the amount of carbon dioxide that needs to
+                  be compensated so that the event and/or the flight has zero impact on the climate. More precisely, it stands for
+                  <b>CO<sub>2</sub> equivalent</b> emission, as generally, other climate active pollutants than
+                  just CO<sub>2</sub> are typically emitted. The
                   influence of all these other pollutants is accounted for in the tCO<sub>2</sub> estimation.
                 </p>
               </div>
@@ -110,11 +127,11 @@
             <div class="collapse border border-base-300 bg-base-100 rounded-box">
               <input type="checkbox" />
               <div class="collapse-title text-xl font-medium">
-                Which tokens can I use to Offset?
+                Which tokens can I send to the Community Offset Pool Smart Contract?
               </div>
               <div class="collapse-content">
-                <p>At the moment one can choose between MATIC, USDC, WETH, WMATIC and the NCT token by clicking on the
-                  "MATIC" ticker in the flight offsetter.
+                <p>At the moment one can choose between MATIC, DAI, USDC, WETH, WMATIC and the NCT token by clicking on the
+                  "MATIC" ticker in the "Contribute to Offset Pool" section.
                 </p>
               </div>
             </div>
@@ -136,40 +153,26 @@
             <div class="collapse border border-base-300 bg-base-100 rounded-box">
               <input type="checkbox" />
               <div class="collapse-title text-xl font-medium">
-                Which project is supported when offsetting the carbon credits?
-              </div>
-              <div class="collapse-content">
-                <p>The offsetter automatically retires tokens from a carbon reduction project
-                  provided by the Toucan Bridge. The offset project currently used is a forest protection project called
-                  <a class="link text-green-700" href="https://registry.verra.org/app/projectDetail/VCS/1052">
-                    North Pikounda REDD+</a> in the Republic of the Congo.
-                </p>
-              </div>
-            </div>
-
-            <div class="collapse border border-base-300 bg-base-100 rounded-box">
-              <input type="checkbox" />
-              <div class="collapse-title text-xl font-medium">
                 Can I choose a carbon credit project to support?
               </div>
               <div class="collapse-content">
-                <p>Not yet. At the moment the offsetter automatically retires carbon certificates
-                  by the default project provided by the
-                  <a class="link text-green-700" href="https://toucan.earth/">Toucan Protocol</a> smart
-                  contracts. In future iterations the offsetter will make it possible to choose from amongst several
-                  dozens projects available in the NCT pool.
+                <p>Yes! When the vote for the carbon offset project goes to snapshot vote shortly after Devcon. The snapshot vote will allow participants that hold the Climate Friendly POAP to vote on the choice of carbon offset project from which to redeem the carbon credits.
                 </p>
               </div>
             </div>
 
+
             <div class="collapse border border-base-300 bg-base-100 rounded-box">
               <input type="checkbox" />
               <div class="collapse-title text-xl font-medium">
-                Can I manually specify the amount of carbon to offset?
+                What is a POAP?
               </div>
               <div class="collapse-content">
-                <p>Yes. Just click on the box to the left of the TCO<sub>2</sub> units, above the
-                  green line and manually fill in the amount of carbon you want to offset.</p>
+                <p>
+                  POAPs are curated NFTs that are issued to commemorate event participation or bookmark a significant or happy memory in your life. POAPs are ERC721 NFTs minted on <a href="https://www.gnosischain.com/">Gnosischain</a>, but may be migrated to the Ethereum mainnet. More information is available at <a href="https://poap.xyz/">poap.xyz</a> and in <a href="https://intercom.help/poap/en/">the POAP FAQ</a>. 
+                </p>
+                <p>
+                  The POAP collectable by contributors to the "community offset pool" will function as a voting token for the choice of carbon offset project when it goes to vote on snapshot shortly after Devcon VI has finished and a more accurate emission estimate can be calculated.</p>
               </div>
             </div>
 
@@ -194,7 +197,7 @@
             <div class="collapse border border-base-300 bg-base-100 rounded-box">
               <input type="checkbox" />
               <div class="collapse-title text-xl font-medium">
-                Why does my travel class affect my carbon emissions?
+                Why does my travel class affect my flight's carbon emissions?
               </div>
               <div class="collapse-content">
                 <p>The flight class directly influences the space a single passenger has available for themselves. This
@@ -263,9 +266,7 @@
                 How can I support your work/disCarbon?
               </div>
               <div class="collapse-content">
-                <p>At the moment the best way to support us is by using and sharing our tools!
-                  Later you will be able to voluntarily make a small contribution when you perform the offset
-                  transaction to disCarbon.
+                <p>The best way to support us is by following <a href="https://twitter.com/discarbon_earth">@discarbon_earth</a> on Twitter and by using and sharing our tools! If you still like our work in December, please consider supporting our <a href="https://gitcoin.co/grants/7163/discarbon">project</a> in Gitcoin Grants Round 16.
                 </p>
               </div>
             </div>
@@ -276,7 +277,7 @@
                 How can I contact disCarbon?
               </div>
               <div class="collapse-content">
-                <p>Feel free to write to "danceratopz" on Twitter, Telegram or Gmail.
+                <p>Feel free to drop into our <a href="https://discord.gg/NfCdbzQwuj">Discord Server</a> or write to "danceratopz" on Twitter, Telegram or Gmail.
                 </p>
               </div>
             </div>
