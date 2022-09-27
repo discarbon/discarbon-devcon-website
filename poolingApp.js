@@ -1230,12 +1230,10 @@ const centerDoughnutPlugin = {
     let text = window.carbonToOffset.asStringLimitedLength(3) + " tCO2";
     let textX = Math.round((width - ctx.measureText(text).width) / 2);
     let textY = (height) / 1.65;
-
-    // console.log("text x: ", textX);
-    // console.log("text y: ", textY);
-
     ctx.fillText(text, textX, textY);
-    ctx.fillText("Total", textX + 25, textY - 30);
+
+    textX = Math.round((width - ctx.measureText("Total").width) / 2);
+    ctx.fillText("Total", textX, textY - 35);
     ctx.save();
   },
 };
