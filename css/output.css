@@ -2372,10 +2372,6 @@ body[dir="rtl"] .checkbox:checked,
     height: 60px;
   }
 
-  .md\:h-\[54px\] {
-    height: 54px;
-  }
-
   .md\:w-24 {
     width: 6rem;
   }
