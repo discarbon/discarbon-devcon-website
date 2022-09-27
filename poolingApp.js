@@ -50,7 +50,7 @@ class BigNumber {
 
   asStringLimitedLength(digits = 4) {
     let precision = parseFloat(this.string).toPrecision(digits)
-    let fixed = parseFloat(this.string).toFixed(3)
+    let fixed = parseFloat(this.string).toFixed(digits-1)
     if (precision.length < fixed.length) {
       return precision;
     } else {
