@@ -474,12 +474,16 @@ async function connectedMyPoapsButton() {
   let myPoapsLink = document.getElementById("myPoaps-link");
   myPoapsLink.removeAttribute("disabled");
   myPoapsLink.setAttribute("href", "https://app.poap.xyz/scan/" + address);
+  let myPoapsLinkImg = document.getElementById("my-poaps-link-img");
+  myPoapsLinkImg.setAttribute("src", "images/FontAwesome/arrow-up-right-from-square-solid.svg")
 }
 
 function disconnectedMyPoapsButton() {
   let myPoapsLink = document.getElementById("myPoaps-link");
   myPoapsLink.setAttribute("disabled", "");
   myPoapsLink.setAttribute("href", "https://app.poap.xyz/scan/");
+  let myPoapsLinkImg = document.getElementById("my-poaps-link-img");
+  myPoapsLinkImg.setAttribute("src", "images/FontAwesome/arrow-up-right-from-square-solid-gray.svg")
 }
 
 function updatePaymentAmountField() {
