@@ -1916,10 +1916,6 @@ body[dir="rtl"] .checkbox:checked,
   width: 5rem;
 }
 
-.w-3\/4 {
-  width: 75%;
-}
-
 .w-auto {
   width: auto;
 }
@@ -1974,10 +1970,6 @@ body[dir="rtl"] .checkbox:checked,
 
 .flex-col {
   flex-direction: column;
-}
-
-.flex-wrap {
-  flex-wrap: wrap;
 }
 
 .items-center {
@@ -2064,10 +2056,6 @@ body[dir="rtl"] .checkbox:checked,
 
 .bg-transparent {
   background-color: transparent;
-}
-
-.bg-RollingHills {
-  background-image: url('/images/RollingHillsWithElements.svg');
 }
 
 .bg-RollingHills_smallScreen {
