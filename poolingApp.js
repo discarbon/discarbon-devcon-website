@@ -49,7 +49,7 @@ class BigNumber {
   }
 
   asStringLimitedLength(digits = 4) {
-    let precision = parseFloat(parseFloat(this.string).toPrecision(digits)).toString()  // another parse needed to not fall into scientific notation (1.01e3)
+    let precision = parseFloat(this.string).toPrecision(digits)
     let fixed = parseFloat(this.string).toFixed(digits - 1)
     // console.log("precision: ", precision, precision.length)
     // console.log("fixed: ", fixed, fixed.length)
