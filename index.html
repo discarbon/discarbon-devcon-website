@@ -119,21 +119,11 @@
               <h2 class="card-title">Configure Flight and Event</h2>
               <div class="grid flex-grow rounded-box place-items-left space-y-2">
                 <div>
-                  <!-- <label class="label">
-                    <span class="label-text">From where are you flying to Bogota?</span>
-                  </label> -->
                   <input name="start" type="text" id="start" placeholder="Departure Airport"
                     class="input input-bordered input-primary max-w-xs w-full md:h-[60px] md:text-xl">
                 </div>
-                <!-- <div>
-                  <input id="destination" type="text" id="destination" placeholder="To"
-                    class="input input-bordered input-primary max-w-xs w-full md:h-[60px] md:text-xl" />
-                </div> -->
                 <div>
-                  <!-- <label class="label">
-                    <span class="label-text">Which class are you flying?</span>
-                  </label> -->
-                  <div class="flex flex-row w-full rounded-lg bg-transparent mt-1">
+                  <div class="flex flex-row w-full rounded-lg bg-transparent">
                     <select id="flightclass"
                       class="select select-bordered select-primary w-full max-w-xs font-normal md:h-[60px] md:text-xl">
                       <option value="economy">Economy class</option>
@@ -172,7 +162,7 @@
                 <label class="label">
                   <span class="label-text">For how many people do you want to offset?</span>
                 </label>
-                <div class="flex flex-row w-full h-12 rounded-xl relative bg-transparent mt-1 md:h-13 md:text-xl">
+                <div class="flex flex-row w-full h-12 rounded-xl relative bg-transparent md:h-13 md:text-xl">
                   <button data-action="decrement"
                     class="btn-primary h-full w-20 md:w-24 rounded-l-md cursor-pointer outline-none">
                     <span class="m-auto text-2xl">−</span>
@@ -197,9 +187,9 @@
               class="grid flex-grow form-control w-80 card rounded-box place-items-left space-y-2 mb-8 lg:mb-0 lg:mr-8">
               <h2 class="card-title">Contribute to Offset Pool</h2>
               <div class="flex justify-center">
-                <canvas id="EmissionChart" style="width:50%" class="mb-4"></canvas>
+                <canvas id="EmissionChart" style="width:50%" class="mb-2"></canvas>
               </div>
-              <div class="stats stats-vertical md:stats-vertical w-full mb-4">
+              <div class="stats stats-vertical md:stats-vertical w-full mb-2">
                 <div class="stat">
                   <div class="stat-title">Cost</div>
                   <div class="stat-value">
@@ -225,23 +215,30 @@
 
             <div class="flex flex-col grid flex-grow form-control w-80 card
               place-items-left rounded-box">
-              <h2 class="card-title mb-12">Mint POAP</h2>
-              <div class="flex justify-center mb-4">
+              <h2 class="card-title mb-16">Mint POAP</h2>
+              <div class="flex justify-center mb-12">
                 <a class="w-64" href="https://poap.gallery/event/" id="poapEvent-link" target="blank_">
                   <img src="./images/POAP/20220830_devcon offset POAP proposal.png"
                     alt="Climate Friendly POAP design"></a>
               </div>
+              <!-- <div class="flex justify-center">
+                <p class="text-left w-64">
+                  Send at least 0.30 NCT (or equiv.) to the community offset contract to collect the POAP.
+                </p>
+              </div> -->
               <div class="flex justify-center">
                 <p class="text-left w-64 mb-8">
-                  Send at least 0.30 NCT (or equivalent) to the community offset contract to collect the POAP. Shortly after Devcon, this POAP allows to vote for the carbon offset project which we will support.
+                  This POAP will enable you to vote on the conservation project to source carbon credits from. The vote
+                  goes to snapshot shortly after Devcon VI.
                 </p>
               </div>
-              <div class="mb-2">
+              <div class="mb-4">
                 <button class="btn btn-primary w-2/5 float-left" id="btn-mintPoap" disabled>Mint POAP</button>
-                <a class="btn btn-ghost normal-case float-right" href="https://app.poap.xyz/scan/" target="_blank"
+                <a class="btn btn-ghost normal-case float-right" href="https://app.poap.xyz/scan/" target="_blank" %
                   id="myPoaps-link" disabled>
                   My&nbsp;POAPs&nbsp;
-                    <img id="my-poaps-link-img" src="images/FontAwesome/arrow-up-right-from-square-solid-gray.svg" width="13" class="inline"/>
+                  <img id="my-poaps-link-img" src="images/FontAwesome/arrow-up-right-from-square-solid-gray.svg"
+                    width="13" class="inline" />
                 </a>
               </div>
             </div>
@@ -265,7 +262,8 @@
         <img src="images/FontAwesome/github.svg" width="25" height="25" class="invert-colours fill-current" />
       </a>
       <a href="https://polygonscan.com/address/0x2608cDFCAe67d96A120bba7407d75c1F871221f6">
-        <img src="images/FontAwesome/scroll-solid-mirrored.svg" width="25" height="25" class="invert-colours fill-current" />
+        <img src="images/FontAwesome/scroll-solid-mirrored.svg" width="25" height="25"
+          class="invert-colours fill-current" />
       </a>
       <a href="https://discord.gg/NfCdbzQwuj">
         <img src="images/FontAwesome/discord.svg" width="25" height="25" class="invert-colours fill-current" />

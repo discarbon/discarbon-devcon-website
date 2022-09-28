@@ -1856,8 +1856,8 @@ body[dir="rtl"] .checkbox:checked,
   margin-bottom: 2rem;
 }
 
-.mt-1 {
-  margin-top: 0.25rem;
+.mb-16 {
+  margin-bottom: 4rem;
 }
 
 .mb-12 {
