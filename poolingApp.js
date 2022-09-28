@@ -497,7 +497,11 @@ function disconnectedMyPoapsButton() {
 
 function updatePaymentAmountField() {
   var paymentAmountField = document.getElementById("payment-amount");
-  paymentAmountField.innerHTML = window.paymentAmount.asStringLimitedLength(4);
+  if (window.paymentAmount.asFloat() > 0.002) {
+    paymentAmountField.innerHTML = window.paymentAmount.asStringLimitedLength(4);
+  } else {
+    paymentAmountField.innerHTML = window.paymentAmount.asStringLimitedLength(5);
+  }
 }
 
 function updateBalanceField() {
