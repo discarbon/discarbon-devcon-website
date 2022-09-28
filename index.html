@@ -227,14 +227,15 @@
                 </p>
               </div> -->
               <div class="flex justify-center">
-                <p class="text-left w-64 mb-4">
+                <p class="text-left w-64 mb-3">
                   This POAP will enable you to vote on the conservation project to source carbon credits from. The vote
                   goes on snapshot shortly after Devcon VI.
                 </p>
               </div>
-
               <div class="mb-2">
-                <button class="btn btn-primary w-2/5 float-left" id="btn-mintPoap" disabled>Mint POAP</button>
+                <div class="w-2/5 float-left" id="mint-tooltip">
+                  <button class="btn btn-primary w-full" id="btn-mintPoap" disabled>Mint POAP</button>
+                </div>
                 <a class="btn btn-ghost normal-case float-right" href="https://app.poap.xyz/scan/" target="_blank" %
                   id="myPoaps-link" disabled>
                   My&nbsp;POAPs&nbsp;
@@ -286,6 +287,8 @@
   <script type="text/javascript" src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
   <script src="./resources/jquery.ui.autocomplete.scroll.js"></script>
   <script type="text/javascript" src="resources/toastify.js"></script>
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
   <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> -->
   <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.js"></script> -->
 

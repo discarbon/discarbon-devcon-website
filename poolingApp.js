@@ -1090,6 +1090,10 @@ function toHex(num) {
   return "0x" + val.toString(16);
 };
 
+tippy('#mint-tooltip', {
+  content: 'Send at least 0.30 NCT (or equiv.) to the community offset contract to collect the POAP.',
+});
+
 // async function handleManuallyEnteredTCO2() {
 //   let TCO2 = parseFloat(document.getElementById("carbon-to-offset").value);
 //   if (TCO2 && TCO2 > 0) {
