@@ -1,6 +1,11 @@
 import { addressesMainnet } from './addresses.js';
 // import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
-import "./resources/wallet-sdk-bundle.js";
+import "./wallet-sdk-bundle.js";
+import boxArrowImage from "/images/FontAwesome/arrow-up-right-from-square-solid.svg";
+import boxArrowImageGray from "/images/FontAwesome/arrow-up-right-from-square-solid-gray.svg";
+
+import erc20ABI from '../ABI/ERC20.json';
+import poolingABI from '../ABI/Pooling_0x2608cDFCAe67d96A120bba7407d75c1F871221f6';
 
 "use strict";
 
@@ -80,7 +85,7 @@ const poapGetCollectorStatusEndpoint = "getCollectorStatus/";
 var poapCollectorStatus = "unknown";
 
 
-import { airports } from './resources/airports_selected.js'
+import { airports } from './airports_selected.js'
 
 let airportsList = airports.map(value => {
   return value[0]
@@ -167,12 +172,12 @@ function showNotification(message, link, type) {
   let hasCloseButton = true;
   if (type == "info") {
     backgroundColor = "#dcdcdc";
-    timer = 5000;
+    timer = 10000;
     hasCloseButton = false;
   }
 
   if (link) {  // Add link symbol if a link is supplied
-    message += "&nbsp<img src='images/FontAwesome/arrow-up-right-from-square-solid.svg' width='15' style='position: relative; top: -2px;' class='inline'/>&nbsp&nbsp"
+    message += "&nbsp<img src=" + boxArrowImage +" width='15' style='position: relative; top: -2px;' class='inline'/>&nbsp&nbsp"
   }
 
   Toastify({
@@ -195,10 +200,11 @@ function showNotification(message, link, type) {
 
 async function createContractObject() {
   // console.log("in create Contract Object")
-  let jsonFile = "./ABI/Pooling_" + addresses["pooling"] + ".json";
-  var poolingABI = await $.getJSON(jsonFile);
+  // let jsonFile = "./Pooling_" + addresses["pooling"] + ".json";
+  // var poolingABI = await $.getJSON(jsonFile);
   window.pooling = new ethers.Contract(addresses["pooling"], poolingABI, window.provider);
   window.poolingWithSigner = window.pooling.connect(window.signer);
+  // console.log("contract created")
 }
 
 /**
@@ -484,7 +490,7 @@ async function connectedMyPoapsButton() {
   myPoapsLink.removeAttribute("disabled");
   myPoapsLink.setAttribute("href", "https://app.poap.xyz/scan/" + address);
   let myPoapsLinkImg = document.getElementById("my-poaps-link-img");
-  myPoapsLinkImg.setAttribute("src", "images/FontAwesome/arrow-up-right-from-square-solid.svg")
+  myPoapsLinkImg.setAttribute("src", boxArrowImage)
 }
 
 function disconnectedMyPoapsButton() {
@@ -492,7 +498,7 @@ function disconnectedMyPoapsButton() {
   myPoapsLink.setAttribute("disabled", "");
   myPoapsLink.setAttribute("href", "https://app.poap.xyz/scan/");
   let myPoapsLinkImg = document.getElementById("my-poaps-link-img");
-  myPoapsLinkImg.setAttribute("src", "images/FontAwesome/arrow-up-right-from-square-solid-gray.svg")
+  myPoapsLinkImg.setAttribute("src", boxArrowImageGray)
 }
 
 function updatePaymentAmountField() {
@@ -530,8 +536,9 @@ async function getMaticBalance() {
 }
 
 async function createErc20Contract() {
-  let jsonFile = "./ABI/ERC20.json";
-  var erc20ABI = await $.getJSON(jsonFile);
+  // let jsonFile = "./ERC20.json";
+  // var erc20ABI = await $.getJSON(jsonFile);
+  // console.log("erc20ABI: ", erc20ABI)
   window.erc20Contract = new ethers.Contract(addresses[window.paymentToken], erc20ABI, window.provider);
 }
 

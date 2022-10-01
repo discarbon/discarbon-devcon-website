@@ -1,5 +1,15 @@
 {
+  "name": "Climate Friendly Devcon VI",
+  "source": "src/index.html",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "start": "parcel",
+    "build": "parcel build --no-source-maps"
+  },
   "devDependencies": {
+    "parcel": "latest",
+    "process": "^0.11.10",
     "tailwindcss": "^3.0.24"
   },
   "dependencies": {
