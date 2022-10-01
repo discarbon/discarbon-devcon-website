@@ -2,8 +2,9 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  content: ["*.{html,js}"],
-  purge: ["*.{html,js}"],
+  content: ["./src/*.{html,js}",
+            "./src/js/*.js"],
+  // purge: ["*.{html,js}"],
   theme: {
     extend: {
       backgroundImage: {
