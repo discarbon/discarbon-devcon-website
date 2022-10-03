@@ -136,7 +136,7 @@ function init() {
   });
   disableOffsetButton();
   disableMintPoapButton();
-  console.log("Web3Modal instance is", web3Modal);
+  // console.log("Web3Modal instance is", web3Modal);
 
   // set event emission value
   var fieldCarbonToOffset = document.getElementById("event-emission");
