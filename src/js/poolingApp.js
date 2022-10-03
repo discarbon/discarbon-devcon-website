@@ -81,6 +81,7 @@ const poapEventId = "62477";
 // const poapBaseUrl = "https://127.0.0.1:8000/";
 const poapBaseUrl = "https://poap.discarbon.earth/";
 const poapMintEndpoint = "mintWithEligibilityTimeout/";
+const poapWaitForMintEndpoint = "waitForMintWithTimeout/";
 const poapGetCollectorStatusEndpoint = "getCollectorStatus/";
 var poapCollectorStatus = "unknown";
 
@@ -177,7 +178,7 @@ function showNotification(message, link, type) {
   }
 
   if (link) {  // Add link symbol if a link is supplied
-    message += "&nbsp<img src=" + boxArrowImage +" width='15' style='position: relative; top: -2px;' class='inline'/>&nbsp&nbsp"
+    message += "&nbsp<img src=" + boxArrowImage + " width='15' style='position: relative; top: -2px;' class='inline'/>&nbsp&nbsp"
   }
 
   Toastify({
@@ -371,15 +372,15 @@ async function updateMintPoapButton() {
 
   if (state.status === "is_eligible") {
     enableMintPoapButton();
-    return;
+    return state;
   }
   if (state.status === "has_collected") {
     collectedMintPoapButton();
-    return;
+    return state;
   }
   if (state.status === "is_not_eligible") {
     disableMintPoapButton();
-    return;
+    return state;
   }
 }
 
@@ -673,36 +674,61 @@ async function mintPoap() {
   busyMintPoapButton();
   const address = await window.signer.getAddress();
   const url = poapBaseUrl + poapMintEndpoint + poapEventId + "/" + address;
-  console.log("Minting POAP for", address, "for event id", poapEventId);
-  var response;
+  console.log("Minting POAP:", url);
   var mintResponse;
   showNotification("Checking POAP eligibility", null, "info");
   try {
-    response = await fetch(url, { mode: 'cors' });
+    const response = await fetch(url, { mode: 'cors' });
     mintResponse = await response.json();
   } catch (e) {
     document.getElementById("poap-mint-error-modal").checked = true;
     document.getElementById("poap-mint-error").innerHTML = e;
+    setTimeout(() => { updateMintPoapButton(); }, 4000);
     return;
   }
   if (mintResponse.success === false) {
     document.getElementById("poap-mint-error-modal").checked = true;
     document.getElementById("poap-mint-error").innerHTML = mintResponse.message;
+    setTimeout(() => { updateMintPoapButton(); }, 4000);
     return;
   }
   showNotification("Minting POAP...", null, "info");
-  const mint_url = poapBaseUrl + "waitForMintWithTimeout/" + poapEventId + "/" + mintResponse.uid;
-  console.log("Waiting for mint to complete", address, "for event id", poapEventId);
+  let successful_mint = await waitForPoapMintTxn(mintResponse.uid);
+  if (successful_mint) {
+    showNotification("POAP minted", "https://gnosisscan.io/tx/" + mintResponse.tx_hash, "success")
+    successfulMintPoapButton();
+    return;
+  }
+  // If waitForPoapMint fails get the current collector status and reflect it in the button
+  showNotification("Verifying POAP mint...", null, "info");
+  // Getting state with exp backoff would be better than a fixed delay!
+  var collectorState = await new Promise(resolve => setTimeout(() => resolve(updateMintPoapButton()), 30000));
+  // Show that mint successful, even if we don't get the mint tx hash
+  if (collectorState.status === "has_collected") {
+    showNotification("POAP minted", null, "success")
+  }
+}
+
+async function waitForPoapMintTxn(uid) {
+  const address = await window.signer.getAddress();
+  const url = poapBaseUrl + poapWaitForMintEndpoint + poapEventId + "/" + uid;
+  console.log("Waiting for POAP mint tx:", url);
   var waitForMintResponse;
   try {
-    response = await fetch(mint_url, { mode: 'cors' });
-    //response = await waitForPoapMintTxnHash(mintResponse.uuid);
+    const response = await fetch(url, { mode: 'cors' });
     waitForMintResponse = await response.json();
   } catch (e) {
-    console.log(e)
+    // no modal: error unlikely to impact user; poap is likely to have minted
+    console.log(poapWaitForMintEndpoint, "exception during request:", e)
+    return false;
   }
-  showNotification("POAP minted", "https://gnosisscan.io/tx/" + waitForMintResponse.tx_hash, "success")
-  successfulMintPoapButton();
+  console.log(waitForMintResponse)
+  console.log(waitForMintResponse.success, waitForMintResponse.success === false)
+  if (waitForMintResponse.success === false) {
+    console.log(poapWaitForMintEndpoint, "request unsuccessful:", waitForMintResponse.message);
+    return false;
+  }
+  return true;
 }
 
 /**
