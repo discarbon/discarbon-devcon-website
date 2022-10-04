@@ -368,10 +368,10 @@ function updateOffsetButton() {
 async function updateMintPoapButton() {
   getCollectorStatusMintPoapButton();
   const state = await getPoapCollectorStatus();
-  console.log("updateMintPoapButton:", state);
   console.log("updateMintPoapButton:", state.status);
   // Save as global to help with updating state post "Send"
   poapCollectorStatus = state.status;
+
 
   if (state.status === "is_eligible") {
     enableMintPoapButton();
@@ -673,8 +673,7 @@ async function getPoapRemainingEventCodeCount() {
 async function getPoapCollectorStatus() {
   const address = await window.signer.getAddress()
   const url = poapBaseUrl + poapGetCollectorStatusEndpoint + poapEventId + "/" + address;
-  console.log("Getting POAP collector status for", address, "for event id", poapEventId);
-  console.log("url:", url)
+  console.log("Getting POAP collector status", url)
   var response;
   try {
     response = await fetch(url, {
@@ -691,7 +690,6 @@ async function getPoapCollectorStatus() {
     return { success: false }
   }
   const getCollectorStatusResponse = await response.json();
-  console.log(getCollectorStatusResponse);
   return {
     status: getCollectorStatusResponse.collector_status,
     success: getCollectorStatusResponse.success
@@ -750,8 +748,6 @@ async function waitForPoapMintTxn(uid) {
     console.log(poapWaitForMintEndpoint, "exception during request:", e)
     return false;
   }
-  console.log(waitForMintResponse)
-  console.log(waitForMintResponse.success, waitForMintResponse.success === false)
   if (waitForMintResponse.success === false) {
     console.log(poapWaitForMintEndpoint, "request unsuccessful:", waitForMintResponse.message);
     return false;
