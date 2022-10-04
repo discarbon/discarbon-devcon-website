@@ -80,6 +80,8 @@ const poapEventId = "62477";
 // const poapEventId = "65132";
 // const poapBaseUrl = "https://127.0.0.1:8000/";
 const poapBaseUrl = "https://poap.discarbon.earth/";
+
+const poapGetRemainingCodeCountEndpoint = "getRemainingCodeCount/";
 const poapMintEndpoint = "mintWithEligibilityTimeout/";
 const poapWaitForMintEndpoint = "waitForMintWithTimeout/";
 const poapGetCollectorStatusEndpoint = "getCollectorStatus/";
@@ -138,7 +140,8 @@ function init() {
   disableOffsetButton();
   disableMintPoapButton();
   // console.log("Web3Modal instance is", web3Modal);
-
+  getPoapRemainingEventCodeCount();
+  
   // set event emission value
   var fieldCarbonToOffset = document.getElementById("event-emission");
   fieldCarbonToOffset.innerHTML = window.eventEmission.asStringLimitedLength(3) + " tCO<sub>2</sub>";
@@ -640,6 +643,31 @@ async function doAutoOffsetUsingToken() {
     readyOffsetButton();
     throw e;
   }
+}
+
+async function getPoapRemainingEventCodeCount() {
+  const url = poapBaseUrl + poapGetRemainingCodeCountEndpoint + poapEventId;
+  console.log("Getting POAP number of remaining codes:", url)
+  var response;
+  try {
+    response = await fetch(url, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
+
+  } catch (e) {
+    console.log("Exception retrieving remaining code count:", e);
+    return;
+  }
+  const codeCountResponse = await response.json();
+  if (codeCountResponse.success === false) {
+    console.log("Getting remaining code count failed, message", codeCountResponse.message);
+    return;
+  }
+  console.log("Remaining codes:", codeCountResponse.count);
 }
 
 async function getPoapCollectorStatus() {
