@@ -1,7 +1,7 @@
 # discarbon-devcon-website
 Frontend for offsetting devcon 6
 
-The website can be accessed under `http://event-offset-dev.discarbon.earth/`. This directly reflects the main branch. This is in development so expect things to change and break. For development purposes, the smart contract running on the polygon chain sends all funds to an address we control. This will change once we get closer to the final version.
+The website is live under `https://devcon.discarbon.earth/`. This directly reflects the main branch.
 
 
 ## How to develop
