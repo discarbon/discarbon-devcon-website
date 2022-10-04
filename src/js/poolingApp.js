@@ -719,9 +719,9 @@ async function mintPoap() {
     return;
   }
   showNotification("Minting POAP...", null, "info");
-  let successful_mint = await waitForPoapMintTxn(mintResponse.uid);
-  if (successful_mint) {
-    showNotification("POAP minted", "https://gnosisscan.io/tx/" + mintResponse.tx_hash, "success")
+  let waitForMintResponse = await waitForPoapMintTxn(mintResponse.uid);
+  if (waitForMintResponse.success === true) {
+    showNotification("POAP minted", "https://gnosisscan.io/tx/" + waitForMintResponse.tx_hash, "success")
     successfulMintPoapButton();
     return;
   }
@@ -745,13 +745,12 @@ async function waitForPoapMintTxn(uid) {
   } catch (e) {
     // no modal: error unlikely to impact user; poap is likely to have minted
     console.log(poapWaitForMintEndpoint, "exception during request:", e)
-    return false;
+    return {"success": false};
   }
   if (waitForMintResponse.success === false) {
     console.log(poapWaitForMintEndpoint, "request unsuccessful:", waitForMintResponse.message);
-    return false;
   }
-  return true;
+  return waitForMintResponse;
 }
 
 /**
