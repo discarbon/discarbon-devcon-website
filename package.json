@@ -5,7 +5,8 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "start": "parcel",
-    "build": "parcel build --no-source-maps"
+    "build": "parcel build --no-source-maps",
+    "postbuild": "cp ./images/Devcon_Offset_Preview.jpg ./dist/"
   },
   "devDependencies": {
     "parcel": "latest",
