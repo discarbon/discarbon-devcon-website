@@ -76,9 +76,9 @@ class BigNumber {
 }
 
 // Globals
-const poapEventId = "62477";
-// const poapEventId = "65132";
+// const poapEventId = "62477";
 // const poapBaseUrl = "https://127.0.0.1:8000/";
+const poapEventId = "71937";
 const poapBaseUrl = "https://poap.discarbon.earth/";
 
 const poapGetRemainingCodeCountEndpoint = "getRemainingCodeCount/";
