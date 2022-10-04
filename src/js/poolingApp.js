@@ -141,7 +141,7 @@ function init() {
   disableMintPoapButton();
   // console.log("Web3Modal instance is", web3Modal);
   getPoapRemainingEventCodeCount();
-  
+
   // set event emission value
   var fieldCarbonToOffset = document.getElementById("event-emission");
   fieldCarbonToOffset.innerHTML = window.eventEmission.asStringLimitedLength(3) + " tCO<sub>2</sub>";
@@ -1147,6 +1147,14 @@ function toHex(num) {
 
 tippy('#mint-tooltip', {
   content: 'Send at least 0.30 NCT (or equiv.) to the community offset contract to collect the POAP.',
+});
+
+tippy('#smart-contract-tooltip', {
+  content: 'Deployed smart contract',
+});
+
+tippy('#pool-tooltip', {
+  content: 'Community offset pool address',
 });
 
 // async function handleManuallyEnteredTCO2() {
