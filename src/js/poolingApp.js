@@ -736,7 +736,6 @@ async function mintPoap() {
 }
 
 async function waitForPoapMintTxn(uid) {
-  const address = await window.signer.getAddress();
   const url = poapBaseUrl + poapWaitForMintEndpoint + poapEventId + "/" + uid;
   console.log("Waiting for POAP mint tx:", url);
   var waitForMintResponse;
