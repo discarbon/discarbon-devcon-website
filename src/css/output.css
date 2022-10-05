@@ -2269,6 +2269,11 @@ body[dir="rtl"] .checkbox:checked,
   margin-bottom: 1.25rem;
 }
 
+.mx-8 {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
 .mb-32 {
   margin-bottom: 8rem;
 }
@@ -2415,6 +2420,10 @@ body[dir="rtl"] .checkbox:checked,
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.list-decimal {
+  list-style-type: decimal;
 }
 
 .grid-flow-col {

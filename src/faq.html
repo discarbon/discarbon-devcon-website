@@ -16,7 +16,8 @@
   <div class="navbar bg-base-500 lg:mb-24">
     <div class="flex-1">
       <!-- <a class="btn btn-ghost text-green-700 normal-case md:text-xl" href="https://www.discarbon.earth">disCarbon</a> -->
-      <a class="btn btn-ghost text-green-700 normal-case md:text-lg" href="./index.html">Climate Friendly Devcon Dapp</a>
+      <a class="btn btn-ghost text-green-700 normal-case md:text-lg" href="./index.html">Climate Friendly Devcon
+        Dapp</a>
       <!-- <a class="btn btn-ghost text-green-700 normal-case md:text-xl" id="faq-contract-link" href="https://polygonscan.com/address/">Contract: 0x</a> -->
     </div>
   </div>
@@ -43,7 +44,50 @@
               </div>
             </div>
  -->
+            <div class="collapse border border-base-300 bg-base-100 rounded-box">
+              <input type="checkbox" />
+              <div class="collapse-title text-xl font-medium">
+                How does offsetting Devcon VI work?
+              </div>
+              <div class="collapse-content">
+                <p>
+                  For the first time, you can help contribute to making Devcon a climate neutral event by using the
+                  "Climate Friendly Devcon VI" Dapp. The Dapp enables you to compensate your air travel and event carbon
+                  emissions due to Devcon VI entirely on-chain.
 
+                  You will receive a special POAP for participating which will later allow you to vote on which
+                  nature-based project to source carbon credits from. Could it be the <a class="link text-green-700"
+                    href="https://selvamatavenredd.org/what-is-mataven">Indigneous Reservation of the Matavén Forest in
+                    Colombia…?</a>
+                </p>
+                <p class="mt-2">
+                  The process is simple:
+                <ol class="list-decimal mx-8">
+                  <li>Connect your Polygon account to the Dapp</li>
+                  <li>Enter your departure airport to calculate the carbon emissions for your flight to Bogota
+                    (optional).</li>
+                  <li>Click "Send" to send the required amount of tokens (MATIC, DAI, USDC, WMATIC, WETH or NCT) to the
+                    smart contract in order to compensate your attendence of Devcon VI and flight. The smart contract
+                    converts these tokens to NCT* and then sends the NCT to the "Community Offset Pool" account (ERC20
+                    tokens will additionally require an approval transaction).</li>
+                  <li>Mint your Climate Friendly Devcon VI POAP! </li>
+                </ol>
+
+                </p>
+                <p class="mt-2">
+                  In a bsecond step, to be performed shortly after Devcon VI, the collected NCT will be redeemed for a
+                  carbon offset project and redeemed, "offsetting" or "compensating" emissions caused by Devcon VI.
+                </p>
+                <p class="mt-2">
+                  *The NCT token represents one tonne of carbon in any of the nature-based carbon projects in <a
+                    class="link text-green-700"
+                    href="https://docs.toucan.earth/toucan/pool/pool-parties/nct-pool-party-report">Toucan Protocol's
+                    NCT pool.</a>
+                </p>
+              </div>
+            </div>
+
+            <!--
             <div class="collapse border border-base-300 bg-base-100 rounded-box">
               <input type="checkbox" />
               <div class="collapse-title text-xl font-medium">
@@ -51,13 +95,18 @@
               </div>
               <div class="collapse-content">
                 <p>
-                  This site provides an initial estimate of the carbon emissions incurred per person by attending Devcon VI and an estimate of the emissions incurred due to plane travel. An attendee may compensate their emissions by contributing to the Devcon VI "Community Offset Pool" by sending funds to the pooling contract that match their emissions estimate.
+                  This site provides an initial estimate of the carbon emissions incurred per person by attending Devcon
+                  VI and an estimate of the emissions incurred due to plane travel. An attendee may compensate their
+                  emissions by contributing to the Devcon VI "Community Offset Pool" by sending funds to the pooling
+                  contract that match their emissions estimate.
                 </p>
                 <p>
-                  These funds are gathered in NCT, an on-chain token. Each token represents 1 tonne of carbon. In a second step, to be performed shortly after Devcon VI, the collected NCT will be redeemed for a carbon offset project and redeemed, "offsetting" or "compensating" emissions caused by Devcon VI.
+                  These funds are gathered in NCT, an on-chain token. Each token represents 1 tonne of carbon. In a
+                  second step, to be performed shortly after Devcon VI, the collected NCT will be redeemed for a carbon
+                  offset project and redeemed, "offsetting" or "compensating" emissions caused by Devcon VI.
                 <p>
               </div>
-            </div>
+            </div> -->
 
             <div class="collapse border border-base-300 bg-base-100 rounded-box">
               <input type="checkbox" />
@@ -66,7 +115,9 @@
               </div>
               <div class="collapse-content">
                 <p>
-                  The Send button initiates an on-chain transaction. It sends the tokens specified by the user to the Pooling Contract and then swaps them to NCT tokens on Sushiswap. Finally, the NCT tokens get sent to a multisig wallet under the control of the Devcon Team, Toucan and disCarbon.
+                  The Send button initiates an on-chain transaction. It sends the tokens specified by the user to the
+                  Pooling Contract and then swaps them to NCT tokens on Sushiswap. Finally, the NCT tokens get sent to a
+                  multisig wallet under the control of the Devcon Team, Toucan and disCarbon.
                 </p>
               </div>
             </div>
@@ -78,7 +129,10 @@
               </div>
               <div class="collapse-content">
                 <p>
-                  You can find the source code on <a class="link text-green-700" href="https://polygonscan.com/address/0xb6A5D547d0A325Ffa0357E2698eB76E165b606BA">Polygonscan</a> or <a class="link text-green-700" href="https://github.com/discarbon/discarbon-devcon-attendee-contract">at its Github Repo</a>.
+                  You can find the source code on <a class="link text-green-700"
+                    href="https://polygonscan.com/address/0xb6A5D547d0A325Ffa0357E2698eB76E165b606BA">Polygonscan</a> or
+                  <a class="link text-green-700"
+                    href="https://github.com/discarbon/discarbon-devcon-attendee-contract">at its Github Repo</a>.
                 </p>
               </div>
             </div>
@@ -90,10 +144,16 @@
               </div>
               <div class="collapse-content">
                 <p>
-                  First, the tokens are swapped to NCT, a token representing a nature-based carbon credit and then sent to the <a class="link text-green-700" href="https://polygonscan.com/address/0x439d22a39cD2d0f0572ed05D3c5081d6117B8031">Community Offset Pool</a>, a multisig wallet under the control of the Devcon Team, Toucan and disCarbon.
+                  First, the tokens are swapped to NCT, a token representing a nature-based carbon credit and then sent
+                  to the <a class="link text-green-700"
+                    href="https://polygonscan.com/address/0x439d22a39cD2d0f0572ed05D3c5081d6117B8031">Community Offset
+                    Pool</a>, a multisig wallet under the control of the Devcon Team, Toucan and disCarbon.
                 </p>
                 <p>
-                  In a second step, once a better estimate of Devcon VI's carbon emissions is available after the event, the funds will be redeemed for a specific carbon offset project and then retired. The choice of carbon offset project will be voted upon by contributors to the Community Offset Pool that hold the Climate Friendly POAP.
+                  In a second step, once a better estimate of Devcon VI's carbon emissions is available after the event,
+                  the funds will be redeemed for a specific carbon offset project and then retired. The choice of carbon
+                  offset project will be voted upon by contributors to the Community Offset Pool that hold the Climate
+                  Friendly POAP.
                 </p>
               </div>
             </div>
@@ -115,8 +175,10 @@
                 What does tCO<sub>2</sub> stand for?
               </div>
               <div class="collapse-content">
-                <p>It stands for "tonnes of carbon dioxide"/"tonnes of CO<sub>2</sub>". This indicates the amount of carbon dioxide that needs to
-                  be compensated so that the event and/or the flight has zero impact on the climate. More precisely, it stands for
+                <p>It stands for "tonnes of carbon dioxide"/"tonnes of CO<sub>2</sub>". This indicates the amount of
+                  carbon dioxide that needs to
+                  be compensated so that the event and/or the flight has zero impact on the climate. More precisely, it
+                  stands for
                   <b>CO<sub>2</sub> equivalent</b> emission, as generally, other climate active pollutants than
                   just CO<sub>2</sub> are typically emitted. The
                   influence of all these other pollutants is accounted for in the tCO<sub>2</sub> estimation.
@@ -130,7 +192,8 @@
                 Which tokens can I send to the Community Offset Pool Smart Contract?
               </div>
               <div class="collapse-content">
-                <p>At the moment one can choose between MATIC, DAI, USDC, WETH, WMATIC and the NCT token by clicking on the
+                <p>At the moment one can choose between MATIC, DAI, USDC, WETH, WMATIC and the NCT token by clicking on
+                  the
                   "MATIC" ticker in the "Contribute to Offset Pool" section.
                 </p>
               </div>
@@ -156,7 +219,9 @@
                 Can I choose a carbon credit project to support?
               </div>
               <div class="collapse-content">
-                <p>Yes! When the vote for the carbon offset project goes to snapshot vote shortly after Devcon. The snapshot vote will allow participants that hold the Climate Friendly POAP to vote on the choice of carbon offset project from which to redeem the carbon credits.
+                <p>Yes! When the vote for the carbon offset project goes to snapshot vote shortly after Devcon. The
+                  snapshot vote will allow participants that hold the Climate Friendly POAP to vote on the choice of
+                  carbon offset project from which to redeem the carbon credits.
                 </p>
               </div>
             </div>
@@ -169,10 +234,16 @@
               </div>
               <div class="collapse-content">
                 <p>
-                  POAPs are curated NFTs that are issued to commemorate event participation or bookmark a significant or happy memory in your life. POAPs are ERC721 NFTs minted on <a class="link text-green-700" href="https://www.gnosischain.com/">Gnosischain</a>, but may be migrated to the Ethereum mainnet. More information is available at <a class="link text-green-700" href="https://poap.xyz/">poap.xyz</a> and in <a class="link text-green-700" href="https://intercom.help/poap/en/">the POAP FAQ</a>.
+                  POAPs are curated NFTs that are issued to commemorate event participation or bookmark a significant or
+                  happy memory in your life. POAPs are ERC721 NFTs minted on <a class="link text-green-700"
+                    href="https://www.gnosischain.com/">Gnosischain</a>, but may be migrated to the Ethereum mainnet.
+                  More information is available at <a class="link text-green-700" href="https://poap.xyz/">poap.xyz</a>
+                  and in <a class="link text-green-700" href="https://intercom.help/poap/en/">the POAP FAQ</a>.
                 </p>
                 <p>
-                  The POAP collectable by contributors to the "community offset pool" will function as a voting token for the choice of carbon offset project when it goes to vote on snapshot shortly after Devcon VI has finished and a more accurate emission estimate can be calculated.</p>
+                  The POAP collectable by contributors to the "community offset pool" will function as a voting token
+                  for the choice of carbon offset project when it goes to vote on snapshot shortly after Devcon VI has
+                  finished and a more accurate emission estimate can be calculated.</p>
               </div>
             </div>
 
@@ -266,7 +337,11 @@
                 How can I support your work/disCarbon?
               </div>
               <div class="collapse-content">
-                <p>The best way to support us is by following <a class="link text-green-700" href="https://twitter.com/discarbon_earth">@discarbon_earth</a> on Twitter and by using and sharing our tools! If you still like our work in December, please consider supporting our <a class="link text-green-700" href="https://gitcoin.co/grants/7163/discarbon">project</a> in Gitcoin Grants Round 16.
+                <p>The best way to support us is by following <a class="link text-green-700"
+                    href="https://twitter.com/discarbon_earth">@discarbon_earth</a> on Twitter and by using and sharing
+                  our tools! If you still like our work in December, please consider supporting our <a
+                    class="link text-green-700" href="https://gitcoin.co/grants/7163/discarbon">project</a> in Gitcoin
+                  Grants Round 16.
                 </p>
               </div>
             </div>
@@ -277,7 +352,9 @@
                 How can I contact disCarbon?
               </div>
               <div class="collapse-content">
-                <p>Feel free to drop into our <a class="link text-green-700" href="https://discord.gg/NfCdbzQwuj">Discord Server</a> or write to "danceratopz" on Twitter, Telegram or Gmail.
+                <p>Feel free to drop into our <a class="link text-green-700"
+                    href="https://discord.gg/NfCdbzQwuj">Discord Server</a> or write to "danceratopz" on Twitter,
+                  Telegram or Gmail.
                 </p>
               </div>
             </div>
@@ -288,29 +365,29 @@
 
 
   <footer class="footer bg-transparent p-2 text-neutral-content grid-flow-col bottom-0">
-      <div class="grid-flow-col">
-        <img src="/images/CO2_logo.png" alt="CO2 Logo" style="width:20px;">
-        <p class="text-xl">disCarbon - 2022</p>
-      </div>
-      <div class="grid-flow-col gap-4 place-self-center justify-self-end">
-        <a href="https://github.com/discarbon/discarbon-devcon-attendee-contract">
-          <img src="/images/FontAwesome/github.svg" width="25" height="25" class="invert-colours fill-current" />
-        </a>
-        <a href="https://polygonscan.com/address/0xb6A5D547d0A325Ffa0357E2698eB76E165b606BA">
-          <img id="smart-contract-tooltip" src="/images/FontAwesome/scroll-solid-mirrored.svg" width="25" height="25"
-            class="invert-colours fill-current" />
-        </a>
-        <a href="https://polygonscan.com/address/0x439d22a39cD2d0f0572ed05D3c5081d6117B8031#tokentxns">
-          <img id="pool-tooltip" src="/images/FontAwesome/water-ladder-solid.svg" width="25" height="25"
-            class="invert-colours fill-current" />
-        </a>
-        <a href="https://discord.gg/NfCdbzQwuj">
-          <img src="/images/FontAwesome/discord.svg" width="25" height="25" class="invert-colours fill-current" />
-        </a>
-        <a href="https://twitter.com/discarbon_earth">
-          <img src="/images/FontAwesome/twitter.svg" width="25" height="25" class="invert-colours fill-current" />
-        </a>
-      </div>
+    <div class="grid-flow-col">
+      <img src="/images/CO2_logo.png" alt="CO2 Logo" style="width:20px;">
+      <p class="text-xl">disCarbon - 2022</p>
+    </div>
+    <div class="grid-flow-col gap-4 place-self-center justify-self-end">
+      <a href="https://github.com/discarbon/discarbon-devcon-attendee-contract">
+        <img src="/images/FontAwesome/github.svg" width="25" height="25" class="invert-colours fill-current" />
+      </a>
+      <a href="https://polygonscan.com/address/0xb6A5D547d0A325Ffa0357E2698eB76E165b606BA">
+        <img id="smart-contract-tooltip" src="/images/FontAwesome/scroll-solid-mirrored.svg" width="25" height="25"
+          class="invert-colours fill-current" />
+      </a>
+      <a href="https://polygonscan.com/address/0x439d22a39cD2d0f0572ed05D3c5081d6117B8031#tokentxns">
+        <img id="pool-tooltip" src="/images/FontAwesome/water-ladder-solid.svg" width="25" height="25"
+          class="invert-colours fill-current" />
+      </a>
+      <a href="https://discord.gg/NfCdbzQwuj">
+        <img src="/images/FontAwesome/discord.svg" width="25" height="25" class="invert-colours fill-current" />
+      </a>
+      <a href="https://twitter.com/discarbon_earth">
+        <img src="/images/FontAwesome/twitter.svg" width="25" height="25" class="invert-colours fill-current" />
+      </a>
+    </div>
   </footer>
 </body>
 
